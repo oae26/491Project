@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cf3twmrxqgskj"]
+
+[ext_resource type="PackedScene" uid="uid://bkmtjqhmucw03" path="res://player.tscn" id="1_dvkoh"]
+[ext_resource type="Script" path="res://player.gd" id="2_wdxr3"]
+
+[node name="Game" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_dvkoh")]
+position = Vector2(7, 3)
+disable_mode = 2
+script = ExtResource("2_wdxr3")
+speed = null
+gravity = null
+jump_force = null
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(7, 3)

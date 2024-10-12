@@ -198,9 +198,6 @@ func _updateData():
 	
 	maxSpeedLock = maxSpeed
 	
-	animScaleLock = abs(anim.scale)
-	colliderScaleLockY = col.scale.y
-	colliderPosLockY = col.position.y
 	
 	if timeToReachMaxSpeed == 0:
 		instantAccel = true

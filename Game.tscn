@@ -1,11 +1,68 @@
-[gd_scene load_steps=2 format=3 uid="uid://cf3twmrxqgskj"]
+[gd_scene load_steps=5 format=3 uid="uid://cf3twmrxqgskj"]
 
 [ext_resource type="PackedScene" uid="uid://bkmtjqhmucw03" path="res://player.tscn" id="1_dvkoh"]
+[ext_resource type="Script" path="res://player.gd" id="2_wdxr3"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_44u2s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_igsbx"]
+size = Vector2(146, 20)
 
 [node name="Game" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_dvkoh")]
-position = Vector2(7, 3)
+position = Vector2(-102, 208)
+disable_mode = 2
+script = ExtResource("2_wdxr3")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(7, 3)
+
+[node name="Platform4" type="StaticBody2D" parent="."]
+position = Vector2(-303, 434)
+scale = Vector2(31.2931, 8.79817)
+metadata/_edit_group_ = true
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="Platform4"]
+position = Vector2(42.1498, -24.3233)
+rotation = 3.14159
+scale = Vector2(4.49128, -142.096)
+mesh = SubResource("BoxMesh_44u2s")
+
+[node name="Platform" type="StaticBody2D" parent="."]
+position = Vector2(-760, 274)
+scale = Vector2(31.2931, 8.79817)
+metadata/_edit_group_ = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Platform"]
+position = Vector2(60, 8)
+scale = Vector2(133.893, 19.5177)
+mesh = SubResource("BoxMesh_44u2s")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
+position = Vector2(66, 8)
+shape = SubResource("RectangleShape2D_igsbx")
+metadata/_edit_group_ = true
+
+[node name="Platform2" type="StaticBody2D" parent="."]
+position = Vector2(-942, 445)
+scale = Vector2(31.2931, 8.79817)
+metadata/_edit_group_ = true
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="Platform2"]
+position = Vector2(42.1498, -24.3233)
+rotation = 3.14159
+scale = Vector2(3.13217, -8.53235)
+mesh = SubResource("BoxMesh_44u2s")
+
+[node name="Platform3" type="StaticBody2D" parent="."]
+position = Vector2(-534, 498)
+scale = Vector2(31.2931, 8.79817)
+metadata/_edit_group_ = true
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="Platform3"]
+position = Vector2(42.1498, -24.3233)
+rotation = 3.14159
+scale = Vector2(3.13217, -8.53235)
+mesh = SubResource("BoxMesh_44u2s")
