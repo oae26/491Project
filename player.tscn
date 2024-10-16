@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bkmtjqhmucw03"]
 
-[ext_resource type="Texture2D" uid="uid://dlgsxymme4w02" path="res://icon.svg" id="1_a5fwq"]
+[ext_resource type="Texture2D" uid="uid://bxoi2l2t5kjcs" path="res://art/IMG_0599_1_-removebg-preview.png" id="1_iof1a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j8350"]
 radius = 4.12311
@@ -11,6 +11,6 @@ radius = 4.12311
 shape = SubResource("CircleShape2D_j8350")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-58, -5)
-scale = Vector2(0.546875, 0.703125)
-texture = ExtResource("1_a5fwq")
+position = Vector2(-61, -19.5)
+scale = Vector2(0.523438, 0.589844)
+texture = ExtResource("1_iof1a")

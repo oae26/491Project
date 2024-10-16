@@ -1,68 +1,106 @@
-[gd_scene load_steps=5 format=3 uid="uid://cf3twmrxqgskj"]
+[gd_scene load_steps=13 format=3 uid="uid://cf3twmrxqgskj"]
 
+[ext_resource type="Texture2D" uid="uid://b3712or6a7qx0" path="res://art/IMG_0596.png" id="1_50j5q"]
 [ext_resource type="PackedScene" uid="uid://bkmtjqhmucw03" path="res://player.tscn" id="1_dvkoh"]
+[ext_resource type="Shader" path="res://snow.gdshader" id="1_mqm0v"]
+[ext_resource type="Shader" path="res://shaders/snow.gdshader" id="1_ovh2r"]
 [ext_resource type="Script" path="res://player.gd" id="2_wdxr3"]
+[ext_resource type="Script" path="res://wind.gd" id="4_gkxye"]
+[ext_resource type="Texture2D" uid="uid://vtqnetjlg4kk" path="res://art/IMG_0598.png" id="4_xitmp"]
+[ext_resource type="Texture2D" uid="uid://15ichst0w811" path="res://art/foreground_leaves.png" id="5_2pnrb"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_44u2s"]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fica4"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_igsbx"]
-size = Vector2(146, 20)
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wdj23"]
+distance = 40.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nokxo"]
+resource_local_to_scene = true
+shader = ExtResource("1_ovh2r")
+shader_parameter/rain_amount = 150.0
+shader_parameter/near_rain_length = 0.01
+shader_parameter/far_rain_length = 0.01
+shader_parameter/near_rain_width = 0.195
+shader_parameter/far_rain_width = 0.5
+shader_parameter/near_rain_transparency = 0.1
+shader_parameter/far_rain_transparency = 0.5
+shader_parameter/rain_color = Color(0.929676, 0.990785, 0.998921, 1)
+shader_parameter/base_rain_speed = 0.331
+shader_parameter/additional_rain_speed = 0.15
+shader_parameter/slant = 0.0950001
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2r4dm"]
+shader = ExtResource("1_mqm0v")
+shader_parameter/rain_amount = 150.0
+shader_parameter/near_rain_length = 0.01
+shader_parameter/far_rain_length = 0.01
+shader_parameter/near_rain_width = 0.195
+shader_parameter/far_rain_width = 0.5
+shader_parameter/near_rain_transparency = 1.0
+shader_parameter/far_rain_transparency = 0.5
+shader_parameter/rain_color = Color(0.929676, 0.990785, 0.998921, 1)
+shader_parameter/base_rain_speed = 0.1
+shader_parameter/additional_rain_speed = 0.5
+shader_parameter/slant = 0.0950001
 
 [node name="Game" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_dvkoh")]
-position = Vector2(-102, 208)
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-922, 440)
+physics_material_override = SubResource("PhysicsMaterial_fica4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(35, -29)
+shape = SubResource("WorldBoundaryShape2D_wdj23")
+
+[node name="Background" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_nokxo")
+position = Vector2(154.251, 3)
+scale = Vector2(1.15703, 1)
+texture = ExtResource("1_50j5q")
+
+[node name="Player" parent="Background" instance=ExtResource("1_dvkoh")]
+position = Vector2(-834.249, 345)
+scale = Vector2(1.10574, 1.13605)
 disable_mode = 2
 script = ExtResource("2_wdxr3")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(7, 3)
+[node name="Camera2D" type="Camera2D" parent="Background/Player"]
+position = Vector2(639.374, -303.685)
+scale = Vector2(0.78163, 0.880245)
 
-[node name="Platform4" type="StaticBody2D" parent="."]
-position = Vector2(-303, 434)
-scale = Vector2(31.2931, 8.79817)
-metadata/_edit_group_ = true
+[node name="Img0598" type="Sprite2D" parent="Background"]
+position = Vector2(-518.22, -255)
+scale = Vector2(0.8637, 1)
+texture = ExtResource("4_xitmp")
 
-[node name="MeshInstance2D2" type="MeshInstance2D" parent="Platform4"]
-position = Vector2(42.1498, -24.3233)
-rotation = 3.14159
-scale = Vector2(4.49128, -142.096)
-mesh = SubResource("BoxMesh_44u2s")
+[node name="ForegroundLeaves" type="Sprite2D" parent="Background"]
+position = Vector2(-140.231, 439)
+scale = Vector2(0.864282, 1)
+texture = ExtResource("5_2pnrb")
+script = ExtResource("4_gkxye")
 
-[node name="Platform" type="StaticBody2D" parent="."]
-position = Vector2(-760, 274)
-scale = Vector2(31.2931, 8.79817)
-metadata/_edit_group_ = true
+[node name="Background2" type="Sprite2D" parent="Background"]
+material = SubResource("ShaderMaterial_2r4dm")
+position = Vector2(1917.62, -0.999969)
+scale = Vector2(1, 1)
+texture = ExtResource("1_50j5q")
+flip_h = true
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Platform"]
-position = Vector2(60, 8)
-scale = Vector2(133.893, 19.5177)
-mesh = SubResource("BoxMesh_44u2s")
-metadata/_edit_group_ = true
+[node name="Img0598" type="Sprite2D" parent="Background/Background2"]
+position = Vector2(-953.303, -251)
+scale = Vector2(0.8637, 1)
+texture = ExtResource("4_xitmp")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
-position = Vector2(66, 8)
-shape = SubResource("RectangleShape2D_igsbx")
-metadata/_edit_group_ = true
+[node name="Img0599" type="Sprite2D" parent="Background/Background2"]
+position = Vector2(-621.419, -255)
+scale = Vector2(0.8637, 1)
+texture = ExtResource("4_xitmp")
+flip_h = true
 
-[node name="Platform2" type="StaticBody2D" parent="."]
-position = Vector2(-942, 445)
-scale = Vector2(31.2931, 8.79817)
-metadata/_edit_group_ = true
-
-[node name="MeshInstance2D2" type="MeshInstance2D" parent="Platform2"]
-position = Vector2(42.1498, -24.3233)
-rotation = 3.14159
-scale = Vector2(3.13217, -8.53235)
-mesh = SubResource("BoxMesh_44u2s")
-
-[node name="Platform3" type="StaticBody2D" parent="."]
-position = Vector2(-534, 498)
-scale = Vector2(31.2931, 8.79817)
-metadata/_edit_group_ = true
-
-[node name="MeshInstance2D2" type="MeshInstance2D" parent="Platform3"]
-position = Vector2(42.1498, -24.3233)
-rotation = 3.14159
-scale = Vector2(3.13217, -8.53235)
-mesh = SubResource("BoxMesh_44u2s")
+[node name="Img0600" type="Sprite2D" parent="Background/Background2"]
+position = Vector2(-1496.94, 640)
+rotation = 1.44665
+scale = Vector2(0.8637, 1)
+texture = ExtResource("4_xitmp")
+flip_h = true
