@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cf3twmrxqgskj"]
+[gd_scene load_steps=16 format=3 uid="uid://cf3twmrxqgskj"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_6oyct"]
 [ext_resource type="Texture2D" uid="uid://b3712or6a7qx0" path="res://art/IMG_0596.png" id="1_50j5q"]
@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://vtqnetjlg4kk" path="res://art/IMG_0598.png" id="4_xitmp"]
 [ext_resource type="Texture2D" uid="uid://15ichst0w811" path="res://art/foreground_leaves.png" id="5_2pnrb"]
 [ext_resource type="Script" path="res://text_float.gd" id="9_1dd11"]
-[ext_resource type="PackedScene" uid="uid://bh4p66j4pm065" path="res://block.tscn" id="10_xwjfo"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fica4"]
 
@@ -45,9 +44,6 @@ shader_parameter/rain_color = Color(0.929676, 0.990785, 0.998921, 1)
 shader_parameter/base_rain_speed = 0.1
 shader_parameter/additional_rain_speed = 0.5
 shader_parameter/slant = 0.0950001
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_1crns"]
-radius = 73.4787
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_si1lk"]
 size = Vector2(143, 1497.14)
@@ -146,12 +142,6 @@ anchor_mode = 0
 limit_top = -500
 limit_bottom = 0
 
-[node name="Area2D" type="Area2D" parent="Player"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
-position = Vector2(-48.4612, -12.3234)
-shape = SubResource("CircleShape2D_1crns")
-
 [node name="ForegroundLeaves" type="Sprite2D" parent="."]
 position = Vector2(-8.00047, 442)
 scale = Vector2(1, 1)
@@ -172,16 +162,8 @@ typing_speed = 1.0
 display_time = 9.0
 text_color = Color(2.21401e-06, 0, 0.666229, 1)
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-188, 109)
 rotation = 3.13401
 scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_si1lk")
-
-[node name="Block" parent="." instance=ExtResource("10_xwjfo")]
-position = Vector2(577, 325)
-scale = Vector2(1, 1)
-
-[connection signal="body_entered" from="Player/Area2D" to="Player" method="_on_Area2D_body_entered"]
-[connection signal="body_exited" from="Player/Area2D" to="Player" method="_on_Area2D_body_exited"]
-[connection signal="block_broken" from="Block" to="Player" method="_on_block_broken"]
