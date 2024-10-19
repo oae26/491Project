@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cf3twmrxqgskj"]
+[gd_scene load_steps=15 format=3 uid="uid://cf3twmrxqgskj"]
 
 [ext_resource type="Texture2D" uid="uid://b3712or6a7qx0" path="res://art/IMG_0596.png" id="1_50j5q"]
 [ext_resource type="PackedScene" uid="uid://bkmtjqhmucw03" path="res://player.tscn" id="1_dvkoh"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://wind.gd" id="4_gkxye"]
 [ext_resource type="Texture2D" uid="uid://vtqnetjlg4kk" path="res://art/IMG_0598.png" id="4_xitmp"]
 [ext_resource type="Texture2D" uid="uid://15ichst0w811" path="res://art/foreground_leaves.png" id="5_2pnrb"]
+[ext_resource type="Script" path="res://text_float.gd" id="9_1dd11"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fica4"]
 
@@ -43,6 +44,9 @@ shader_parameter/base_rain_speed = 0.1
 shader_parameter/additional_rain_speed = 0.5
 shader_parameter/slant = 0.0950001
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_si1lk"]
+size = Vector2(143, 1497.14)
+
 [node name="Game" type="Node2D"]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
@@ -59,41 +63,25 @@ position = Vector2(154.251, 3)
 scale = Vector2(1.15703, 1)
 texture = ExtResource("1_50j5q")
 
-[node name="Player" parent="Background" instance=ExtResource("1_dvkoh")]
-position = Vector2(-834.249, 345)
-scale = Vector2(1.10574, 1.13605)
-disable_mode = 2
-script = ExtResource("2_wdxr3")
-
-[node name="Camera2D" type="Camera2D" parent="Background/Player"]
-position = Vector2(639.374, -303.685)
-scale = Vector2(0.78163, 0.880245)
-
 [node name="Img0598" type="Sprite2D" parent="Background"]
 position = Vector2(-518.22, -255)
 scale = Vector2(0.8637, 1)
 texture = ExtResource("4_xitmp")
 
-[node name="ForegroundLeaves" type="Sprite2D" parent="Background"]
-position = Vector2(-140.231, 439)
-scale = Vector2(0.864282, 1)
-texture = ExtResource("5_2pnrb")
-script = ExtResource("4_gkxye")
-
 [node name="Background2" type="Sprite2D" parent="Background"]
 material = SubResource("ShaderMaterial_2r4dm")
 position = Vector2(1917.62, -0.999969)
-scale = Vector2(1, 1)
 texture = ExtResource("1_50j5q")
 flip_h = true
 
 [node name="Img0598" type="Sprite2D" parent="Background/Background2"]
-position = Vector2(-953.303, -251)
+position = Vector2(-94.2025, 807)
+rotation = -0.950797
 scale = Vector2(0.8637, 1)
 texture = ExtResource("4_xitmp")
 
 [node name="Img0599" type="Sprite2D" parent="Background/Background2"]
-position = Vector2(-621.419, -255)
+position = Vector2(118.411, -271)
 scale = Vector2(0.8637, 1)
 texture = ExtResource("4_xitmp")
 flip_h = true
@@ -104,3 +92,76 @@ rotation = 1.44665
 scale = Vector2(0.8637, 1)
 texture = ExtResource("4_xitmp")
 flip_h = true
+
+[node name="Background3" type="Sprite2D" parent="Background"]
+material = SubResource("ShaderMaterial_nokxo")
+position = Vector2(3837.19, -1)
+texture = ExtResource("1_50j5q")
+
+[node name="Img0598" type="Sprite2D" parent="Background/Background3"]
+position = Vector2(-518.22, -255)
+scale = Vector2(0.8637, 1)
+texture = ExtResource("4_xitmp")
+
+[node name="Background4" type="Sprite2D" parent="Background/Background3"]
+material = SubResource("ShaderMaterial_2r4dm")
+position = Vector2(1917.62, -0.999969)
+texture = ExtResource("1_50j5q")
+flip_h = true
+
+[node name="Img0598" type="Sprite2D" parent="Background/Background3/Background4"]
+position = Vector2(-953.303, -251)
+scale = Vector2(0.8637, 1)
+texture = ExtResource("4_xitmp")
+
+[node name="Img0599" type="Sprite2D" parent="Background/Background3/Background4"]
+position = Vector2(-621.419, -255)
+scale = Vector2(0.8637, 1)
+texture = ExtResource("4_xitmp")
+flip_h = true
+
+[node name="Img0600" type="Sprite2D" parent="Background/Background3/Background4"]
+position = Vector2(-1609.07, 641)
+rotation = 1.44665
+scale = Vector2(0.610273, 0.827577)
+texture = ExtResource("4_xitmp")
+flip_h = true
+
+[node name="Player" parent="." instance=ExtResource("1_dvkoh")]
+position = Vector2(-537, 353)
+scale = Vector2(1.27937, 1.13605)
+disable_mode = 2
+script = ExtResource("2_wdxr3")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(-308.745, -793.099)
+scale = Vector2(0.78163, 0.880245)
+anchor_mode = 0
+limit_top = -500
+limit_bottom = 0
+
+[node name="ForegroundLeaves" type="Sprite2D" parent="."]
+position = Vector2(-8.00047, 442)
+scale = Vector2(1, 1)
+texture = ExtResource("5_2pnrb")
+script = ExtResource("4_gkxye")
+
+[node name="ForegroundLeaves2" type="Sprite2D" parent="ForegroundLeaves"]
+position = Vector2(3003, -875)
+rotation = -3.13862
+texture = ExtResource("5_2pnrb")
+script = ExtResource("4_gkxye")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(13, 0)
+scale = Vector2(1, 1)
+script = ExtResource("9_1dd11")
+typing_speed = 1.0
+display_time = 9.0
+text_color = Color(2.21401e-06, 0, 0.666229, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-188, 109)
+rotation = 3.13401
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_si1lk")
