@@ -2,7 +2,7 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var block = preload("res://block.tscn").instantiate()
+	var block = preload("res://scenes/block.tscn").instantiate()
 	block.position = Vector2(869, 300)  # Set position as needed
 	block.add_to_group("blocks")  # Add block to group for easy detection
 
