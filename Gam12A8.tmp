@@ -1,5 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://cf3twmrxqgskj"]
+[gd_scene load_steps=16 format=3 uid="uid://cf3twmrxqgskj"]
 
+[ext_resource type="Script" path="res://game.gd" id="1_6oyct"]
 [ext_resource type="Texture2D" uid="uid://b3712or6a7qx0" path="res://art/IMG_0596.png" id="1_50j5q"]
 [ext_resource type="PackedScene" uid="uid://bkmtjqhmucw03" path="res://player.tscn" id="1_dvkoh"]
 [ext_resource type="Shader" path="res://snow.gdshader" id="1_mqm0v"]
@@ -48,6 +49,7 @@ shader_parameter/slant = 0.0950001
 size = Vector2(143, 1497.14)
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_6oyct")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(-922, 440)
@@ -127,7 +129,7 @@ scale = Vector2(0.610273, 0.827577)
 texture = ExtResource("4_xitmp")
 flip_h = true
 
-[node name="Player" parent="." instance=ExtResource("1_dvkoh")]
+[node name="Player" parent="." groups=["player"] instance=ExtResource("1_dvkoh")]
 position = Vector2(-537, 353)
 scale = Vector2(1.27937, 1.13605)
 disable_mode = 2

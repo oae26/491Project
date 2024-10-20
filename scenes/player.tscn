@@ -7,10 +7,13 @@ radius = 4.12311
 
 [node name="Player" type="CharacterBody2D"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_j8350")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-61, -19.5)
+position = Vector2(-49, -17)
 scale = Vector2(0.523438, 0.589844)
 texture = ExtResource("1_iof1a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-49, -14)
+rotation = 3.14159
+scale = Vector2(8.57511, -13.4881)
+shape = SubResource("CircleShape2D_j8350")
