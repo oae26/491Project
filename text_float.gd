@@ -25,8 +25,8 @@ func _ready():
 	label.modulate = text_color
 	add_child(label)
 	
-	var dynamic_font = FontFile.new()
-	dynamic_font.size = 24;
+	#var dynamic_font = FontFile.new()
+	#dynamic_font.size = 24;
 
 	typing_timer = Timer.new()
 	typing_timer.wait_time = typing_speed
