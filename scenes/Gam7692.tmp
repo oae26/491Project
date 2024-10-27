@@ -70,7 +70,6 @@ process_mode = 3
 script = ExtResource("1_6n0sd")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-process_mode = 1
 position = Vector2(-922, 440)
 physics_material_override = SubResource("PhysicsMaterial_fica4")
 
@@ -79,7 +78,6 @@ position = Vector2(35, -29)
 shape = SubResource("WorldBoundaryShape2D_wdj23")
 
 [node name="Background" type="Sprite2D" parent="."]
-process_mode = 1
 material = SubResource("ShaderMaterial_nokxo")
 position = Vector2(154.251, 3)
 scale = Vector2(1.15703, 1)
@@ -150,7 +148,6 @@ texture = ExtResource("4_q41if")
 flip_h = true
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("6_nprxy")]
-process_mode = 1
 position = Vector2(-537, 353)
 scale = Vector2(1.27937, 1.13605)
 disable_mode = 2
@@ -170,7 +167,6 @@ position = Vector2(-48.4612, -12.3234)
 shape = SubResource("CircleShape2D_1crns")
 
 [node name="ForegroundLeaves" type="Sprite2D" parent="."]
-process_mode = 1
 position = Vector2(-8.00047, 442)
 texture = ExtResource("8_dkh5y")
 script = SubResource("GDScript_x7i0g")
@@ -182,7 +178,6 @@ texture = ExtResource("8_dkh5y")
 script = SubResource("GDScript_x7i0g")
 
 [node name="Area2D" type="Area2D" parent="."]
-process_mode = 1
 position = Vector2(13, 0)
 script = ExtResource("9_chctq")
 typing_speed = 1.0
@@ -195,17 +190,9 @@ rotation = 3.13401
 shape = SubResource("RectangleShape2D_si1lk")
 
 [node name="Block" parent="." instance=ExtResource("10_x6xq4")]
-process_mode = 1
 position = Vector2(577, 325)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("10_vf2hw")]
-visible = false
-offset_left = -387.0
-offset_top = -528.0
-offset_right = -387.0
-offset_bottom = -528.0
+[node name="PauseMenu" parent="." instance=ExtResource("10_vf2hw")]
 
 [connection signal="body_entered" from="Player/Area2D" to="Player" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Player/Area2D" to="Player" method="_on_Area2D_body_exited"]

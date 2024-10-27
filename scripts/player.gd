@@ -26,7 +26,8 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 	
-	if Input.is_action_just_pressed("ui_select") and current_block:
+	# Create action for block breaking
+	if Input.is_action_just_pressed("break_block") and current_block:
 		current_block.destroy_block()# Call the break_block function
 	
 	if Input.is_action_just_pressed("spore_launch") and sporeTimer.get_time_left() == 0:
