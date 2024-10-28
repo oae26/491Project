@@ -17,3 +17,7 @@ position = Vector2(-49, -14)
 rotation = 3.14159
 scale = Vector2(8.57511, -13.4881)
 shape = SubResource("CircleShape2D_j8350")
+
+[node name="SporeTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true

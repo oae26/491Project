@@ -4,6 +4,9 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
 var current_block: Node = null
+@onready var game = get_tree().get_root().get_node("Game")
+@onready var SPORE = load("res://scenes/spore.tscn")
+@onready var sporeTimer = $SporeTimer
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -23,9 +26,12 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 	
-	if Input.is_action_just_pressed("ui_select") and current_block:
+	# Create action for block breaking
+	if Input.is_action_just_pressed("break_block") and current_block:
 		current_block.destroy_block()# Call the break_block function
-
+	
+	if Input.is_action_just_pressed("spore_launch") and sporeTimer.get_time_left() == 0:
+		launch_spore()
 
 func _on_Area2D_body_entered(body: Node) -> void:
 	if body.is_in_group("blocks"):  # Check if it's a block
@@ -37,3 +43,11 @@ func _on_Area2D_body_exited(body: Node) -> void:
 		
 func _on_block_broken() -> void:
 	print("the block has been broken!")
+
+func launch_spore():
+	var spore = SPORE.instantiate()
+	spore.dir = rotation
+	spore.spawnPos = global_position
+	spore.spawnRot = rotation
+	game.add_child.call_deferred(spore)
+	sporeTimer.start()

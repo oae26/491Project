@@ -1,15 +1,15 @@
-[gd_scene load_steps=16 format=3 uid="uid://cf3twmrxqgskj"]
+[gd_scene load_steps=18 format=3 uid="uid://cf3twmrxqgskj"]
 
-[ext_resource type="Script" path="res://game.gd" id="1_6oyct"]
-[ext_resource type="Texture2D" uid="uid://b3712or6a7qx0" path="res://art/IMG_0596.png" id="1_50j5q"]
-[ext_resource type="PackedScene" uid="uid://bkmtjqhmucw03" path="res://player.tscn" id="1_dvkoh"]
-[ext_resource type="Shader" path="res://snow.gdshader" id="1_mqm0v"]
-[ext_resource type="Shader" path="res://shaders/snow.gdshader" id="1_ovh2r"]
-[ext_resource type="Script" path="res://player.gd" id="2_wdxr3"]
-[ext_resource type="Script" path="res://wind.gd" id="4_gkxye"]
-[ext_resource type="Texture2D" uid="uid://vtqnetjlg4kk" path="res://art/IMG_0598.png" id="4_xitmp"]
-[ext_resource type="Texture2D" uid="uid://15ichst0w811" path="res://art/foreground_leaves.png" id="5_2pnrb"]
-[ext_resource type="Script" path="res://text_float.gd" id="9_1dd11"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_6n0sd"]
+[ext_resource type="Texture2D" uid="uid://b3712or6a7qx0" path="res://art/IMG_0596.png" id="3_n34rj"]
+[ext_resource type="Texture2D" uid="uid://vtqnetjlg4kk" path="res://art/IMG_0598.png" id="4_q41if"]
+[ext_resource type="Shader" path="res://shaders/snow.gdshader" id="5_oqcws"]
+[ext_resource type="PackedScene" uid="uid://bkmtjqhmucw03" path="res://scenes/player.tscn" id="6_nprxy"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="7_eclyp"]
+[ext_resource type="Texture2D" uid="uid://15ichst0w811" path="res://art/foreground_leaves.png" id="8_dkh5y"]
+[ext_resource type="Script" path="res://scripts/text_float.gd" id="9_chctq"]
+[ext_resource type="PackedScene" uid="uid://barwiegfv76e0" path="res://scenes/pause_menu.tscn" id="10_vf2hw"]
+[ext_resource type="PackedScene" uid="uid://bh4p66j4pm065" path="res://scenes/block.tscn" id="10_x6xq4"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fica4"]
 
@@ -18,7 +18,7 @@ distance = 40.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nokxo"]
 resource_local_to_scene = true
-shader = ExtResource("1_ovh2r")
+shader = ExtResource("5_oqcws")
 shader_parameter/rain_amount = 150.0
 shader_parameter/near_rain_length = 0.01
 shader_parameter/far_rain_length = 0.01
@@ -32,7 +32,7 @@ shader_parameter/additional_rain_speed = 0.15
 shader_parameter/slant = 0.0950001
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2r4dm"]
-shader = ExtResource("1_mqm0v")
+shader = ExtResource("5_oqcws")
 shader_parameter/rain_amount = 150.0
 shader_parameter/near_rain_length = 0.01
 shader_parameter/far_rain_length = 0.01
@@ -45,11 +45,29 @@ shader_parameter/base_rain_speed = 0.1
 shader_parameter/additional_rain_speed = 0.5
 shader_parameter/slant = 0.0950001
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_1crns"]
+radius = 73.4787
+
+[sub_resource type="GDScript" id="GDScript_x7i0g"]
+script/source = "extends Sprite2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_si1lk"]
 size = Vector2(143, 1497.14)
 
 [node name="Game" type="Node2D"]
-script = ExtResource("1_6oyct")
+process_mode = 3
+script = ExtResource("1_6n0sd")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(-922, 440)
@@ -63,77 +81,77 @@ shape = SubResource("WorldBoundaryShape2D_wdj23")
 material = SubResource("ShaderMaterial_nokxo")
 position = Vector2(154.251, 3)
 scale = Vector2(1.15703, 1)
-texture = ExtResource("1_50j5q")
+texture = ExtResource("3_n34rj")
 
 [node name="Img0598" type="Sprite2D" parent="Background"]
 position = Vector2(-518.22, -255)
 scale = Vector2(0.8637, 1)
-texture = ExtResource("4_xitmp")
+texture = ExtResource("4_q41if")
 
 [node name="Background2" type="Sprite2D" parent="Background"]
 material = SubResource("ShaderMaterial_2r4dm")
 position = Vector2(1917.62, -0.999969)
-texture = ExtResource("1_50j5q")
+texture = ExtResource("3_n34rj")
 flip_h = true
 
 [node name="Img0598" type="Sprite2D" parent="Background/Background2"]
 position = Vector2(-94.2025, 807)
 rotation = -0.950797
 scale = Vector2(0.8637, 1)
-texture = ExtResource("4_xitmp")
+texture = ExtResource("4_q41if")
 
 [node name="Img0599" type="Sprite2D" parent="Background/Background2"]
 position = Vector2(118.411, -271)
 scale = Vector2(0.8637, 1)
-texture = ExtResource("4_xitmp")
+texture = ExtResource("4_q41if")
 flip_h = true
 
 [node name="Img0600" type="Sprite2D" parent="Background/Background2"]
 position = Vector2(-1496.94, 640)
 rotation = 1.44665
 scale = Vector2(0.8637, 1)
-texture = ExtResource("4_xitmp")
+texture = ExtResource("4_q41if")
 flip_h = true
 
 [node name="Background3" type="Sprite2D" parent="Background"]
 material = SubResource("ShaderMaterial_nokxo")
 position = Vector2(3837.19, -1)
-texture = ExtResource("1_50j5q")
+texture = ExtResource("3_n34rj")
 
 [node name="Img0598" type="Sprite2D" parent="Background/Background3"]
 position = Vector2(-518.22, -255)
 scale = Vector2(0.8637, 1)
-texture = ExtResource("4_xitmp")
+texture = ExtResource("4_q41if")
 
 [node name="Background4" type="Sprite2D" parent="Background/Background3"]
 material = SubResource("ShaderMaterial_2r4dm")
 position = Vector2(1917.62, -0.999969)
-texture = ExtResource("1_50j5q")
+texture = ExtResource("3_n34rj")
 flip_h = true
 
 [node name="Img0598" type="Sprite2D" parent="Background/Background3/Background4"]
 position = Vector2(-953.303, -251)
 scale = Vector2(0.8637, 1)
-texture = ExtResource("4_xitmp")
+texture = ExtResource("4_q41if")
 
 [node name="Img0599" type="Sprite2D" parent="Background/Background3/Background4"]
 position = Vector2(-621.419, -255)
 scale = Vector2(0.8637, 1)
-texture = ExtResource("4_xitmp")
+texture = ExtResource("4_q41if")
 flip_h = true
 
 [node name="Img0600" type="Sprite2D" parent="Background/Background3/Background4"]
 position = Vector2(-1609.07, 641)
 rotation = 1.44665
 scale = Vector2(0.610273, 0.827577)
-texture = ExtResource("4_xitmp")
+texture = ExtResource("4_q41if")
 flip_h = true
 
-[node name="Player" parent="." groups=["player"] instance=ExtResource("1_dvkoh")]
+[node name="Player" parent="." groups=["player"] instance=ExtResource("6_nprxy")]
 position = Vector2(-537, 353)
 scale = Vector2(1.27937, 1.13605)
 disable_mode = 2
-script = ExtResource("2_wdxr3")
+script = ExtResource("7_eclyp")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(-308.745, -793.099)
@@ -142,25 +160,44 @@ anchor_mode = 0
 limit_top = -500
 limit_bottom = 0
 
+[node name="Area2D" type="Area2D" parent="Player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
+position = Vector2(-48.4612, -12.3234)
+shape = SubResource("CircleShape2D_1crns")
+
 [node name="ForegroundLeaves" type="Sprite2D" parent="."]
 position = Vector2(-8.00047, 442)
-texture = ExtResource("5_2pnrb")
-script = ExtResource("4_gkxye")
+texture = ExtResource("8_dkh5y")
+script = SubResource("GDScript_x7i0g")
 
 [node name="ForegroundLeaves2" type="Sprite2D" parent="ForegroundLeaves"]
 position = Vector2(3003, -875)
 rotation = -3.13862
-texture = ExtResource("5_2pnrb")
-script = ExtResource("4_gkxye")
+texture = ExtResource("8_dkh5y")
+script = SubResource("GDScript_x7i0g")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(13, 0)
-script = ExtResource("9_1dd11")
+script = ExtResource("9_chctq")
 typing_speed = 1.0
 display_time = 9.0
 text_color = Color(2.21401e-06, 0, 0.666229, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-188, 109)
 rotation = 3.13401
 shape = SubResource("RectangleShape2D_si1lk")
+
+[node name="Block" parent="." instance=ExtResource("10_x6xq4")]
+position = Vector2(577, 325)
+
+[node name="PauseMenu" parent="." instance=ExtResource("10_vf2hw")]
+visible = false
+size_flags_horizontal = 4
+size_flags_vertical = 4
+game = NodePath("")
+
+[connection signal="body_entered" from="Player/Area2D" to="Player" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Player/Area2D" to="Player" method="_on_Area2D_body_exited"]
+[connection signal="block_broken" from="Block" to="Player" method="_on_block_broken"]
