@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dif8bokxkrkx1"]
+
+[ext_resource type="Script" path="res://scripts/seed.gd" id="1_vbn4w"]
+[ext_resource type="Texture2D" uid="uid://dyed6ff0k36m2" path="res://art/sunflowerseed.png" id="2_fshtl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3q1li"]
+size = Vector2(83, 83)
+
+[node name="Seed" type="StaticBody2D"]
+position = Vector2(-27, -20)
+script = ExtResource("1_vbn4w")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-80.4774, 47.6836)
+scale = Vector2(0.135972, 0.138225)
+texture = ExtResource("2_fshtl")
+offset = Vector2(823.53, -189.427)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(31.5, 22.5)
+shape = SubResource("RectangleShape2D_3q1li")

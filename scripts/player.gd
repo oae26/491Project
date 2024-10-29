@@ -3,6 +3,7 @@ extends CharacterBody2D
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
+const aoE = preload("res://scenes/grow_aoe.tscn")
 var current_block: Node = null
 @onready var game = get_tree().get_root().get_node("Game")
 @onready var SPORE = load("res://scenes/spore.tscn")
@@ -25,6 +26,8 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+	if 	Input.is_action_just_released("press_e"):
+		_grow();
 	
 	# Create action for block breaking
 	if Input.is_action_just_pressed("break_block") and current_block:
@@ -43,6 +46,12 @@ func _on_Area2D_body_exited(body: Node) -> void:
 		
 func _on_block_broken() -> void:
 	print("the block has been broken!")
+	
+func _grow():
+	var grow = aoE.instantiate();
+
+	get_parent().add_child(grow);
+	grow.position = global_position;
 
 func launch_spore():
 	var spore = SPORE.instantiate()
