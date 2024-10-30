@@ -1,16 +1,47 @@
-[gd_scene load_steps=3 format=3 uid="uid://bkmtjqhmucw03"]
+[gd_scene load_steps=9 format=3 uid="uid://bkmtjqhmucw03"]
 
 [ext_resource type="Texture2D" uid="uid://bxoi2l2t5kjcs" path="res://art/IMG_0599_1_-removebg-preview.png" id="1_iof1a"]
+[ext_resource type="Texture2D" uid="uid://dln8gxlpuro7u" path="res://art/idle_left.png" id="2_1rg8c"]
+[ext_resource type="Texture2D" uid="uid://c74qreir6ffbm" path="res://art/walking_sprite2_left.png" id="2_s6j4t"]
+[ext_resource type="Texture2D" uid="uid://buhexv0kuxhyr" path="res://art/walking_sprite_left.png" id="3_nbtlk"]
+[ext_resource type="Texture2D" uid="uid://ti53u1amifdg" path="res://art/walking_sprite2-removebg-preview.png" id="4_0cxw1"]
+[ext_resource type="Texture2D" uid="uid://cbypjax6wfv3x" path="res://art/walking_sprite-removebg-preview.png" id="5_isyqk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j8350"]
 radius = 4.12311
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_gm2if"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_iof1a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_isyqk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_0cxw1")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_1rg8c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_nbtlk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_s6j4t")
+}],
+"loop": true,
+"name": &"walk_left",
+"speed": 5.0
+}]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-49, -17)
-scale = Vector2(0.523438, 0.589844)
-texture = ExtResource("1_iof1a")
+[node name="Player" type="CharacterBody2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-49, -14)
@@ -21,3 +52,10 @@ shape = SubResource("CircleShape2D_j8350")
 [node name="SporeTimer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-49, -17)
+scale = Vector2(0.523438, 0.589844)
+sprite_frames = SubResource("SpriteFrames_gm2if")
+animation = &"walk"
+frame_progress = 0.368931

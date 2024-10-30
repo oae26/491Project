@@ -63,7 +63,7 @@ func _process(delta: float) -> void:
 size = Vector2(143, 1497.14)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1crns"]
-radius = 603.181
+radius = 73.4787
 
 [node name="Game" type="Node2D"]
 process_mode = 3
@@ -188,7 +188,7 @@ offset_right = -387.0
 offset_bottom = -528.0
 
 [node name="Player" parent="." instance=ExtResource("6_nprxy")]
-position = Vector2(-9, 312)
+position = Vector2(-483, 331)
 script = ExtResource("7_eclyp")
 metadata/_edit_group_ = true
 
