@@ -1,10 +1,18 @@
 extends Area2D
 
 # Variables
-@export var typing_speed: float = 0.05 # Speed at which each character is typed
-@export var display_time: float = 1.0 # Time text stays fully visible before vanishing
-@export var text_color: Color = Color(0,0,0)
-var text_to_display: String = "This is floating text!" # Default message
+@export var typing_speed: float = 0.01
+@export var display_time: float = 1.5
+@export var text_color: Color = Color(0, 0, 0)
+@export var texts_to_display: Array[String] = [
+	"What's the point anymore... everything is so cold...", 
+	"Life is just too stifling...", 
+	"Everything in my life is made harder by others. I just wish they would go away!", 
+	"I'm.. I'm just really sad."
+] 
+
+# Zones as Position2D nodes
+@export var zones: Array[Marker2D] = []
 
 # Nodes
 var label: Label
@@ -14,18 +22,17 @@ var display_timer: Timer
 # Variables for typewriter effect
 var current_text: String = ""
 var char_index: int = 0
+var active_message_index: int = -1
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	# Initialize the Label and Timers
 	label = Label.new()
 	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	label.position = position + Vector2(100, 0) # Adjust floating position relative to the Area2D
-	label.visible = false  # Initially invisible
+	label.position = position
+	label.visible = false  
 	label.modulate = text_color
 	add_child(label)
 	
-
 	typing_timer = Timer.new()
 	typing_timer.wait_time = typing_speed
 	typing_timer.one_shot = true
@@ -38,35 +45,44 @@ func _ready():
 	display_timer.timeout.connect(_on_DisplayTimer_timeout)
 	add_child(display_timer)
 
-	# Connect signal for when player enters the area
 	body_entered.connect(_on_Area2D_body_entered)
 
-# Trigger when player walks into the area
+# Triggered when player enters the main Area2D
 func _on_Area2D_body_entered(body: Node):
-	if body.name == "Player":  # Change this to match your player's node name
-		label.visible = true
-		current_text = ""
-		char_index = 0
-		label.text = "" # Clear any previous text
-		typing_timer.start() # Start the typewriter effect
-		print("Label set to true")
-		print("label visibile at position: ", label.position)
+	if body.name == "Player":
+		# Find the closest zone to the player’s position
+		active_message_index = _get_closest_zone_index(body.global_position)
+		if active_message_index != -1:
+			current_text = texts_to_display[active_message_index]
+			label.text = ""
+			char_index = 0
+			label.visible = true
+			typing_timer.start()
+
+# Returns the index of the closest zone based on player's position
+func _get_closest_zone_index(player_position: Vector2) -> int:
+	var closest_index = -1
+	var min_distance = INF
+	for i in range(zones.size()):
+		var distance = player_position.distance_to(zones[i].global_position)
+		if distance < min_distance:
+			min_distance = distance
+			closest_index = i
+	return closest_index
 
 # Typewriter effect
 func _on_TypingTimer_timeout():
-	if char_index < text_to_display.length():
-		current_text += text_to_display[char_index]
-		label.text = current_text
+	if char_index < current_text.length():
+		label.text += current_text[char_index]
 		char_index += 1
-		typing_timer.start() # Continue typing
+		typing_timer.start()
 	else:
-		display_timer.start() # Start the timer to make the text disappear
+		display_timer.start()
 
-# Make the text fade and disappear after it's been fully displayed
+# Make text fade after display time
 func _on_DisplayTimer_timeout():
-	# Create a SceneTreeTween for the fade out animation
 	var tween = get_tree().create_tween()
 	tween.tween_property(label, "modulate:a", 0.0, 1.0)
-	await tween.finished # Wait for the tween to finish
+	await tween.finished
 	label.visible = false
-	label.modulate.a = 1.0  # Reset the alpha for the next time it's triggered
+	label.modulate.a = 1.0

@@ -17,10 +17,10 @@ animations = [{
 "texture": ExtResource("1_iof1a")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_isyqk")
+"texture": ExtResource("4_0cxw1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_0cxw1")
+"texture": ExtResource("5_isyqk")
 }],
 "loop": true,
 "name": &"walk",
@@ -58,4 +58,4 @@ position = Vector2(-49, -17)
 scale = Vector2(0.523438, 0.589844)
 sprite_frames = SubResource("SpriteFrames_gm2if")
 animation = &"walk"
-frame_progress = 0.368931
+frame_progress = 0.774694
