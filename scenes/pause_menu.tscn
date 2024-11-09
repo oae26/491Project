@@ -1,9 +1,10 @@
 [gd_scene load_steps=2 format=3 uid="uid://barwiegfv76e0"]
 
-[ext_resource type="Script" path="res://scenes/pause_menu.gd" id="1_je4lu"]
+[ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_je4lu"]
 
 [node name="PauseMenu" type="Control"]
-process_mode = 2
+process_mode = 3
+visible = false
 layout_direction = 1
 layout_mode = 3
 anchors_preset = 14
@@ -48,15 +49,15 @@ layout_mode = 2
 text = "Paused"
 horizontal_alignment = 1
 
-[node name="Resume" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="ResumeBtn" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Resume"
 icon_alignment = 1
 
-[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="QuitBtn" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Quit"
 icon_alignment = 1
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ResumeBtn" to="." method="_on_resume_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/QuitBtn" to="." method="_on_quit_btn_pressed"]

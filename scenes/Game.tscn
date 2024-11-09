@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cf3twmrxqgskj"]
+[gd_scene load_steps=19 format=3 uid="uid://cf3twmrxqgskj"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_6n0sd"]
 [ext_resource type="Texture2D" uid="uid://b3712or6a7qx0" path="res://art/IMG_0596.png" id="3_n34rj"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/player.gd" id="7_eclyp"]
 [ext_resource type="Texture2D" uid="uid://15ichst0w811" path="res://art/foreground_leaves.png" id="8_dkh5y"]
 [ext_resource type="Script" path="res://scripts/text_float.gd" id="9_chctq"]
+[ext_resource type="PackedScene" uid="uid://barwiegfv76e0" path="res://scenes/pause_menu.tscn" id="10_56xfp"]
 [ext_resource type="AudioStream" uid="uid://dqon4c3kgmxf4" path="res://music/Project Growth Ice.wav" id="10_sxdw7"]
 [ext_resource type="PackedScene" uid="uid://bh4p66j4pm065" path="res://scenes/block.tscn" id="10_x6xq4"]
 
@@ -87,11 +88,13 @@ scale = Vector2(1.15703, 1)
 texture = ExtResource("3_n34rj")
 
 [node name="Img0598" type="Sprite2D" parent="Background"]
+process_mode = 1
 position = Vector2(-518.22, -255)
 scale = Vector2(0.8637, 1)
 texture = ExtResource("4_q41if")
 
 [node name="Background2" type="Sprite2D" parent="Background"]
+process_mode = 1
 material = SubResource("ShaderMaterial_2r4dm")
 position = Vector2(1917.62, -0.999969)
 texture = ExtResource("3_n34rj")
@@ -192,6 +195,7 @@ position = Vector2(3846, -40)
 position = Vector2(4619, -35)
 
 [node name="Player" parent="." instance=ExtResource("6_nprxy")]
+process_mode = 1
 position = Vector2(-540, 318)
 script = ExtResource("7_eclyp")
 metadata/_edit_group_ = true
@@ -257,6 +261,14 @@ position = Vector2(5394, 291)
 position = Vector2(577, 325)
 stream = ExtResource("10_sxdw7")
 autoplay = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("10_56xfp")]
+offset_left = -804.0
+offset_top = -593.0
+offset_right = -804.0
+offset_bottom = -593.0
 
 [connection signal="area_entered" from="Player/Area2D" to="Player" method="_on_Area2D_body_entered"]
 [connection signal="area_exited" from="Player/Area2D" to="Player" method="_on_Area2D_body_exited"]
