@@ -1,7 +1,11 @@
 extends Control
 
+
 var _is_paused:bool = false:
 	set = set_paused
+
+func _ready() -> void:
+	pass
 	
 func _on_Pause_Input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):

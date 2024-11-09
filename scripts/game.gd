@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var pause_menu = $CanvasLayer/PauseMenu
+@onready var resume = $CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/ResumeBtn
 var paused = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -27,5 +28,6 @@ func pauseMenu() -> void:
 		get_tree().paused = false
 	else:
 		pause_menu.show()
+		resume.grab_focus()
 		get_tree().paused = true
 	paused = !paused
