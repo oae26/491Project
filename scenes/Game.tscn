@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cf3twmrxqgskj"]
+[gd_scene load_steps=19 format=3 uid="uid://cf3twmrxqgskj"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_6n0sd"]
 [ext_resource type="Texture2D" uid="uid://b3712or6a7qx0" path="res://art/IMG_0596.png" id="3_n34rj"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://scripts/text_float.gd" id="9_chctq"]
 [ext_resource type="AudioStream" uid="uid://dqon4c3kgmxf4" path="res://music/Project Growth Ice.wav" id="10_sxdw7"]
 [ext_resource type="PackedScene" uid="uid://bh4p66j4pm065" path="res://scenes/block.tscn" id="10_x6xq4"]
+[ext_resource type="Script" path="res://scripts/SceneSwitch.gd" id="11_4n75b"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fica4"]
 
@@ -258,25 +259,28 @@ position = Vector2(577, 325)
 stream = ExtResource("10_sxdw7")
 autoplay = true
 
+[node name="Node2" type="Node" parent="."]
+script = ExtResource("11_4n75b")
+
 [connection signal="area_entered" from="Player/Area2D" to="Player" method="_on_Area2D_body_entered"]
 [connection signal="area_exited" from="Player/Area2D" to="Player" method="_on_Area2D_body_exited"]
-[connection signal="block_broken" from="Block" to="Player" method="destroy_block"]
 [connection signal="block_broken" from="Block" to="Player" method="break_block"]
-[connection signal="block_broken" from="Block2" to="Player" method="destroy_block"]
+[connection signal="block_broken" from="Block" to="Player" method="destroy_block"]
 [connection signal="block_broken" from="Block2" to="Player" method="break_block"]
-[connection signal="block_broken" from="Block3" to="Player" method="destroy_block"]
+[connection signal="block_broken" from="Block2" to="Player" method="destroy_block"]
 [connection signal="block_broken" from="Block3" to="Player" method="break_block"]
-[connection signal="block_broken" from="Block4" to="Player" method="destroy_block"]
+[connection signal="block_broken" from="Block3" to="Player" method="destroy_block"]
 [connection signal="block_broken" from="Block4" to="Player" method="break_block"]
-[connection signal="block_broken" from="Block6" to="Player" method="destroy_block"]
+[connection signal="block_broken" from="Block4" to="Player" method="destroy_block"]
 [connection signal="block_broken" from="Block6" to="Player" method="break_block"]
-[connection signal="block_broken" from="Block8" to="Player" method="destroy_block"]
+[connection signal="block_broken" from="Block6" to="Player" method="destroy_block"]
 [connection signal="block_broken" from="Block8" to="Player" method="break_block"]
-[connection signal="block_broken" from="Block9" to="Player" method="destroy_block"]
+[connection signal="block_broken" from="Block8" to="Player" method="destroy_block"]
 [connection signal="block_broken" from="Block9" to="Player" method="break_block"]
-[connection signal="block_broken" from="Block11" to="Player" method="destroy_block"]
+[connection signal="block_broken" from="Block9" to="Player" method="destroy_block"]
 [connection signal="block_broken" from="Block11" to="Player" method="break_block"]
-[connection signal="block_broken" from="Block13" to="Player" method="destroy_block"]
+[connection signal="block_broken" from="Block11" to="Player" method="destroy_block"]
 [connection signal="block_broken" from="Block13" to="Player" method="break_block"]
-[connection signal="block_broken" from="Block14" to="Player" method="destroy_block"]
+[connection signal="block_broken" from="Block13" to="Player" method="destroy_block"]
 [connection signal="block_broken" from="Block14" to="Player" method="break_block"]
+[connection signal="block_broken" from="Block14" to="Player" method="destroy_block"]
