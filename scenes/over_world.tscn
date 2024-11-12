@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://bde8ibebpl0b3"]
+
+[ext_resource type="PackedScene" uid="uid://bkmtjqhmucw03" path="res://scenes/player.tscn" id="1_81mt6"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_gu437"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="2_rryov"]
+[ext_resource type="PackedScene" uid="uid://barwiegfv76e0" path="res://scenes/pause_menu.tscn" id="4_pa4np"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fb38p"]
+radius = 42.2083
+height = 124.995
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0un6t"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_eq04q"]
+distance = 40.0
+
+[node name="OverWorld" type="Node2D"]
+script = ExtResource("1_gu437")
+
+[node name="Player2" parent="." instance=ExtResource("1_81mt6")]
+position = Vector2(-836, 298)
+script = ExtResource("2_rryov")
+metadata/_edit_group_ = true
+
+[node name="Camera2D" type="Camera2D" parent="Player2"]
+position = Vector2(-535.999, -883)
+scale = Vector2(0.999994, 1)
+anchor_mode = 0
+limit_top = -500
+limit_bottom = 0
+
+[node name="Area2D" type="Area2D" parent="Player2"]
+position = Vector2(-141, 18)
+scale = Vector2(1.27937, 1.13605)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player2/Area2D"]
+position = Vector2(70.3471, -25.527)
+scale = Vector2(1, 1.37282)
+shape = SubResource("CapsuleShape2D_fb38p")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+process_mode = 1
+position = Vector2(-922, 440)
+physics_material_override = SubResource("PhysicsMaterial_0un6t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(35, -29)
+shape = SubResource("WorldBoundaryShape2D_eq04q")
+
+[node name="PauseMenu" parent="." instance=ExtResource("4_pa4np")]
+offset_left = -844.0
+offset_top = -397.0
+offset_right = -844.0
+offset_bottom = -397.0
+
+[connection signal="area_entered" from="Player2/Area2D" to="Player2" method="_on_Area2D_body_entered"]
+[connection signal="area_exited" from="Player2/Area2D" to="Player2" method="_on_Area2D_body_exited"]
