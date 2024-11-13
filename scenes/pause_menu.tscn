@@ -44,12 +44,6 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2.5, 2.5)
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "Paused"
-horizontal_alignment = 1
-
 [node name="ResumeBtn" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../QuitBtn")
@@ -63,6 +57,21 @@ focus_neighbor_top = NodePath("../ResumeBtn")
 focus_neighbor_bottom = NodePath("../ResumeBtn")
 text = "Quit"
 icon_alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -211.0
+offset_top = 90.0
+offset_right = 211.0
+offset_bottom = 255.0
+grow_horizontal = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 120
+text = "Paused"
+horizontal_alignment = 1
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ResumeBtn" to="." method="_on_resume_btn_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/QuitBtn" to="." method="_on_quit_btn_pressed"]

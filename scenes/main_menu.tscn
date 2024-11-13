@@ -1,5 +1,42 @@
-[gd_scene format=3 uid="uid://c4veusxftny3t"]
+[gd_scene load_steps=3 format=3 uid="uid://c4veusxftny3t"]
 
-[node name="MarginContainer" type="MarginContainer"]
-offset_right = 40.0
-offset_bottom = 40.0
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_6abxt"]
+[ext_resource type="Script" path="res://scripts/button.gd" id="1_egtvm"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1918.0
+offset_bottom = 1081.0
+script = ExtResource("1_6abxt")
+
+[node name="MarginContainer" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 1918.0
+offset_bottom = 1081.0
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+offset_left = 112.0
+offset_top = 146.0
+offset_right = 2030.0
+offset_bottom = 278.0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 120
+text = "Project: Growth"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 580.0
+offset_right = 416.0
+offset_bottom = 646.0
+
+[node name="StartBtn" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Start Game"
+script = ExtResource("1_egtvm")
+
+[node name="QuitBtn" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Exit Game"
