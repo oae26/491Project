@@ -1,38 +1,42 @@
 extends CanvasLayer
 
-@export var next_scene_path: String = "res://scenes/Game.tscn"
 @export var dialogue_lines: Array[String] = []
+@export var next_scene_path: String = "res://scenes/Game.tscn"
 
-@onready var dialogue_label: Label = $DialogueControl/DialogueLabel
-@onready var next_button: Button = $DialogueControl/NextButton
+var label: Label
+var current_index = 0
 
-var current_line: int =0 
-
-
+# Initialize dialogue display
 func _ready() -> void:
+	# Dynamically assign the label node
+	label = $DialogueControl/DialogueLabel
+
+	# Check if the label was found
+	if label == null:
+		print("Error: DialogueLabel not found!")
+		return
+
+	# Display the first line of dialogue if available
 	if dialogue_lines.size() > 0:
-		show_line(current_line)
-	next_button.visibile = dialogue_lines.size() > 1 
-
-func show_line(line_index: int) -> void:
-	if line_index < dialogue_lines.size():
-		await typewriter(dialogue_lines[line_index]) 
+		label.text = dialogue_lines[current_index]
 	else:
-		change_scene()
+		label.text = "No dialogue lines provided."
 
-func next_line() -> void: 
-	current_line +=1
-	show_line(current_line)
-	
-func change_scene() -> void: 
-	if next_scene_path != " ":
+# Handle advancing dialogue with the interact key
+func _process(delta: float) -> void:
+	if label == null:
+		return  # Ensure label exists before updating text
+
+	if Input.is_action_just_pressed("ui_accept"):
+		current_index += 1
+		if current_index < dialogue_lines.size():
+			label.text = dialogue_lines[current_index]
+		else:
+			end_dialogue()
+
+# End the dialogue and change scene if needed
+func end_dialogue() -> void:
+	if next_scene_path != "":
 		get_tree().change_scene_to_file(next_scene_path)
-
-func _on_NextButton_pressed() -> void: 
-	next_line()
-
-func typewriter(text:String) -> void: 
-	dialogue_label.text = " "
-	for char in text:
-		dialogue_label.text += char
-		await get_tree().process_frame
+	else:
+		queue_free()  # Close the dialogue box

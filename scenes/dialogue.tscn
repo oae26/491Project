@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/DialogueBox.gd" id="1_hygy4"]
 
-[node name="CanvasLayer" type="CanvasLayer"]
+[node name="Dialogue" type="CanvasLayer"]
 script = ExtResource("1_hygy4")
 
 [node name="DialogueControl" type="Control" parent="."]
@@ -10,14 +10,26 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+metadata/_edit_group_ = true
 
-[node name="DialogueLabel" type="Label" parent="."]
+[node name="DialogueLabel" type="Label" parent="DialogueControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.119271
+anchor_bottom = 0.0842593
 offset_right = 40.0
 offset_bottom = 23.0
+metadata/_edit_use_anchors_ = true
+metadata/_edit_group_ = true
 
-[node name="NextButton" type="Button" parent="DialogueLabel"]
-layout_mode = 0
+[node name="NextButton" type="Button" parent="DialogueControl/DialogueLabel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.1
+anchor_bottom = 1.6087
 offset_right = 8.0
 offset_bottom = 8.0
+metadata/_edit_use_anchors_ = true
 
-[connection signal="pressed" from="DialogueLabel/NextButton" to="." method="_on_NextButton_pressed"]
+[connection signal="pressed" from="DialogueControl/DialogueLabel/NextButton" to="." method="_on_NextButton_pressed"]
