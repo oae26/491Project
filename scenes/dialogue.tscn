@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://vakwwfr5tu8n"]
+
+[ext_resource type="Script" path="res://scripts/DialogueBox.gd" id="1_hygy4"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_hygy4")
+
+[node name="DialogueControl" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DialogueLabel" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="NextButton" type="Button" parent="DialogueLabel"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[connection signal="pressed" from="DialogueLabel/NextButton" to="." method="_on_NextButton_pressed"]
