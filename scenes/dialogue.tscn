@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" path="res://scripts/DialogueBox.gd" id="1_hygy4"]
 
-[node name="Dialogue" type="CanvasLayer"]
+[node name="Dialogue" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_hygy4")
 
 [node name="DialogueControl" type="Control" parent="."]
@@ -31,5 +33,3 @@ anchor_bottom = 1.6087
 offset_right = 8.0
 offset_bottom = 8.0
 metadata/_edit_use_anchors_ = true
-
-[connection signal="pressed" from="DialogueControl/DialogueLabel/NextButton" to="." method="_on_NextButton_pressed"]

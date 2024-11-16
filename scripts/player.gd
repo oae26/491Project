@@ -4,22 +4,31 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 var screen_size
 var current_block: Node = null
-var npc: Node = null  # New variable to track NPC in range
+var npc: Node = null  # Variable to track NPC in range
 
-@onready var game = get_tree().get_root().get_node("Game")
+@onready var game = get_tree().root.get_node("Game")
 @onready var SPORE = load("res://scenes/spore.tscn")
 @onready var sporeTimer = $SporeTimer
-@onready var area2d = $Area2D
-@onready var npc_area2d = $Area2NPC  # New Area2D for NPCs
+@onready var area2d = $Player2D
+@onready var npc_area2d = $NPCInteractionArea
 
 # Track the last movement direction (-1 for left, 1 for right)
 var last_direction = 1
 
-func _ready():
+func _ready() -> void:
 	screen_size = get_viewport_rect().size
-	area2d.body_entered.connect(_on_Area2D_body_entered)
-	area2d.body_exited.connect(_on_Area2D_body_exited)
-	
+
+	# Check if nodes are valid before connecting signals
+	if area2d and area2d.has_signal("body_entered"):
+		area2d.body_entered.connect(_on_Area2D_body_entered)
+	if area2d and area2d.has_signal("body_exited"):
+		area2d.body_exited.connect(_on_Area2D_body_exited)
+		
+	if npc_area2d and npc_area2d.has_signal("body_entered"):
+		npc_area2d.body_entered.connect(_on_NPCInteractionArea_body_entered)
+	if npc_area2d and npc_area2d.has_signal("body_exited"):
+		npc_area2d.body_exited.connect(_on_NPCInteractionArea_body_exited)
+
 func _physics_process(delta: float) -> void:
 	# Add gravity
 	if not is_on_floor():
@@ -62,12 +71,12 @@ func trigger_dialogue(npc_node: Node) -> void:
 	var dialogue_box = preload("res://scenes/dialogue.tscn").instantiate()
 	get_tree().root.add_child(dialogue_box)
 	dialogue_box.dialogue_lines = npc_node.dialogue_lines
+	print("Dialogue triggered with NPC")
 
 # Area2D signals for blocks
 func _on_Area2D_body_entered(body: Node) -> void:
 	if body.is_in_group("blocks"):
 		current_block = body
-
 		var callable_on_block_destroyed = Callable(self, "_on_block_destroyed")
 		if not current_block.is_connected("block_broken", callable_on_block_destroyed):
 			current_block.connect("block_broken", callable_on_block_destroyed)
@@ -77,8 +86,17 @@ func _on_Area2D_body_exited(body: Node) -> void:
 		current_block = null
 
 # Area2D signals for NPCs
+func _on_NPCInteractionArea_body_entered(body: Node) -> void:
+	if body.has_method("trigger_dialogue"):
+		npc = body
+		print("Player entered NPC interaction area")
 
+func _on_NPCInteractionArea_body_exited(body: Node) -> void:
+	if body == npc:
+		npc = null
+		print("Player exited NPC interaction area")
 
+# Function to launch a spore
 func launch_spore():
 	var spore = SPORE.instantiate()
 	spore.dir = rotation

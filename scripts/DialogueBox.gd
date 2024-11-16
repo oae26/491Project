@@ -1,7 +1,7 @@
-extends CanvasLayer
+extends Control
 
 @export var dialogue_lines: Array[String] = []
-@export var next_scene_path: String = "res://scenes/Game.tscn"
+@export var next_scene_path: String = ""
 
 var label: Label
 var current_index = 0
@@ -10,7 +10,10 @@ var current_index = 0
 func _ready() -> void:
 	# Dynamically assign the label node
 	label = $DialogueControl/DialogueLabel
-
+	
+	# Ensure the dialogue box receives input focus
+	set_process_input(true)
+	
 	# Check if the label was found
 	if label == null:
 		print("Error: DialogueLabel not found!")
@@ -27,6 +30,7 @@ func _process(delta: float) -> void:
 	if label == null:
 		return  # Ensure label exists before updating text
 
+	# Handle advancing the dialogue
 	if Input.is_action_just_pressed("ui_accept"):
 		current_index += 1
 		if current_index < dialogue_lines.size():
@@ -36,7 +40,10 @@ func _process(delta: float) -> void:
 
 # End the dialogue and change scene if needed
 func end_dialogue() -> void:
+	print("Ending dialogue...")
 	if next_scene_path != "":
-		get_tree().change_scene_to_file(next_scene_path)
+		print("Changing scene to:", next_scene_path)
+		if not get_tree().change_scene_to_file(next_scene_path):
+			print("Error changing scene!")
 	else:
 		queue_free()  # Close the dialogue box
