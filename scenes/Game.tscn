@@ -1,13 +1,12 @@
-[gd_scene load_steps=19 format=3 uid="uid://cf3twmrxqgskj"]
+[gd_scene load_steps=17 format=3 uid="uid://cf3twmrxqgskj"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_6n0sd"]
-[ext_resource type="Texture2D" uid="uid://b3712or6a7qx0" path="res://art/IMG_0596.png" id="3_n34rj"]
+[ext_resource type="Texture2D" uid="uid://b3712or6a7qx0" path="res://art/snowlevel1.png" id="3_n34rj"]
 [ext_resource type="Texture2D" uid="uid://vtqnetjlg4kk" path="res://art/IMG_0598.png" id="4_q41if"]
 [ext_resource type="Shader" path="res://shaders/snow.gdshader" id="5_oqcws"]
 [ext_resource type="PackedScene" uid="uid://bkmtjqhmucw03" path="res://scenes/player.tscn" id="6_nprxy"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="7_eclyp"]
 [ext_resource type="Texture2D" uid="uid://15ichst0w811" path="res://art/foreground_leaves.png" id="8_dkh5y"]
-[ext_resource type="Script" path="res://scripts/text_float.gd" id="9_chctq"]
 [ext_resource type="AudioStream" uid="uid://dqon4c3kgmxf4" path="res://music/Project Growth Ice.wav" id="10_sxdw7"]
 [ext_resource type="PackedScene" uid="uid://bh4p66j4pm065" path="res://scenes/block.tscn" id="10_x6xq4"]
 [ext_resource type="Script" path="res://scripts/SceneSwitch.gd" id="11_4n75b"]
@@ -59,9 +58,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 "
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_si1lk"]
-size = Vector2(5907.97, 1497.14)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qxbje"]
 radius = 42.2083
@@ -162,35 +158,6 @@ position = Vector2(3003, -875)
 rotation = -3.13862
 texture = ExtResource("8_dkh5y")
 script = SubResource("GDScript_x7i0g")
-
-[node name="TextArea" type="Area2D" parent="." node_paths=PackedStringArray("zones")]
-process_mode = 1
-position = Vector2(13, 0)
-script = ExtResource("9_chctq")
-typing_speed = 0.5
-display_time = 9.0
-text_color = Color(1, 0, 0.129412, 1)
-zones = [NodePath("Marker2D"), NodePath("Marker2D2"), NodePath("Marker2D3"), NodePath("Marker2D4"), NodePath("Marker2D5")]
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="TextArea"]
-position = Vector2(1996.41, 92.4362)
-rotation = 3.13401
-shape = SubResource("RectangleShape2D_si1lk")
-
-[node name="Marker2D" type="Marker2D" parent="TextArea"]
-position = Vector2(963, 270)
-
-[node name="Marker2D2" type="Marker2D" parent="TextArea"]
-position = Vector2(-264, 252)
-
-[node name="Marker2D3" type="Marker2D" parent="TextArea"]
-position = Vector2(2054, 290)
-
-[node name="Marker2D4" type="Marker2D" parent="TextArea"]
-position = Vector2(3846, -40)
-
-[node name="Marker2D5" type="Marker2D" parent="TextArea"]
-position = Vector2(4619, -35)
 
 [node name="Player" parent="." instance=ExtResource("6_nprxy")]
 position = Vector2(-540, 318)

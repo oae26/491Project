@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bde8ibebpl0b3"]
+[gd_scene load_steps=14 format=3 uid="uid://bde8ibebpl0b3"]
 
 [ext_resource type="PackedScene" uid="uid://bkmtjqhmucw03" path="res://scenes/player.tscn" id="1_81mt6"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_gu437"]
@@ -6,13 +6,14 @@
 [ext_resource type="Script" path="res://scripts/player.gd" id="2_rryov"]
 [ext_resource type="Texture2D" uid="uid://jfutkkdcukrp" path="res://art/overworld2.PNG" id="3_gfb7x"]
 [ext_resource type="PackedScene" uid="uid://barwiegfv76e0" path="res://scenes/pause_menu.tscn" id="4_pa4np"]
+[ext_resource type="Script" path="res://scripts/camera.gd" id="6_xpo2t"]
 [ext_resource type="PackedScene" uid="uid://ci23ocsa8yhhk" path="res://scenes/npc.tscn" id="8_f3ykd"]
 [ext_resource type="Texture2D" uid="uid://ccavpgoo3lgvl" path="res://art/garbage.png" id="8_n0i03"]
 [ext_resource type="Texture2D" uid="uid://63pmdtbry7a5" path="res://art/pole.png" id="9_bpqdb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fb38p"]
-radius = 39.0818
-height = 92.3318
+radius = 42.2083
+height = 124.995
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0un6t"]
 
@@ -25,14 +26,13 @@ script = ExtResource("1_gu437")
 [node name="Overworld1" type="Sprite2D" parent="."]
 position = Vector2(-407, -63)
 texture = ExtResource("2_3ae4y")
-region_rect = Rect2(0, 0, 1920, 1080)
 
 [node name="Overworld2" type="Sprite2D" parent="."]
 position = Vector2(1501, -63)
 texture = ExtResource("3_gfb7x")
 
 [node name="Player" parent="." instance=ExtResource("1_81mt6")]
-position = Vector2(-852, 124)
+position = Vector2(-847, 78)
 script = ExtResource("2_rryov")
 metadata/_edit_group_ = true
 
@@ -48,10 +48,12 @@ shape = SubResource("CapsuleShape2D_fb38p")
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(-523, -1106)
 scale = Vector2(0.999994, 1)
-anchor_mode = 0
 zoom = Vector2(1.25, 1.11)
 limit_top = -500
 limit_bottom = 0
+script = ExtResource("6_xpo2t")
+background_width = null
+background_height = null
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 process_mode = 1
@@ -59,7 +61,7 @@ position = Vector2(-922, 440)
 physics_material_override = SubResource("PhysicsMaterial_0un6t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(22, -230)
+position = Vector2(26, -237)
 shape = SubResource("WorldBoundaryShape2D_eq04q")
 
 [node name="PauseMenu" parent="." instance=ExtResource("4_pa4np")]

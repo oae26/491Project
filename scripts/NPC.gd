@@ -24,13 +24,19 @@ func _process(delta: float) -> void:
 # Function to trigger the dialogue box
 func trigger_dialogue() -> void:
 	print("Triggering dialogue...")
+
+	# Instantiate the dialogue box scene
 	var dialogue_box = preload("res://scenes/dialogue.tscn").instantiate()
-	get_tree().root.add_child(dialogue_box)
-	
+	print("Passing dialogue lines to dialogue box:", dialogue_lines)
 	# Pass dialogue lines and next scene path to the dialogue box
 	dialogue_box.dialogue_lines = dialogue_lines
 	dialogue_box.next_scene_path = next_scene_path
 
+	# Add the dialogue box to the scene tree
+	get_tree().root.add_child(dialogue_box)
+
 	# Position the dialogue box above the NPC
 	var npc_global_position = global_position
 	dialogue_box.position = npc_global_position + Vector2(0, -100)  # Adjust the offset as needed
+
+	print("Triggering dialogue...")

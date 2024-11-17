@@ -4,11 +4,11 @@ extends Control
 @export var next_scene_path: String = ""
 
 var label: Label
-var current_index = 0
+var current_index: int = 0
 
 # Initialize dialogue display
-# Initialize dialogue display
 func _ready() -> void:
+	print(dialogue_lines)  # Ensure dialogue_lines are received properly
 	label = $DialogueControl/DialogueLabel
 	set_process_input(true)  # Ensure the dialogue box receives input focus
 	grab_focus()  # Ensure the dialogue box captures input exclusively
@@ -16,9 +16,9 @@ func _ready() -> void:
 	if label == null:
 		print("Error: DialogueLabel not found!")
 		return
-
+	label.self_modulate = Color(0, 0, 0)  # RGB for black
 	if dialogue_lines.size() > 0:
-		label.text = dialogue_lines[current_index]
+		label.text = dialogue_lines[current_index]  # Display the first line
 	else:
 		label.text = "No dialogue lines provided."
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bde8ibebpl0b3"]
+[gd_scene load_steps=11 format=3 uid="uid://bde8ibebpl0b3"]
 
 [ext_resource type="PackedScene" uid="uid://bkmtjqhmucw03" path="res://scenes/player.tscn" id="1_81mt6"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_gu437"]
@@ -7,12 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://jfutkkdcukrp" path="res://art/overworld2.PNG" id="3_gfb7x"]
 [ext_resource type="PackedScene" uid="uid://barwiegfv76e0" path="res://scenes/pause_menu.tscn" id="4_pa4np"]
 [ext_resource type="PackedScene" uid="uid://ci23ocsa8yhhk" path="res://scenes/npc.tscn" id="8_f3ykd"]
-[ext_resource type="Texture2D" uid="uid://ccavpgoo3lgvl" path="res://art/garbage.png" id="8_n0i03"]
-[ext_resource type="Texture2D" uid="uid://63pmdtbry7a5" path="res://art/pole.png" id="9_bpqdb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fb38p"]
-radius = 39.0818
-height = 92.3318
+radius = 42.2083
+height = 124.995
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0un6t"]
 
@@ -25,14 +23,13 @@ script = ExtResource("1_gu437")
 [node name="Overworld1" type="Sprite2D" parent="."]
 position = Vector2(-407, -63)
 texture = ExtResource("2_3ae4y")
-region_rect = Rect2(0, 0, 1920, 1080)
 
 [node name="Overworld2" type="Sprite2D" parent="."]
-position = Vector2(1501, -63)
+position = Vector2(1502, -64)
 texture = ExtResource("3_gfb7x")
 
 [node name="Player" parent="." instance=ExtResource("1_81mt6")]
-position = Vector2(-852, 124)
+position = Vector2(-847, 78)
 script = ExtResource("2_rryov")
 metadata/_edit_group_ = true
 
@@ -59,7 +56,7 @@ position = Vector2(-922, 440)
 physics_material_override = SubResource("PhysicsMaterial_0un6t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(22, -230)
+position = Vector2(26, -237)
 shape = SubResource("WorldBoundaryShape2D_eq04q")
 
 [node name="PauseMenu" parent="." instance=ExtResource("4_pa4np")]
@@ -70,34 +67,9 @@ offset_right = -844.0
 offset_bottom = -397.0
 
 [node name="NPC" parent="." instance=ExtResource("8_f3ykd")]
-position = Vector2(480, 34)
-scale = Vector2(0.713323, 0.57363)
-dialogue_lines = Array[String](["Oh... who are you?", "I don't understand... I'm too cold? ", "I don't need people. Just get away from me already!!", "Wh-what's that feeling in my head... "])
+position = Vector2(-249, 54)
+dialogue_lines = Array[String](["Oh... who are you?", "I don't understand... I'm too cold? ", "Goodbye!", ""])
 next_scene_path = "res://scenes/Game.tscn"
-
-[node name="Garbage" type="Sprite2D" parent="."]
-position = Vector2(-180, 348)
-scale = Vector2(0.66116, 0.936411)
-texture = ExtResource("8_n0i03")
-
-[node name="Garbage2" type="Sprite2D" parent="."]
-position = Vector2(-17.625, 84.375)
-scale = Vector2(0.515786, 0.63676)
-texture = ExtResource("8_n0i03")
-
-[node name="Pole" type="Sprite2D" parent="."]
-position = Vector2(-78.25, -55.25)
-scale = Vector2(1.23699, 1.63909)
-texture = ExtResource("9_bpqdb")
-
-[node name="Pole2" type="Sprite2D" parent="."]
-position = Vector2(1319, -283)
-scale = Vector2(1.04247, 1.12225)
-texture = ExtResource("9_bpqdb")
-
-[node name="Garbage3" type="Sprite2D" parent="."]
-position = Vector2(-1364, 393)
-texture = ExtResource("8_n0i03")
 
 [connection signal="area_entered" from="Player/Player2D" to="Player" method="_on_Area2D_body_entered"]
 [connection signal="area_exited" from="Player/Player2D" to="Player" method="_on_Area2D_body_exited"]
