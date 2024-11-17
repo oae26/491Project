@@ -40,3 +40,5 @@ script = ExtResource("1_egtvm")
 [node name="QuitBtn" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Exit Game"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/QuitBtn" to="." method="_on_quit_btn_pressed"]
