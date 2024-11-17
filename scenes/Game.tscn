@@ -204,11 +204,11 @@ anchor_mode = 0
 limit_top = -500
 limit_bottom = 0
 
-[node name="Area2D" type="Area2D" parent="Player"]
+[node name="Player2D" type="Area2D" parent="Player"]
 position = Vector2(-141, 18)
 scale = Vector2(1.27937, 1.13605)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Player2D"]
 position = Vector2(70.3471, -25.527)
 shape = SubResource("CapsuleShape2D_qxbje")
 
@@ -262,8 +262,8 @@ autoplay = true
 [node name="Node2" type="Node" parent="."]
 script = ExtResource("11_4n75b")
 
-[connection signal="area_entered" from="Player/Area2D" to="Player" method="_on_Area2D_body_entered"]
-[connection signal="area_exited" from="Player/Area2D" to="Player" method="_on_Area2D_body_exited"]
+[connection signal="area_entered" from="Player/Player2D" to="Player" method="_on_Area2D_body_entered"]
+[connection signal="area_exited" from="Player/Player2D" to="Player" method="_on_Area2D_body_exited"]
 [connection signal="block_broken" from="Block" to="Player" method="break_block"]
 [connection signal="block_broken" from="Block" to="Player" method="destroy_block"]
 [connection signal="block_broken" from="Block2" to="Player" method="break_block"]

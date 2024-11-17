@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://ci23ocsa8yhhk"]
+
+[ext_resource type="Texture2D" uid="uid://bfmyad6ic31ah" path="res://art/npc.png" id="1_2cviv"]
+[ext_resource type="Script" path="res://scripts/NPC.gd" id="1_13wn4"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4r8pb"]
+height = 184.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wso6o"]
+
+[node name="NPC" type="CharacterBody2D" groups=["NPCs"]]
+position = Vector2(-9, -8)
+script = ExtResource("1_13wn4")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_2cviv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(3.28, 1)
+shape = SubResource("CapsuleShape2D_4r8pb")
+
+[node name="NPCInteractionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPCInteractionArea"]
+position = Vector2(-2, 2)
+scale = Vector2(-5.76761, -7.02968)
+shape = SubResource("CapsuleShape2D_wso6o")
+
+[connection signal="area_entered" from="NPCInteractionArea" to="." method="_on_Area2D_body_entered"]
+[connection signal="area_exited" from="NPCInteractionArea" to="." method="_on_Area2D_body_exited"]
