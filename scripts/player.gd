@@ -16,19 +16,26 @@ var npc: Node = null  # Variable to track NPC in range
 var last_direction = 1
 
 func _ready() -> void:
-	screen_size = get_viewport_rect().size
+	# Check for the Player2D node before trying to use it
+	if has_node("Player2D"):
+		area2d = $Player2D
+		print("2DArea is accepted!")
+		if area2d.has_signal("body_entered"):
+			area2d.body_entered.connect(_on_Area2D_body_entered)
+		if area2d.has_signal("body_exited"):
+			area2d.body_exited.connect(_on_Area2D_body_exited)
+	else:
+		print("Player2D node not found in this scene")
 
-	# Check if nodes are valid before connecting signals
-	if area2d and area2d.has_signal("body_entered"):
-		area2d.body_entered.connect(_on_Area2D_body_entered)
-	if area2d and area2d.has_signal("body_exited"):
-		area2d.body_exited.connect(_on_Area2D_body_exited)
-		
-	if npc_area2d and npc_area2d.has_signal("body_entered"):
-		npc_area2d.body_entered.connect(_on_NPCInteractionArea_body_entered)
-	if npc_area2d and npc_area2d.has_signal("body_exited"):
-		npc_area2d.body_exited.connect(_on_NPCInteractionArea_body_exited)
-
+	# Check for the NPCInteractionArea node
+	if has_node("NPCInteractionArea"):
+		npc_area2d = $NPCInteractionArea
+		if npc_area2d.has_signal("body_entered"):
+			npc_area2d.body_entered.connect(_on_NPCInteractionArea_body_entered)
+		if npc_area2d.has_signal("body_exited"):
+			npc_area2d.body_exited.connect(_on_NPCInteractionArea_body_exited)
+	else:
+		print("NPCInteractionArea not found in this scene")
 func _physics_process(delta: float) -> void:
 	# Add gravity
 	if not is_on_floor():
@@ -54,6 +61,7 @@ func _physics_process(delta: float) -> void:
 
 	# Block breaking
 	if Input.is_action_just_pressed("break_block") and current_block:
+		print("Breaking Block")
 		current_block.destroy_block()
 
 	# Spore launching

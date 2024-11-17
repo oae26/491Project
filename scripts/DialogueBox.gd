@@ -7,19 +7,16 @@ var label: Label
 var current_index = 0
 
 # Initialize dialogue display
+# Initialize dialogue display
 func _ready() -> void:
-	# Dynamically assign the label node
 	label = $DialogueControl/DialogueLabel
-	
-	# Ensure the dialogue box receives input focus
-	set_process_input(true)
-	
-	# Check if the label was found
+	set_process_input(true)  # Ensure the dialogue box receives input focus
+	grab_focus()  # Ensure the dialogue box captures input exclusively
+
 	if label == null:
 		print("Error: DialogueLabel not found!")
 		return
 
-	# Display the first line of dialogue if available
 	if dialogue_lines.size() > 0:
 		label.text = dialogue_lines[current_index]
 	else:
@@ -41,9 +38,9 @@ func _process(delta: float) -> void:
 # End the dialogue and change scene if needed
 func end_dialogue() -> void:
 	print("Ending dialogue...")
-	if next_scene_path != "":
-		print("Changing scene to:", next_scene_path)
-		if not get_tree().change_scene_to_file(next_scene_path):
-			print("Error changing scene!")
-	else:
-		queue_free()  # Close the dialogue box
+	set_process_input(false)  # Disable further input processing for this dialogue box
+	queue_free()
+	var transition = preload("res://scenes/transition.tscn").instantiate()
+	get_tree().root.add_child(transition)
+
+	queue_free()
