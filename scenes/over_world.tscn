@@ -29,16 +29,9 @@ position = Vector2(1502, -64)
 texture = ExtResource("3_gfb7x")
 
 [node name="Player" parent="." instance=ExtResource("1_81mt6")]
-position = Vector2(-866, 194)
+position = Vector2(-847, 78)
 script = ExtResource("2_rryov")
 metadata/_edit_group_ = true
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(-535.999, -883)
-scale = Vector2(0.999994, 1)
-anchor_mode = 0
-limit_top = -500
-limit_bottom = 0
 
 [node name="Player2D" type="Area2D" parent="Player"]
 position = Vector2(-141, 18)
@@ -49,13 +42,21 @@ position = Vector2(70.3471, -25.527)
 scale = Vector2(1, 1.37282)
 shape = SubResource("CapsuleShape2D_fb38p")
 
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(-523, -1106)
+scale = Vector2(0.999994, 1)
+anchor_mode = 0
+zoom = Vector2(1.25, 1.11)
+limit_top = -500
+limit_bottom = 0
+
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 process_mode = 1
 position = Vector2(-922, 440)
 physics_material_override = SubResource("PhysicsMaterial_0un6t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(39, -106)
+position = Vector2(26, -237)
 shape = SubResource("WorldBoundaryShape2D_eq04q")
 
 [node name="PauseMenu" parent="." instance=ExtResource("4_pa4np")]
@@ -66,7 +67,7 @@ offset_right = -844.0
 offset_bottom = -397.0
 
 [node name="NPC" parent="." instance=ExtResource("8_f3ykd")]
-position = Vector2(-261, 172)
+position = Vector2(-249, 54)
 next_scene_path = "res://scenes/Game.tscn"
 
 [connection signal="area_entered" from="Player/Player2D" to="Player" method="_on_Area2D_body_entered"]
