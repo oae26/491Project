@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://cf3twmrxqgskj"]
+[gd_scene load_steps=18 format=3 uid="uid://cf3twmrxqgskj"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_6n0sd"]
 [ext_resource type="Texture2D" uid="uid://b3712or6a7qx0" path="res://art/snowlevel1.png" id="3_n34rj"]
+[ext_resource type="Texture2D" uid="uid://pb1vh15ys1hg" path="res://art/snowlevel2.PNG" id="3_pudrr"]
 [ext_resource type="Texture2D" uid="uid://vtqnetjlg4kk" path="res://art/IMG_0598.png" id="4_q41if"]
 [ext_resource type="Shader" path="res://shaders/snow.gdshader" id="5_oqcws"]
 [ext_resource type="PackedScene" uid="uid://bkmtjqhmucw03" path="res://scenes/player.tscn" id="6_nprxy"]
@@ -59,9 +60,9 @@ func _process(delta: float) -> void:
 	pass
 "
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qxbje"]
-radius = 42.2083
-height = 124.995
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_waeqy"]
+radius = 39.0818
+height = 92.3318
 
 [node name="Game" type="Node2D"]
 process_mode = 3
@@ -79,9 +80,9 @@ shape = SubResource("WorldBoundaryShape2D_wdj23")
 [node name="Background" type="Sprite2D" parent="."]
 process_mode = 1
 material = SubResource("ShaderMaterial_nokxo")
-position = Vector2(154.251, 3)
+position = Vector2(133, 5)
 scale = Vector2(1.15703, 1)
-texture = ExtResource("3_n34rj")
+texture = ExtResource("3_pudrr")
 
 [node name="Img0598" type="Sprite2D" parent="Background"]
 position = Vector2(-518.22, -255)
@@ -91,7 +92,7 @@ texture = ExtResource("4_q41if")
 [node name="Background2" type="Sprite2D" parent="Background"]
 material = SubResource("ShaderMaterial_2r4dm")
 position = Vector2(1917.62, -0.999969)
-texture = ExtResource("3_n34rj")
+texture = ExtResource("3_pudrr")
 flip_h = true
 
 [node name="Img0598" type="Sprite2D" parent="Background/Background2"]
@@ -101,8 +102,8 @@ scale = Vector2(0.8637, 1)
 texture = ExtResource("4_q41if")
 
 [node name="Img0599" type="Sprite2D" parent="Background/Background2"]
-position = Vector2(118.411, -271)
-scale = Vector2(0.8637, 1)
+position = Vector2(-902.089, -23)
+scale = Vector2(1.12328, 1.80139)
 texture = ExtResource("4_q41if")
 flip_h = true
 
@@ -159,26 +160,6 @@ rotation = -3.13862
 texture = ExtResource("8_dkh5y")
 script = SubResource("GDScript_x7i0g")
 
-[node name="Player" parent="." instance=ExtResource("6_nprxy")]
-position = Vector2(-540, 318)
-script = ExtResource("7_eclyp")
-metadata/_edit_group_ = true
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(-535.999, -883)
-scale = Vector2(0.999994, 1)
-anchor_mode = 0
-limit_top = -500
-limit_bottom = 0
-
-[node name="Player2D" type="Area2D" parent="Player"]
-position = Vector2(-141, 18)
-scale = Vector2(1.27937, 1.13605)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Player2D"]
-position = Vector2(70.3471, -25.527)
-shape = SubResource("CapsuleShape2D_qxbje")
-
 [node name="Block" parent="." instance=ExtResource("10_x6xq4")]
 process_mode = 1
 position = Vector2(577, 325)
@@ -229,25 +210,27 @@ autoplay = true
 [node name="Node2" type="Node" parent="."]
 script = ExtResource("11_4n75b")
 
+[node name="Player" parent="." instance=ExtResource("6_nprxy")]
+position = Vector2(-577, 304)
+script = ExtResource("7_eclyp")
+metadata/_edit_group_ = true
+
+[node name="Player2D" type="Area2D" parent="Player"]
+position = Vector2(-141, 18)
+scale = Vector2(1.27937, 1.13605)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Player2D"]
+position = Vector2(70.3471, -25.527)
+scale = Vector2(1, 1.37282)
+shape = SubResource("CapsuleShape2D_waeqy")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(-523, -1106)
+scale = Vector2(0.999994, 1)
+anchor_mode = 0
+zoom = Vector2(1.25, 1.11)
+limit_top = -500
+limit_bottom = 0
+
 [connection signal="area_entered" from="Player/Player2D" to="Player" method="_on_Area2D_body_entered"]
 [connection signal="area_exited" from="Player/Player2D" to="Player" method="_on_Area2D_body_exited"]
-[connection signal="block_broken" from="Block" to="Player" method="break_block"]
-[connection signal="block_broken" from="Block" to="Player" method="destroy_block"]
-[connection signal="block_broken" from="Block2" to="Player" method="break_block"]
-[connection signal="block_broken" from="Block2" to="Player" method="destroy_block"]
-[connection signal="block_broken" from="Block3" to="Player" method="break_block"]
-[connection signal="block_broken" from="Block3" to="Player" method="destroy_block"]
-[connection signal="block_broken" from="Block4" to="Player" method="break_block"]
-[connection signal="block_broken" from="Block4" to="Player" method="destroy_block"]
-[connection signal="block_broken" from="Block6" to="Player" method="break_block"]
-[connection signal="block_broken" from="Block6" to="Player" method="destroy_block"]
-[connection signal="block_broken" from="Block8" to="Player" method="break_block"]
-[connection signal="block_broken" from="Block8" to="Player" method="destroy_block"]
-[connection signal="block_broken" from="Block9" to="Player" method="break_block"]
-[connection signal="block_broken" from="Block9" to="Player" method="destroy_block"]
-[connection signal="block_broken" from="Block11" to="Player" method="break_block"]
-[connection signal="block_broken" from="Block11" to="Player" method="destroy_block"]
-[connection signal="block_broken" from="Block13" to="Player" method="break_block"]
-[connection signal="block_broken" from="Block13" to="Player" method="destroy_block"]
-[connection signal="block_broken" from="Block14" to="Player" method="break_block"]
-[connection signal="block_broken" from="Block14" to="Player" method="destroy_block"]

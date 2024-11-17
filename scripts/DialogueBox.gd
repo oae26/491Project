@@ -16,7 +16,7 @@ func _ready() -> void:
 	if label == null:
 		print("Error: DialogueLabel not found!")
 		return
-	label.self_modulate = Color(0, 0, 0)  # RGB for black
+	
 	if dialogue_lines.size() > 0:
 		label.text = dialogue_lines[current_index]  # Display the first line
 	else:

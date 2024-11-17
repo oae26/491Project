@@ -37,6 +37,6 @@ func trigger_dialogue() -> void:
 
 	# Position the dialogue box above the NPC
 	var npc_global_position = global_position
-	dialogue_box.position = npc_global_position + Vector2(0, -100)  # Adjust the offset as needed
+	dialogue_box.position = npc_global_position + Vector2(0, -150)  # Adjust the offset as needed
 
 	print("Triggering dialogue...")
