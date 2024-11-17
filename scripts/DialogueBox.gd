@@ -42,5 +42,6 @@ func end_dialogue() -> void:
 	queue_free()
 	var transition = preload("res://scenes/transition.tscn").instantiate()
 	get_tree().root.add_child(transition)
+	get_tree().change_scene_to_file(next_scene_path)
 
 	queue_free()
