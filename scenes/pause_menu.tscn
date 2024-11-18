@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://barwiegfv76e0"]
+[gd_scene load_steps=3 format=3 uid="uid://barwiegfv76e0"]
 
 [ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_je4lu"]
+[ext_resource type="PackedScene" uid="uid://dkk3jfexd2d8t" path="res://scenes/confirmation_prompt.tscn" id="2_a7w7o"]
 
 [node name="PauseMenu" type="Control"]
 process_mode = 2
@@ -14,7 +15,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_je4lu")
 
-[node name="MarginContainer" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="."]
 layout_direction = 1
 layout_mode = 1
 anchors_preset = 8
@@ -22,43 +23,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -961.0
+offset_left = -1018.0
 offset_top = -540.0
-offset_right = 964.0
+offset_right = 1030.0
 offset_bottom = 524.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -147.5
-offset_top = -117.0
-offset_right = -32.5
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(2.5, 2.5)
-
-[node name="ResumeBtn" type="Button" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-focus_neighbor_top = NodePath("../QuitBtn")
-focus_neighbor_bottom = NodePath("../QuitBtn")
-text = "Resume"
-icon_alignment = 1
-
-[node name="QuitBtn" type="Button" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-focus_neighbor_top = NodePath("../ResumeBtn")
-focus_neighbor_bottom = NodePath("../ResumeBtn")
-text = "Quit"
-icon_alignment = 1
-
-[node name="Label" type="Label" parent="MarginContainer"]
+[node name="Label" type="Label" parent="Panel"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -73,5 +45,42 @@ theme_override_font_sizes/font_size = 120
 text = "Paused"
 horizontal_alignment = 1
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/ResumeBtn" to="." method="_on_resume_btn_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/QuitBtn" to="." method="_on_quit_btn_pressed"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -147.5
+offset_top = -139.0
+offset_right = -32.5
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.5, 2.5)
+theme_override_constants/separation = 10
+
+[node name="Spacer" type="Control" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="ResumeBtn" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../QuitBtn")
+focus_neighbor_bottom = NodePath("../QuitBtn")
+text = "Resume"
+icon_alignment = 1
+
+[node name="Spacer2" type="Control" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="QuitBtn" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../ResumeBtn")
+focus_neighbor_bottom = NodePath("../ResumeBtn")
+text = "Quit"
+icon_alignment = 1
+
+[node name="ConfirmationPrompt" parent="." instance=ExtResource("2_a7w7o")]
+visible = false
+layout_mode = 1
