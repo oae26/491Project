@@ -1,16 +1,16 @@
 [gd_scene load_steps=18 format=3 uid="uid://cf3twmrxqgskj"]
 
-[ext_resource type="Script" path="res://scripts/game.gd" id="1_6n0sd"]
-[ext_resource type="Texture2D" uid="uid://b3712or6a7qx0" path="res://art/snowlevel1.png" id="3_n34rj"]
-[ext_resource type="Texture2D" uid="uid://pb1vh15ys1hg" path="res://art/snowlevel2.PNG" id="3_pudrr"]
-[ext_resource type="Texture2D" uid="uid://vtqnetjlg4kk" path="res://art/IMG_0598.png" id="4_q41if"]
-[ext_resource type="Shader" path="res://shaders/snow.gdshader" id="5_oqcws"]
-[ext_resource type="PackedScene" uid="uid://bkmtjqhmucw03" path="res://scenes/player.tscn" id="6_nprxy"]
-[ext_resource type="Script" path="res://scripts/player.gd" id="7_eclyp"]
-[ext_resource type="Texture2D" uid="uid://15ichst0w811" path="res://art/foreground_leaves.png" id="8_dkh5y"]
-[ext_resource type="AudioStream" uid="uid://dqon4c3kgmxf4" path="res://music/Project Growth Ice.wav" id="10_sxdw7"]
-[ext_resource type="PackedScene" uid="uid://bh4p66j4pm065" path="res://scenes/block.tscn" id="10_x6xq4"]
-[ext_resource type="Script" path="res://scripts/SceneSwitch.gd" id="11_4n75b"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_qdjrj"]
+[ext_resource type="Shader" path="res://shaders/snow.gdshader" id="2_gd2af"]
+[ext_resource type="Texture2D" uid="uid://pb1vh15ys1hg" path="res://art/snowlevel2.PNG" id="3_o54ch"]
+[ext_resource type="Texture2D" uid="uid://vtqnetjlg4kk" path="res://art/IMG_0598.png" id="4_wib7y"]
+[ext_resource type="Texture2D" uid="uid://b3712or6a7qx0" path="res://art/snowlevel1.png" id="5_bk3sj"]
+[ext_resource type="Texture2D" uid="uid://15ichst0w811" path="res://art/foreground_leaves.png" id="6_v4xde"]
+[ext_resource type="PackedScene" uid="uid://bh4p66j4pm065" path="res://scenes/block.tscn" id="7_kq8o2"]
+[ext_resource type="AudioStream" uid="uid://dqon4c3kgmxf4" path="res://music/Project Growth Ice.wav" id="8_1dls7"]
+[ext_resource type="Script" path="res://scripts/SceneSwitch.gd" id="9_j42no"]
+[ext_resource type="PackedScene" uid="uid://bkmtjqhmucw03" path="res://scenes/player.tscn" id="10_gs2t8"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="11_vhsyl"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fica4"]
 
@@ -19,7 +19,7 @@ distance = 40.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nokxo"]
 resource_local_to_scene = true
-shader = ExtResource("5_oqcws")
+shader = ExtResource("2_gd2af")
 shader_parameter/rain_amount = 150.0
 shader_parameter/near_rain_length = 0.01
 shader_parameter/far_rain_length = 0.01
@@ -33,7 +33,7 @@ shader_parameter/additional_rain_speed = 0.15
 shader_parameter/slant = 0.0950001
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2r4dm"]
-shader = ExtResource("5_oqcws")
+shader = ExtResource("2_gd2af")
 shader_parameter/rain_amount = 150.0
 shader_parameter/near_rain_length = 0.01
 shader_parameter/far_rain_length = 0.01
@@ -64,9 +64,9 @@ func _process(delta: float) -> void:
 radius = 39.0818
 height = 92.3318
 
-[node name="Game" type="Node2D"]
+[node name="IceLevel" type="Node2D"]
 process_mode = 3
-script = ExtResource("1_6n0sd")
+script = ExtResource("1_qdjrj")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 process_mode = 1
@@ -82,121 +82,121 @@ process_mode = 1
 material = SubResource("ShaderMaterial_nokxo")
 position = Vector2(133, 5)
 scale = Vector2(1.15703, 1)
-texture = ExtResource("3_pudrr")
+texture = ExtResource("3_o54ch")
 
 [node name="Img0598" type="Sprite2D" parent="Background"]
 position = Vector2(-518.22, -255)
 scale = Vector2(0.8637, 1)
-texture = ExtResource("4_q41if")
+texture = ExtResource("4_wib7y")
 
 [node name="Background2" type="Sprite2D" parent="Background"]
 material = SubResource("ShaderMaterial_2r4dm")
 position = Vector2(1917.62, -0.999969)
-texture = ExtResource("3_pudrr")
+texture = ExtResource("3_o54ch")
 flip_h = true
 
 [node name="Img0598" type="Sprite2D" parent="Background/Background2"]
 position = Vector2(-94.2025, 807)
 rotation = -0.950797
 scale = Vector2(0.8637, 1)
-texture = ExtResource("4_q41if")
+texture = ExtResource("4_wib7y")
 
 [node name="Img0599" type="Sprite2D" parent="Background/Background2"]
 position = Vector2(-902.089, -23)
 scale = Vector2(1.12328, 1.80139)
-texture = ExtResource("4_q41if")
+texture = ExtResource("4_wib7y")
 flip_h = true
 
 [node name="Img0600" type="Sprite2D" parent="Background/Background2"]
 position = Vector2(-1496.94, 640)
 rotation = 1.44665
 scale = Vector2(0.8637, 1)
-texture = ExtResource("4_q41if")
+texture = ExtResource("4_wib7y")
 flip_h = true
 
 [node name="Background3" type="Sprite2D" parent="Background"]
 material = SubResource("ShaderMaterial_nokxo")
 position = Vector2(3837.19, -1)
-texture = ExtResource("3_n34rj")
+texture = ExtResource("5_bk3sj")
 
 [node name="Img0598" type="Sprite2D" parent="Background/Background3"]
 position = Vector2(-518.22, -255)
 scale = Vector2(0.8637, 1)
-texture = ExtResource("4_q41if")
+texture = ExtResource("4_wib7y")
 
 [node name="Background4" type="Sprite2D" parent="Background/Background3"]
 material = SubResource("ShaderMaterial_2r4dm")
 position = Vector2(1917.62, -0.999969)
-texture = ExtResource("3_n34rj")
+texture = ExtResource("5_bk3sj")
 flip_h = true
 
 [node name="Img0598" type="Sprite2D" parent="Background/Background3/Background4"]
 position = Vector2(-953.303, -251)
 scale = Vector2(0.8637, 1)
-texture = ExtResource("4_q41if")
+texture = ExtResource("4_wib7y")
 
 [node name="Img0599" type="Sprite2D" parent="Background/Background3/Background4"]
 position = Vector2(-621.419, -255)
 scale = Vector2(0.8637, 1)
-texture = ExtResource("4_q41if")
+texture = ExtResource("4_wib7y")
 flip_h = true
 
 [node name="Img0600" type="Sprite2D" parent="Background/Background3/Background4"]
 position = Vector2(-1609.07, 641)
 rotation = 1.44665
 scale = Vector2(0.610273, 0.827577)
-texture = ExtResource("4_q41if")
+texture = ExtResource("4_wib7y")
 flip_h = true
 
 [node name="ForegroundLeaves" type="Sprite2D" parent="."]
 process_mode = 1
 position = Vector2(-8.00047, 442)
-texture = ExtResource("8_dkh5y")
+texture = ExtResource("6_v4xde")
 script = SubResource("GDScript_x7i0g")
 
 [node name="ForegroundLeaves2" type="Sprite2D" parent="ForegroundLeaves"]
 position = Vector2(3003, -875)
 rotation = -3.13862
-texture = ExtResource("8_dkh5y")
+texture = ExtResource("6_v4xde")
 script = SubResource("GDScript_x7i0g")
 
-[node name="Block" parent="." instance=ExtResource("10_x6xq4")]
+[node name="Block" parent="." instance=ExtResource("7_kq8o2")]
 process_mode = 1
 position = Vector2(577, 325)
 
-[node name="Block2" parent="." instance=ExtResource("10_x6xq4")]
+[node name="Block2" parent="." instance=ExtResource("7_kq8o2")]
 process_mode = 1
 position = Vector2(1706, 354)
 
-[node name="Block3" parent="." instance=ExtResource("10_x6xq4")]
+[node name="Block3" parent="." instance=ExtResource("7_kq8o2")]
 process_mode = 1
 position = Vector2(1709, 272)
 
-[node name="Block4" parent="." instance=ExtResource("10_x6xq4")]
+[node name="Block4" parent="." instance=ExtResource("7_kq8o2")]
 process_mode = 1
 position = Vector2(1708, 187)
 
-[node name="Block6" parent="." instance=ExtResource("10_x6xq4")]
+[node name="Block6" parent="." instance=ExtResource("7_kq8o2")]
 process_mode = 1
 position = Vector2(2744, 309)
 
-[node name="Block8" parent="." instance=ExtResource("10_x6xq4")]
+[node name="Block8" parent="." instance=ExtResource("7_kq8o2")]
 process_mode = 1
 position = Vector2(4068, 282)
 
-[node name="Block9" parent="." instance=ExtResource("10_x6xq4")]
+[node name="Block9" parent="." instance=ExtResource("7_kq8o2")]
 process_mode = 1
 position = Vector2(3539, 300)
 
-[node name="Block11" parent="." instance=ExtResource("10_x6xq4")]
+[node name="Block11" parent="." instance=ExtResource("7_kq8o2")]
 process_mode = 1
 position = Vector2(4599, 300)
 
-[node name="Block13" parent="." instance=ExtResource("10_x6xq4")]
+[node name="Block13" parent="." instance=ExtResource("7_kq8o2")]
 process_mode = 1
 position = Vector2(5923, 273)
 
-[node name="Block14" parent="." instance=ExtResource("10_x6xq4")]
+[node name="Block14" parent="." instance=ExtResource("7_kq8o2")]
 process_mode = 1
 position = Vector2(5394, 291)
 
@@ -204,15 +204,15 @@ position = Vector2(5394, 291)
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(577, 325)
-stream = ExtResource("10_sxdw7")
+stream = ExtResource("8_1dls7")
 autoplay = true
 
 [node name="Node2" type="Node" parent="."]
-script = ExtResource("11_4n75b")
+script = ExtResource("9_j42no")
 
-[node name="Player" parent="." instance=ExtResource("6_nprxy")]
+[node name="Player" parent="." instance=ExtResource("10_gs2t8")]
 position = Vector2(-577, 304)
-script = ExtResource("7_eclyp")
+script = ExtResource("11_vhsyl")
 metadata/_edit_group_ = true
 
 [node name="Player2D" type="Area2D" parent="Player"]
