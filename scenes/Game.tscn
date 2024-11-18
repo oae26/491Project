@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cf3twmrxqgskj"]
+[gd_scene load_steps=19 format=3 uid="uid://cf3twmrxqgskj"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_6n0sd"]
 [ext_resource type="Texture2D" uid="uid://b3712or6a7qx0" path="res://art/snowlevel1.png" id="3_n34rj"]
@@ -8,6 +8,11 @@
 [ext_resource type="PackedScene" uid="uid://bkmtjqhmucw03" path="res://scenes/player.tscn" id="6_nprxy"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="7_eclyp"]
 [ext_resource type="Texture2D" uid="uid://15ichst0w811" path="res://art/foreground_leaves.png" id="8_dkh5y"]
+further-ui
+[ext_resource type="Script" path="res://scripts/text_float.gd" id="9_chctq"]
+[ext_resource type="PackedScene" uid="uid://barwiegfv76e0" path="res://scenes/pause_menu.tscn" id="10_56xfp"]
+
+main
 [ext_resource type="AudioStream" uid="uid://dqon4c3kgmxf4" path="res://music/Project Growth Ice.wav" id="10_sxdw7"]
 [ext_resource type="PackedScene" uid="uid://bh4p66j4pm065" path="res://scenes/block.tscn" id="10_x6xq4"]
 [ext_resource type="Script" path="res://scripts/SceneSwitch.gd" id="11_4n75b"]
@@ -85,11 +90,13 @@ scale = Vector2(1.15703, 1)
 texture = ExtResource("3_pudrr")
 
 [node name="Img0598" type="Sprite2D" parent="Background"]
+process_mode = 1
 position = Vector2(-518.22, -255)
 scale = Vector2(0.8637, 1)
 texture = ExtResource("4_q41if")
 
 [node name="Background2" type="Sprite2D" parent="Background"]
+process_mode = 1
 material = SubResource("ShaderMaterial_2r4dm")
 position = Vector2(1917.62, -0.999969)
 texture = ExtResource("3_pudrr")
@@ -160,6 +167,58 @@ rotation = -3.13862
 texture = ExtResource("8_dkh5y")
 script = SubResource("GDScript_x7i0g")
 
+ further-ui
+[node name="TextArea" type="Area2D" parent="." node_paths=PackedStringArray("zones")]
+process_mode = 1
+position = Vector2(13, 0)
+script = ExtResource("9_chctq")
+typing_speed = 0.5
+display_time = 9.0
+text_color = Color(1, 0, 0.129412, 1)
+zones = [NodePath("Marker2D"), NodePath("Marker2D2"), NodePath("Marker2D3"), NodePath("Marker2D4"), NodePath("Marker2D5")]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="TextArea"]
+position = Vector2(1996.41, 92.4362)
+rotation = 3.13401
+shape = SubResource("RectangleShape2D_si1lk")
+
+[node name="Marker2D" type="Marker2D" parent="TextArea"]
+position = Vector2(963, 270)
+
+[node name="Marker2D2" type="Marker2D" parent="TextArea"]
+position = Vector2(-264, 252)
+
+[node name="Marker2D3" type="Marker2D" parent="TextArea"]
+position = Vector2(2054, 290)
+
+[node name="Marker2D4" type="Marker2D" parent="TextArea"]
+position = Vector2(3846, -40)
+
+[node name="Marker2D5" type="Marker2D" parent="TextArea"]
+position = Vector2(4619, -35)
+
+[node name="Player" parent="." instance=ExtResource("6_nprxy")]
+process_mode = 1
+position = Vector2(-540, 318)
+script = ExtResource("7_eclyp")
+metadata/_edit_group_ = true
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(-535.999, -883)
+scale = Vector2(0.999994, 1)
+anchor_mode = 0
+limit_top = -500
+limit_bottom = 0
+
+[node name="Area2D" type="Area2D" parent="Player"]
+position = Vector2(-141, 18)
+scale = Vector2(1.27937, 1.13605)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
+position = Vector2(70.3471, -25.527)
+shape = SubResource("CapsuleShape2D_qxbje")
+
+ main
 [node name="Block" parent="." instance=ExtResource("10_x6xq4")]
 process_mode = 1
 position = Vector2(577, 325)
@@ -207,6 +266,38 @@ position = Vector2(577, 325)
 stream = ExtResource("10_sxdw7")
 autoplay = true
 
+further-ui
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("10_56xfp")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_right = 0.5
+
+[connection signal="area_entered" from="Player/Area2D" to="Player" method="_on_Area2D_body_entered"]
+[connection signal="area_exited" from="Player/Area2D" to="Player" method="_on_Area2D_body_exited"]
+[connection signal="block_broken" from="Block" to="Player" method="break_block"]
+[connection signal="block_broken" from="Block" to="Player" method="destroy_block"]
+[connection signal="block_broken" from="Block2" to="Player" method="break_block"]
+[connection signal="block_broken" from="Block2" to="Player" method="destroy_block"]
+[connection signal="block_broken" from="Block3" to="Player" method="break_block"]
+[connection signal="block_broken" from="Block3" to="Player" method="destroy_block"]
+[connection signal="block_broken" from="Block4" to="Player" method="break_block"]
+[connection signal="block_broken" from="Block4" to="Player" method="destroy_block"]
+[connection signal="block_broken" from="Block6" to="Player" method="break_block"]
+[connection signal="block_broken" from="Block6" to="Player" method="destroy_block"]
+[connection signal="block_broken" from="Block8" to="Player" method="break_block"]
+[connection signal="block_broken" from="Block8" to="Player" method="destroy_block"]
+[connection signal="block_broken" from="Block9" to="Player" method="break_block"]
+[connection signal="block_broken" from="Block9" to="Player" method="destroy_block"]
+[connection signal="block_broken" from="Block11" to="Player" method="break_block"]
+[connection signal="block_broken" from="Block11" to="Player" method="destroy_block"]
+[connection signal="block_broken" from="Block13" to="Player" method="break_block"]
+[connection signal="block_broken" from="Block13" to="Player" method="destroy_block"]
+[connection signal="block_broken" from="Block14" to="Player" method="break_block"]
+[connection signal="block_broken" from="Block14" to="Player" method="destroy_block"]
+
 [node name="Node2" type="Node" parent="."]
 script = ExtResource("11_4n75b")
 
@@ -234,3 +325,4 @@ limit_bottom = 0
 
 [connection signal="area_entered" from="Player/Player2D" to="Player" method="_on_Area2D_body_entered"]
 [connection signal="area_exited" from="Player/Player2D" to="Player" method="_on_Area2D_body_exited"]
+main

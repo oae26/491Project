@@ -1,5 +1,64 @@
-[gd_scene format=3 uid="uid://c4veusxftny3t"]
 
-[node name="MarginContainer" type="MarginContainer"]
-offset_right = 40.0
-offset_bottom = 40.0
+[gd_scene load_steps=4 format=3 uid="uid://c4veusxftny3t"]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_6abxt"]
+[ext_resource type="Script" path="res://scripts/button.gd" id="1_egtvm"]
+[ext_resource type="PackedScene" uid="uid://dkk3jfexd2d8t" path="res://scenes/confirmation_prompt.tscn" id="3_y8e86"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1918.0
+offset_bottom = 1081.0
+script = ExtResource("1_6abxt")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 2071.0
+offset_bottom = 1271.0
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 2
+offset_left = 129.0
+offset_top = 130.0
+offset_right = 2047.0
+offset_bottom = 295.0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 144
+text = "Project: Growth"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.128
+anchor_top = 0.5
+anchor_right = 0.128
+anchor_bottom = 0.5
+offset_left = 52.912
+offset_top = -115.5
+offset_right = 321.912
+offset_bottom = 94.5
+grow_vertical = 0
+theme_override_constants/separation = 20
+
+[node name="Spacer" type="Control" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="StartBtn" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Start Game"
+script = ExtResource("1_egtvm")
+
+[node name="Spacer2" type="Control" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="QuitBtn" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Exit Game"
+
+[node name="ConfirmationPrompt" parent="." instance=ExtResource("3_y8e86")]
+visible = false
+layout_mode = 1
+
