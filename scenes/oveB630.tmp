@@ -1,0 +1,77 @@
+[gd_scene load_steps=11 format=3 uid="uid://bde8ibebpl0b3"]
+
+[ext_resource type="PackedScene" uid="uid://bkmtjqhmucw03" path="res://scenes/player.tscn" id="1_81mt6"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_gu437"]
+[ext_resource type="Texture2D" uid="uid://xlhscffwqb5w" path="res://art/overworld1.PNG" id="2_3ae4y"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="2_rryov"]
+[ext_resource type="Texture2D" uid="uid://jfutkkdcukrp" path="res://art/overworld2.PNG" id="3_gfb7x"]
+[ext_resource type="PackedScene" uid="uid://barwiegfv76e0" path="res://scenes/pause_menu.tscn" id="4_pa4np"]
+[ext_resource type="PackedScene" uid="uid://ci23ocsa8yhhk" path="res://scenes/npc.tscn" id="8_f3ykd"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fb38p"]
+radius = 42.2083
+height = 124.995
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0un6t"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_eq04q"]
+distance = 40.0
+
+[node name="OverWorld" type="Node2D"]
+script = ExtResource("1_gu437")
+
+[node name="Overworld1" type="Sprite2D" parent="."]
+position = Vector2(-407, -63)
+texture = ExtResource("2_3ae4y")
+
+[node name="Overworld2" type="Sprite2D" parent="."]
+position = Vector2(1502, -64)
+texture = ExtResource("3_gfb7x")
+
+[node name="Player" parent="." instance=ExtResource("1_81mt6")]
+position = Vector2(-847, 78)
+script = ExtResource("2_rryov")
+metadata/_edit_group_ = true
+
+[node name="Player2D" type="Area2D" parent="Player"]
+position = Vector2(-141, 18)
+scale = Vector2(1.27937, 1.13605)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Player2D"]
+position = Vector2(70.3471, -25.527)
+scale = Vector2(1, 1.37282)
+shape = SubResource("CapsuleShape2D_fb38p")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(-523, -1106)
+scale = Vector2(0.999994, 1)
+anchor_mode = 0
+zoom = Vector2(1.25, 1.11)
+limit_top = -500
+limit_bottom = 0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+process_mode = 1
+position = Vector2(-922, 440)
+physics_material_override = SubResource("PhysicsMaterial_0un6t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(26, -237)
+shape = SubResource("WorldBoundaryShape2D_eq04q")
+
+[node name="PauseMenu" parent="." instance=ExtResource("4_pa4np")]
+visible = false
+offset_left = -844.0
+offset_top = -397.0
+offset_right = -844.0
+offset_bottom = -397.0
+
+[node name="NPC" parent="." instance=ExtResource("8_f3ykd")]
+position = Vector2(-249, 54)
+dialogue_lines = Array[String](["Oh... who are you?", "I don't understand... I'm too cold? ", "Goodbye!", ""])
+next_scene_path = "res://scenes/Game.tscn"
+
+[connection signal="area_entered" from="Player/Player2D" to="Player" method="_on_Area2D_body_entered"]
+[connection signal="area_exited" from="Player/Player2D" to="Player" method="_on_Area2D_body_exited"]
+
+[editable path="NPC"]

@@ -1,3 +1,4 @@
+
 [gd_scene load_steps=4 format=3 uid="uid://c4veusxftny3t"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_6abxt"]
@@ -60,3 +61,4 @@ text = "Exit Game"
 [node name="ConfirmationPrompt" parent="." instance=ExtResource("3_y8e86")]
 visible = false
 layout_mode = 1
+

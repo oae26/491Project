@@ -1,5 +1,6 @@
 extends Control
 
+
 @onready var resume_btn = $Panel/VBoxContainer/ResumeBtn as Button
 @onready var quit_btn = $Panel/VBoxContainer/QuitBtn as Button
 @onready var confirmation_prompt = $ConfirmationPrompt as ConfirmationPrompt
@@ -44,3 +45,4 @@ func handle_pause_signals() -> void:
 	resume_btn.button_down.connect(on_resume_btn_pressed)
 	quit_btn.button_down.connect(on_quit_btn_pressed)
 	no_btn.button_down.connect(on_no_btn_pressed)
+
