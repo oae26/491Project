@@ -17,10 +17,6 @@ shader_parameter/BackColor = Color(0, 0.4, 0.58, 1)
 shader_parameter/CloudColor = Color(0.18, 0.7, 0.87, 1)
 shader_parameter/speed = 0.57
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fb38p"]
-radius = 39.0818
-height = 92.3318
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y051c"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0un6t"]
@@ -34,55 +30,52 @@ shader_parameter/BackColor = Color(0.339166, 0.275942, 0, 1)
 shader_parameter/CloudColor = Color(0.613231, 0.662323, 0.525181, 1)
 shader_parameter/speed = 0.125
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fb38p"]
+radius = 39.0818
+height = 92.3318
+
 [node name="OverWorld" type="Node2D"]
 material = SubResource("ShaderMaterial_2udsx")
 position = Vector2(0, 13)
 script = ExtResource("1_gu437")
 
 [node name="Overworld1" type="Sprite2D" parent="."]
+z_as_relative = false
 position = Vector2(-407, -63)
 texture = ExtResource("2_3ae4y")
 region_rect = Rect2(0, 0, 1920, 1080)
 
-[node name="Player" parent="Overworld1" instance=ExtResource("1_81mt6")]
-position = Vector2(-445, 187)
-script = ExtResource("2_rryov")
-metadata/_edit_group_ = true
-
-[node name="Player2D" type="Area2D" parent="Overworld1/Player"]
-position = Vector2(-141, 18)
-scale = Vector2(1.27937, 1.13605)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Overworld1/Player/Player2D"]
-position = Vector2(70.3471, -25.527)
-scale = Vector2(1, 1.37282)
-shape = SubResource("CapsuleShape2D_fb38p")
-
-[node name="Camera2D" type="Camera2D" parent="Overworld1/Player"]
-position = Vector2(-523, -1106)
-scale = Vector2(0.999994, 1)
-anchor_mode = 0
-zoom = Vector2(1.25, 1.11)
-limit_top = -500
-limit_bottom = 0
-
-[node name="Garbage" type="Sprite2D" parent="Overworld1"]
-position = Vector2(227, 411)
-scale = Vector2(0.66116, 0.936411)
-texture = ExtResource("8_n0i03")
-
 [node name="Garbage2" type="Sprite2D" parent="Overworld1"]
+z_index = 2
 position = Vector2(389.375, 147.375)
 scale = Vector2(0.515786, 0.63676)
 texture = ExtResource("8_n0i03")
 
 [node name="Pole" type="Sprite2D" parent="Overworld1"]
+z_index = 2
 position = Vector2(328.75, 7.75)
 scale = Vector2(1.23699, 1.63909)
 texture = ExtResource("9_bpqdb")
 
 [node name="Garbage3" type="Sprite2D" parent="Overworld1"]
+z_index = 2
 position = Vector2(-957, 456)
+texture = ExtResource("8_n0i03")
+
+[node name="Overworld3" type="Sprite2D" parent="Overworld1"]
+position = Vector2(1908, 0)
+texture = ExtResource("3_gfb7x")
+
+[node name="Pole2" type="Sprite2D" parent="Overworld1/Overworld3"]
+position = Vector2(-284, -227)
+scale = Vector2(1.04247, 1.12225)
+texture = ExtResource("9_bpqdb")
+
+[node name="Sprite2D" type="Sprite2D" parent="Overworld1/Overworld3"]
+
+[node name="Garbage" type="Sprite2D" parent="Overworld1"]
+position = Vector2(227, 411)
+scale = Vector2(0.66116, 0.936411)
 texture = ExtResource("8_n0i03")
 
 [node name="Overworld2" type="Sprite2D" parent="Overworld1"]
@@ -97,17 +90,6 @@ texture = ExtResource("9_bpqdb")
 
 [node name="Sprite2D" type="Sprite2D" parent="Overworld1/Overworld2"]
 
-[node name="Overworld3" type="Sprite2D" parent="Overworld1"]
-position = Vector2(1908, 0)
-texture = ExtResource("3_gfb7x")
-
-[node name="Pole2" type="Sprite2D" parent="Overworld1/Overworld3"]
-position = Vector2(-284, -227)
-scale = Vector2(1.04247, 1.12225)
-texture = ExtResource("9_bpqdb")
-
-[node name="Sprite2D" type="Sprite2D" parent="Overworld1/Overworld3"]
-
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 process_mode = 1
 position = Vector2(-922, 440)
@@ -116,13 +98,6 @@ physics_material_override = SubResource("PhysicsMaterial_0un6t")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(22, -230)
 shape = SubResource("WorldBoundaryShape2D_eq04q")
-
-[node name="PauseMenu" parent="." instance=ExtResource("4_pa4np")]
-visible = false
-offset_left = -844.0
-offset_top = -397.0
-offset_right = -844.0
-offset_bottom = -397.0
 
 [node name="NPC" parent="." instance=ExtResource("8_f3ykd")]
 position = Vector2(480, 34)
@@ -140,7 +115,43 @@ rotation = -1.43641
 skew = 0.261799
 color = Color(0.613231, 0.662323, 0.525181, 1)
 
-[connection signal="area_entered" from="Overworld1/Player/Player2D" to="Overworld1/Player" method="_on_Area2D_body_entered"]
-[connection signal="area_exited" from="Overworld1/Player/Player2D" to="Overworld1/Player" method="_on_Area2D_body_exited"]
+[node name="Player" parent="." instance=ExtResource("1_81mt6")]
+z_index = 1
+z_as_relative = false
+position = Vector2(-852, 124)
+script = ExtResource("2_rryov")
+metadata/_edit_group_ = true
+
+[node name="Player2D" type="Area2D" parent="Player"]
+position = Vector2(-141, 18)
+scale = Vector2(1.27937, 1.13605)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Player2D"]
+position = Vector2(70.3471, -25.527)
+scale = Vector2(1, 1.37282)
+shape = SubResource("CapsuleShape2D_fb38p")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(-523, -1106)
+scale = Vector2(0.999994, 1)
+anchor_mode = 0
+zoom = Vector2(1.25, 1.11)
+limit_top = -500
+limit_bottom = 0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Player/Camera2D"]
+follow_viewport_enabled = true
+
+[node name="PauseMenu" parent="Player/Camera2D/CanvasLayer" instance=ExtResource("4_pa4np")]
+visible = false
+offset_left = 14.0
+offset_top = -835.0
+offset_right = 14.0
+offset_bottom = -835.0
+scale = Vector2(0.502756, 0.545338)
+
+[connection signal="area_entered" from="Player/Player2D" to="Player" method="_on_Area2D_body_entered"]
+[connection signal="area_exited" from="Player/Player2D" to="Player" method="_on_Area2D_body_exited"]
 
 [editable path="NPC"]
+[editable path="Player/Camera2D/CanvasLayer/PauseMenu"]

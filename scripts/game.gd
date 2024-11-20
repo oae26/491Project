@@ -1,8 +1,8 @@
 extends Node2D
 
 
-@onready var pause_menu = $PauseMenu
-@onready var resume = $PauseMenu/Panel/VBoxContainer/ResumeBtn
+@onready var pause_menu = $Player/Camera2D/CanvasLayer/PauseMenu
+@onready var resume = $Player/Camera2D/CanvasLayer/PauseMenu/Panel/VBoxContainer/ResumeBtn
 var paused = false
 # Called when the node enters the scene tree for the first time.
 
