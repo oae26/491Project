@@ -46,7 +46,6 @@ region_rect = Rect2(0, 0, 1920, 1080)
 
 [node name="Player" parent="Overworld1" instance=ExtResource("1_81mt6")]
 position = Vector2(-445, 187)
-scale = Vector2(1, 1)
 script = ExtResource("2_rryov")
 metadata/_edit_group_ = true
 
@@ -138,7 +137,6 @@ z_as_relative = false
 material = SubResource("ShaderMaterial_yd22i")
 position = Vector2(1501, -63)
 rotation = -1.43641
-scale = Vector2(1, 1)
 skew = 0.261799
 color = Color(0.613231, 0.662323, 0.525181, 1)
 

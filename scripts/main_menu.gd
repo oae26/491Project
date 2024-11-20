@@ -7,7 +7,7 @@ extends Control
 @onready var yes_btn = $ConfirmationPrompt/Panel/HBoxContainer/YesBtn
 @onready var no_btn = $ConfirmationPrompt/Panel/HBoxContainer/NoBtn
 @onready var panel = $Panel as Panel
-@onready var level = preload("res://scenes/Game.tscn") as PackedScene
+@onready var level = preload("res://scenes/over_world.tscn") as PackedScene
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
