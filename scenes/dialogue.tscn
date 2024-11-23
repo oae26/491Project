@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://vakwwfr5tu8n"]
+[gd_scene load_steps=3 format=3 uid="uid://vakwwfr5tu8n"]
 
 [ext_resource type="Script" path="res://scripts/DialogueBox.gd" id="1_hygy4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_na713"]
 
 [node name="Dialogue" type="Control"]
 layout_mode = 3
@@ -25,17 +27,22 @@ anchor_right = 11.05
 anchor_bottom = 1.2
 offset_right = 40.0
 offset_bottom = 23.0
+text = "hi"
+label_settings = SubResource("LabelSettings_na713")
 metadata/_edit_use_anchors_ = true
 metadata/_edit_group_ = true
 
-[node name="NextButton" type="Button" parent="DialogueControl"]
+[node name="NextButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.025
 anchor_top = -0.577
 anchor_right = 14.878
 anchor_bottom = 1.6
-offset_top = 19.08
-offset_right = -113.12
-offset_bottom = 8.0
+offset_left = 1.0
+offset_top = -4.0
+offset_right = 9.0
+offset_bottom = 4.0
+scale = Vector2(4.51349, 1.28472)
 metadata/_edit_use_anchors_ = true
+metadata/_edit_group_ = true

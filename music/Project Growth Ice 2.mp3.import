@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cycqra72vhie6"
+path="res://.godot/imported/Project Growth Ice 2.mp3-027009572d404c1fde569a1dacd0aced.mp3str"
+
+[deps]
+
+source_file="res://music/Project Growth Ice 2.mp3"
+dest_files=["res://.godot/imported/Project Growth Ice 2.mp3-027009572d404c1fde569a1dacd0aced.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

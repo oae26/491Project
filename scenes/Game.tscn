@@ -1,21 +1,35 @@
-[gd_scene load_steps=18 format=3 uid="uid://cf3twmrxqgskj"]
+[gd_scene load_steps=30 format=3 uid="uid://cf3twmrxqgskj"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_qdjrj"]
 [ext_resource type="Shader" path="res://shaders/snow.gdshader" id="2_gd2af"]
 [ext_resource type="Texture2D" uid="uid://pb1vh15ys1hg" path="res://art/snowlevel2.PNG" id="3_o54ch"]
 [ext_resource type="Texture2D" uid="uid://vtqnetjlg4kk" path="res://art/IMG_0598.png" id="4_wib7y"]
 [ext_resource type="Texture2D" uid="uid://b3712or6a7qx0" path="res://art/snowlevel1.png" id="5_bk3sj"]
+[ext_resource type="Shader" path="res://shaders/clouds.gdshader" id="6_4pmpv"]
 [ext_resource type="Texture2D" uid="uid://15ichst0w811" path="res://art/foreground_leaves.png" id="6_v4xde"]
+[ext_resource type="Texture2D" uid="uid://c5ll12a4arbmo" path="res://art/IMG_0652.PNG" id="7_hlggy"]
 [ext_resource type="PackedScene" uid="uid://bh4p66j4pm065" path="res://scenes/block.tscn" id="7_kq8o2"]
 [ext_resource type="AudioStream" uid="uid://dqon4c3kgmxf4" path="res://music/Project Growth Ice.wav" id="8_1dls7"]
+[ext_resource type="Texture2D" uid="uid://b81nwhnbji5l3" path="res://art/IMG_0668-removebg-preview.png" id="8_3iydb"]
+[ext_resource type="Texture2D" uid="uid://7273jnsmsuis" path="res://art/IMG_0663-removebg-preview.png" id="9_fojyb"]
 [ext_resource type="Script" path="res://scripts/SceneSwitch.gd" id="9_j42no"]
+[ext_resource type="Texture2D" uid="uid://dvi1xeyem8q0c" path="res://art/IMG_0666-removebg-preview.png" id="10_10v1h"]
 [ext_resource type="PackedScene" uid="uid://bkmtjqhmucw03" path="res://scenes/player.tscn" id="10_gs2t8"]
+[ext_resource type="Texture2D" uid="uid://cqhhdva5eii3r" path="res://art/IMG_0664-removebg-preview.png" id="11_5iu1d"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="11_vhsyl"]
+[ext_resource type="Texture2D" uid="uid://csk7onnqixibj" path="res://art/IMG_0670-removebg-preview.png" id="12_2rq1d"]
+[ext_resource type="PackedScene" uid="uid://barwiegfv76e0" path="res://scenes/pause_menu.tscn" id="12_fts5d"]
+[ext_resource type="Texture2D" uid="uid://bdq08uxmvcefk" path="res://art/IMG_0671-removebg-preview.png" id="13_8jx3m"]
+[ext_resource type="Texture2D" uid="uid://chin14pr8fj4e" path="res://art/IMG_0669-removebg-preview.png" id="14_2oldg"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_waeqy"]
+radius = 39.0818
+height = 92.3318
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fica4"]
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wdj23"]
-distance = 40.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6l2tp"]
+size = Vector2(13847.7, 138)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nokxo"]
 resource_local_to_scene = true
@@ -23,28 +37,36 @@ shader = ExtResource("2_gd2af")
 shader_parameter/rain_amount = 150.0
 shader_parameter/near_rain_length = 0.01
 shader_parameter/far_rain_length = 0.01
-shader_parameter/near_rain_width = 0.195
+shader_parameter/near_rain_width = 1.0
 shader_parameter/far_rain_width = 0.5
 shader_parameter/near_rain_transparency = 0.1
 shader_parameter/far_rain_transparency = 0.5
 shader_parameter/rain_color = Color(0.929676, 0.990785, 0.998921, 1)
-shader_parameter/base_rain_speed = 0.331
-shader_parameter/additional_rain_speed = 0.15
+shader_parameter/base_rain_speed = 0.824
+shader_parameter/additional_rain_speed = 0.588
 shader_parameter/slant = 0.0950001
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2r4dm"]
 shader = ExtResource("2_gd2af")
-shader_parameter/rain_amount = 150.0
+shader_parameter/rain_amount = 3000.0
 shader_parameter/near_rain_length = 0.01
 shader_parameter/far_rain_length = 0.01
-shader_parameter/near_rain_width = 0.195
-shader_parameter/far_rain_width = 0.5
+shader_parameter/near_rain_width = 0.1
+shader_parameter/far_rain_width = 1.0
 shader_parameter/near_rain_transparency = 1.0
 shader_parameter/far_rain_transparency = 0.5
 shader_parameter/rain_color = Color(0.929676, 0.990785, 0.998921, 1)
-shader_parameter/base_rain_speed = 0.1
-shader_parameter/additional_rain_speed = 0.5
+shader_parameter/base_rain_speed = 0.991
+shader_parameter/additional_rain_speed = 1.0
 shader_parameter/slant = -0.12
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jp2be"]
+shader = ExtResource("6_4pmpv")
+shader_parameter/BackColor = Color(0.218167, 0.25124, 0.299306, 0)
+shader_parameter/CloudColor = Color(0.167347, 0.181261, 0.191323, 1)
+shader_parameter/speed = 2.3
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bll0u"]
 
 [sub_resource type="GDScript" id="GDScript_x7i0g"]
 script/source = "extends Sprite2D
@@ -60,13 +82,41 @@ func _process(delta: float) -> void:
 	pass
 "
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_waeqy"]
-radius = 39.0818
-height = 92.3318
-
 [node name="IceLevel" type="Node2D"]
 process_mode = 3
 script = ExtResource("1_qdjrj")
+
+[node name="Player" parent="." instance=ExtResource("10_gs2t8")]
+z_as_relative = false
+position = Vector2(-605, 307)
+script = ExtResource("11_vhsyl")
+metadata/_edit_group_ = true
+
+[node name="Player2D" type="Area2D" parent="Player"]
+position = Vector2(-141, 18)
+scale = Vector2(1.27937, 1.13605)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Player2D"]
+position = Vector2(70.3471, -25.527)
+scale = Vector2(1, 1.37282)
+shape = SubResource("CapsuleShape2D_waeqy")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(-363, -846)
+anchor_mode = 0
+position_smoothing_speed = 12.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Player/Camera2D"]
+
+[node name="PauseMenu" parent="Player/Camera2D/CanvasLayer" instance=ExtResource("12_fts5d")]
+visible = false
+anchors_preset = -1
+anchor_bottom = 1.0
+offset_left = -879.0
+offset_top = -655.0
+offset_right = 934.0
+offset_bottom = -572.0
+scale = Vector2(0.484363, 0.359999)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 process_mode = 1
@@ -74,11 +124,23 @@ position = Vector2(-922, 440)
 physics_material_override = SubResource("PhysicsMaterial_fica4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(35, -29)
-shape = SubResource("WorldBoundaryShape2D_wdj23")
+visible = false
+position = Vector2(3275.46, 27)
+scale = Vector2(0.48, 1)
+shape = SubResource("RectangleShape2D_6l2tp")
+debug_color = Color(0.513197, 0.546495, 0.516599, 0.42)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+visible = false
+position = Vector2(8588.08, 3256)
+scale = Vector2(0.479693, 1)
+shape = SubResource("RectangleShape2D_6l2tp")
+debug_color = Color(0.513197, 0.546495, 0.516599, 0.42)
 
 [node name="Background" type="Sprite2D" parent="."]
 process_mode = 1
+z_index = -2
+z_as_relative = false
 material = SubResource("ShaderMaterial_nokxo")
 position = Vector2(133, 5)
 scale = Vector2(1.15703, 1)
@@ -90,13 +152,14 @@ scale = Vector2(0.8637, 1)
 texture = ExtResource("4_wib7y")
 
 [node name="Background2" type="Sprite2D" parent="Background"]
+self_modulate = Color(0.854947, 0.872415, 0.882701, 1)
 material = SubResource("ShaderMaterial_2r4dm")
 position = Vector2(1917.62, -0.999969)
 texture = ExtResource("3_o54ch")
 flip_h = true
 
 [node name="Img0598" type="Sprite2D" parent="Background/Background2"]
-position = Vector2(-94.2025, 807)
+position = Vector2(-218.442, 597)
 rotation = -0.950797
 scale = Vector2(0.8637, 1)
 texture = ExtResource("4_wib7y")
@@ -114,39 +177,172 @@ scale = Vector2(0.8637, 1)
 texture = ExtResource("4_wib7y")
 flip_h = true
 
-[node name="Background3" type="Sprite2D" parent="Background"]
-material = SubResource("ShaderMaterial_nokxo")
-position = Vector2(3837.19, -1)
-texture = ExtResource("5_bk3sj")
-
-[node name="Img0598" type="Sprite2D" parent="Background/Background3"]
-position = Vector2(-518.22, -255)
-scale = Vector2(0.8637, 1)
-texture = ExtResource("4_wib7y")
-
-[node name="Background4" type="Sprite2D" parent="Background/Background3"]
+[node name="Background4" type="Sprite2D" parent="Background"]
+self_modulate = Color(0.496791, 0.503834, 0.510867, 1)
 material = SubResource("ShaderMaterial_2r4dm")
-position = Vector2(1917.62, -0.999969)
+position = Vector2(3829.19, -0.5)
 texture = ExtResource("5_bk3sj")
 flip_h = true
 
-[node name="Img0598" type="Sprite2D" parent="Background/Background3/Background4"]
+[node name="Img0598" type="Sprite2D" parent="Background/Background4"]
 position = Vector2(-953.303, -251)
 scale = Vector2(0.8637, 1)
 texture = ExtResource("4_wib7y")
 
-[node name="Img0599" type="Sprite2D" parent="Background/Background3/Background4"]
+[node name="Img0599" type="Sprite2D" parent="Background/Background4"]
 position = Vector2(-621.419, -255)
 scale = Vector2(0.8637, 1)
 texture = ExtResource("4_wib7y")
 flip_h = true
 
-[node name="Img0600" type="Sprite2D" parent="Background/Background3/Background4"]
+[node name="Img0600" type="Sprite2D" parent="Background/Background4"]
+position = Vector2(-1518.96, 546.5)
+rotation = 1.44665
+scale = Vector2(0.610273, 0.827577)
+texture = ExtResource("4_wib7y")
+flip_h = true
+
+[node name="Cover" type="Sprite2D" parent="Background"]
+self_modulate = Color(0.741385, 0.741385, 0.741385, 1)
+material = SubResource("ShaderMaterial_jp2be")
+position = Vector2(6591.45, -110.25)
+scale = Vector2(2.08823, 2.61898)
+texture = ExtResource("5_bk3sj")
+flip_h = true
+
+[node name="Img0600" type="Sprite2D" parent="Background/Cover"]
 position = Vector2(-1609.07, 641)
 rotation = 1.44665
 scale = Vector2(0.610273, 0.827577)
 texture = ExtResource("4_wib7y")
 flip_h = true
+
+[node name="Underground" type="Sprite2D" parent="Background"]
+position = Vector2(5569.43, 3213)
+texture = ExtResource("7_hlggy")
+flip_h = true
+metadata/_edit_group_ = true
+
+[node name="Img0670-removebg-preview(1)2" type="Sprite2D" parent="Background/Underground"]
+position = Vector2(251.506, 197)
+scale = Vector2(0.864282, 1)
+texture = SubResource("CompressedTexture2D_bll0u")
+
+[node name="Img0670-removebg-preview2" type="Sprite2D" parent="Background/Underground"]
+position = Vector2(-601.54, 197)
+scale = Vector2(0.864282, 1)
+texture = ExtResource("12_2rq1d")
+
+[node name="Img0663-removebg-preview" type="Sprite2D" parent="Background/Underground"]
+position = Vector2(24.2007, 168)
+scale = Vector2(2.28666, 1.73649)
+texture = ExtResource("9_fojyb")
+
+[node name="Img0668-removebg-preview2" type="Sprite2D" parent="Background/Underground"]
+position = Vector2(-4.31982, 259)
+scale = Vector2(2.05856, 2.103)
+texture = ExtResource("8_3iydb")
+
+[node name="Img0669-removebg-preview" type="Sprite2D" parent="Background/Underground"]
+position = Vector2(478.813, 370)
+scale = Vector2(0.864282, 1)
+texture = ExtResource("14_2oldg")
+
+[node name="Img0666-removebg-preview" type="Sprite2D" parent="Background/Underground"]
+position = Vector2(-583.39, -380)
+scale = Vector2(0.864282, 1)
+texture = ExtResource("10_10v1h")
+
+[node name="Img0664-removebg-preview" type="Sprite2D" parent="Background/Underground"]
+position = Vector2(1.29688, -237)
+scale = Vector2(2.38732, 1.72436)
+texture = ExtResource("11_5iu1d")
+
+[node name="Img0670-removebg-preview(1)" type="Sprite2D" parent="Background/Underground"]
+position = Vector2(-791.682, 299)
+scale = Vector2(0.864282, 1)
+texture = SubResource("CompressedTexture2D_bll0u")
+
+[node name="Img0670-removebg-preview" type="Sprite2D" parent="Background/Underground"]
+position = Vector2(785.633, 230)
+scale = Vector2(0.864282, 1)
+texture = ExtResource("12_2rq1d")
+
+[node name="Img0671-removebg-preview" type="Sprite2D" parent="Background/Underground"]
+z_index = 1
+position = Vector2(-177.177, 376.75)
+scale = Vector2(1.19365, 1.89306)
+texture = ExtResource("13_8jx3m")
+
+[node name="Img0666-removebg-preview2" type="Sprite2D" parent="Background/Underground"]
+position = Vector2(602.405, -386)
+scale = Vector2(0.864282, 1)
+texture = ExtResource("10_10v1h")
+
+[node name="Underground2" type="Sprite2D" parent="Background"]
+z_index = -1
+position = Vector2(7489.87, 3221)
+texture = ExtResource("7_hlggy")
+flip_h = true
+
+[node name="Img0668-removebg-preview2" type="Sprite2D" parent="Background/Underground2"]
+z_index = 1
+position = Vector2(-4.32031, 259)
+scale = Vector2(2.05856, 2.103)
+texture = ExtResource("8_3iydb")
+
+[node name="Img0663-removebg-preview" type="Sprite2D" parent="Background/Underground2"]
+position = Vector2(24.2007, 168)
+scale = Vector2(2.28666, 1.73649)
+texture = ExtResource("9_fojyb")
+
+[node name="Img0664-removebg-preview" type="Sprite2D" parent="Background/Underground2"]
+position = Vector2(-21.6066, -260)
+scale = Vector2(2.38732, 1.72436)
+texture = ExtResource("11_5iu1d")
+
+[node name="Img0670-removebg-preview(1)" type="Sprite2D" parent="Background/Underground2"]
+position = Vector2(-66.549, 165)
+scale = Vector2(1.01398, 1.4364)
+texture = SubResource("CompressedTexture2D_bll0u")
+
+[node name="Img0670-removebg-preview" type="Sprite2D" parent="Background/Underground2"]
+position = Vector2(913.547, 193)
+scale = Vector2(0.864282, 1)
+texture = ExtResource("12_2rq1d")
+
+[node name="Img0671-removebg-preview" type="Sprite2D" parent="Background/Underground2"]
+z_index = 1
+position = Vector2(-177.177, 376.75)
+scale = Vector2(1.19365, 1.89306)
+texture = ExtResource("13_8jx3m")
+
+[node name="Img0666-removebg-preview2" type="Sprite2D" parent="Background/Underground2"]
+position = Vector2(-19.013, -392)
+scale = Vector2(-0.79993, 1)
+texture = ExtResource("10_10v1h")
+
+[node name="Img0670-removebg-preview2" type="Sprite2D" parent="Background/Underground2"]
+position = Vector2(-354.355, 466)
+scale = Vector2(0.864282, 1)
+texture = ExtResource("12_2rq1d")
+
+[node name="Img0670-removebg-preview(1)2" type="Sprite2D" parent="Background/Underground2"]
+position = Vector2(-744.146, 331)
+scale = Vector2(0.864282, 1)
+texture = SubResource("CompressedTexture2D_bll0u")
+
+[node name="Img0669-removebg-preview" type="Sprite2D" parent="Background/Underground2"]
+z_index = 1
+position = Vector2(55.3145, 139)
+scale = Vector2(0.864282, 1)
+texture = ExtResource("14_2oldg")
+
+[node name="Img0652" type="Sprite2D" parent="Background"]
+z_index = 2
+position = Vector2(5706.47, 2009.75)
+scale = Vector2(1.16087, 1.2912)
+texture = ExtResource("7_hlggy")
 
 [node name="ForegroundLeaves" type="Sprite2D" parent="."]
 process_mode = 1
@@ -194,43 +390,24 @@ position = Vector2(4599, 300)
 
 [node name="Block13" parent="." instance=ExtResource("7_kq8o2")]
 process_mode = 1
-position = Vector2(5923, 273)
+position = Vector2(3695, 274.5)
 
 [node name="Block14" parent="." instance=ExtResource("7_kq8o2")]
 process_mode = 1
-position = Vector2(5394, 291)
+position = Vector2(3166, 292.5)
 
 [node name="Node" type="Node" parent="."]
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
-position = Vector2(577, 325)
+position = Vector2(2520, -6.99997)
+scale = Vector2(-152.381, 2278.67)
 stream = ExtResource("8_1dls7")
 autoplay = true
+max_distance = 1e+07
+attenuation = 0.000482087
 
 [node name="Node2" type="Node" parent="."]
 script = ExtResource("9_j42no")
-
-[node name="Player" parent="." instance=ExtResource("10_gs2t8")]
-position = Vector2(-577, 304)
-script = ExtResource("11_vhsyl")
-metadata/_edit_group_ = true
-
-[node name="Player2D" type="Area2D" parent="Player"]
-position = Vector2(-141, 18)
-scale = Vector2(1.27937, 1.13605)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Player2D"]
-position = Vector2(70.3471, -25.527)
-scale = Vector2(1, 1.37282)
-shape = SubResource("CapsuleShape2D_waeqy")
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(-523, -1106)
-scale = Vector2(0.999994, 1)
-anchor_mode = 0
-zoom = Vector2(1.25, 1.11)
-limit_top = -500
-limit_bottom = 0
 
 [connection signal="area_entered" from="Player/Player2D" to="Player" method="_on_Area2D_body_entered"]
 [connection signal="area_exited" from="Player/Player2D" to="Player" method="_on_Area2D_body_exited"]

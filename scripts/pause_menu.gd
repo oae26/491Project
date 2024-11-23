@@ -45,4 +45,3 @@ func handle_pause_signals() -> void:
 	resume_btn.button_down.connect(on_resume_btn_pressed)
 	quit_btn.button_down.connect(on_quit_btn_pressed)
 	no_btn.button_down.connect(on_no_btn_pressed)
-

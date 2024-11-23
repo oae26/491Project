@@ -115,3 +115,28 @@ func launch_spore():
 	spore.spawnRot = rotation
 	game.add_child.call_deferred(spore)
 	sporeTimer.start()
+	
+	
+func _on_block_destroyed(memory_text: String) -> void:
+	if not current_block:
+		return
+	
+	var block_position = current_block.global_position
+
+	# Trigger a thought or memory UI
+	var thought_ui = preload("res://scenes/thought_UI.tscn").instantiate()
+	get_tree().get_current_scene().add_child(thought_ui)  # Add it to the current scene
+	thought_ui.text = "A thought emerges..."
+	
+
+	# Assuming ThoughtUI scene has a `set_text` method
+	if thought_ui.has_method("set_text"):
+		thought_ui.set_text(memory_text)  # Pass memory text to the UI
+	else:
+		print("ThoughtUI does not have a `set_text` method")
+
+	# Add ThoughtUI to the current scene
+	get_tree().get_current_scene().add_child(thought_ui)
+
+	# Reset the current block reference
+	current_block = null
