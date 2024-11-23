@@ -107,7 +107,8 @@ func _on_NPCInteractionArea_body_exited(body: Node) -> void:
 # Function to launch a spore
 # Figure out to pass control between spore and player
 # and get rid of timer in favor of only launching
-# one spore at a time
+# one spore at a time signal, that is passed from
+# spore.gd to player.gd?
 func launch_spore():
 	var spore = SPORE.instantiate()
 	spore.dir = rotation
