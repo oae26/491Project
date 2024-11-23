@@ -105,6 +105,9 @@ func _on_NPCInteractionArea_body_exited(body: Node) -> void:
 		print("Player exited NPC interaction area")
 
 # Function to launch a spore
+# Figure out to pass control between spore and player
+# and get rid of timer in favor of only launching
+# one spore at a time
 func launch_spore():
 	var spore = SPORE.instantiate()
 	spore.dir = rotation
