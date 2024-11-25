@@ -1,24 +1,43 @@
-[gd_scene load_steps=4 format=3 uid="uid://bh4p66j4pm065"]
+[gd_scene load_steps=7 format=3 uid="uid://bh4p66j4pm065"]
 
 [ext_resource type="Script" path="res://scripts/block.gd" id="1_xaqr8"]
-[ext_resource type="Texture2D" uid="uid://bwy7k25wudbdc" path="res://art/8aa0e7b1-73ae-4d42-a43c-b4433f10080e-removebg-preview.png" id="2_m08ls"]
+[ext_resource type="Texture2D" uid="uid://bwy7k25wudbdc" path="res://art/ice_block.png" id="2_m08ls"]
+[ext_resource type="Texture2D" uid="uid://cn3doofpw58q6" path="res://art/ice_block_half_broken.png" id="3_c033y"]
+[ext_resource type="Texture2D" uid="uid://c2awsmbxb1tyo" path="res://art/Seeds_freed.png" id="4_6q213"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3q1li"]
-size = Vector2(83, 83)
+size = Vector2(99, 83)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fg5tm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_m08ls")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_c033y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6q213")
+}],
+"loop": false,
+"name": &"break",
+"speed": 4.0
+}]
 
 [node name="Block" type="StaticBody2D"]
 position = Vector2(-27, -20)
 script = ExtResource("1_xaqr8")
 metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-392, 92)
-scale = Vector2(0.512973, 0.569158)
-texture = ExtResource("2_m08ls")
-offset = Vector2(823.53, -189.427)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(31.5, 22.5)
+position = Vector2(29.5, 25)
 shape = SubResource("RectangleShape2D_3q1li")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(32, -9)
+scale = Vector2(0.548713, 0.523785)
+sprite_frames = SubResource("SpriteFrames_fg5tm")
+animation = &"break"
 
 [connection signal="block_broken" from="." to="." method="break_block"]

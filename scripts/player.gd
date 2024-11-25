@@ -12,6 +12,26 @@ var npc: Node = null  # Variable to track NPC in range
 @onready var area2d = $Player2D
 @onready var npc_area2d = $NPCInteractionArea
 
+@export var flowers: Array = [
+	{
+		"texture": preload("res://art/Daffodil.png"),
+		"message": "Be kinder to yourself."
+	},
+	{
+		"texture": preload("res://art/Rose.png"),
+		"message": "Be kinder to yourself."
+	},
+	{
+		"texture": preload("res://art/Cosmo.png"),
+		"message": "Be kinder to yourself."
+	},
+	{
+		"texture": preload("res://art/LilyOfTheValley.png"),
+		"message": "Be kinder to yourself."
+	}
+]
+
+
 # Track the last movement direction (-1 for left, 1 for right)
 var last_direction = 1
 
@@ -114,26 +134,40 @@ func launch_spore():
 	sporeTimer.start()
 	
 	
-func _on_block_destroyed(memory_text: String) -> void:
+func _on_block_destroyed() -> void:
 	if not current_block:
 		return
 	
 	var block_position = current_block.global_position
-
-	# Trigger a thought or memory UI
-	var thought_ui = preload("res://scenes/thought_UI.tscn").instantiate()
-	get_tree().get_current_scene().add_child(thought_ui)  # Add it to the current scene
-	thought_ui.text = "A thought emerges..."
 	
+	# Trigger a thought or memory UI
+	var thought_ui_scene = preload("res://scenes/thought_UI.tscn")
+	var thought_ui_instance = thought_ui_scene.instantiate()
+	
+	var random_flower = flowers[randi() % flowers.size()]
+	
+	# Create a new Sprite2D node for the flower
+	var flower_sprite = Sprite2D.new()
+	flower_sprite.texture = random_flower["texture"]
+	flower_sprite.position = block_position
+	
+	# Add the flower to the scene
+	get_tree().get_current_scene().add_child(flower_sprite)
+	
+	# Display the associated message as a thought UI
+	show_flower_message(block_position, random_flower["message"])
 
 	# Assuming ThoughtUI scene has a `set_text` method
-	if thought_ui.has_method("set_text"):
-		thought_ui.set_text(memory_text)  # Pass memory text to the UI
-	else:
-		print("ThoughtUI does not have a `set_text` method")
 
 	# Add ThoughtUI to the current scene
-	get_tree().get_current_scene().add_child(thought_ui)
+	get_tree().get_current_scene().add_child(thought_ui_instance)
 
 	# Reset the current block reference
 	current_block = null
+	
+func show_flower_message(position: Vector2, message: String) -> void:
+	# Instantiate the thought UI (assuming you already have this scene created)
+	var thought_ui = preload("res://scenes/thought_UI.tscn").instantiate()
+	thought_ui.global_position = position + Vector2(0, -50)  # Slightly above the flower
+	thought_ui.text = message  # Pass the flower's message to the UI
+	get_tree().get_current_scene().add_child(thought_ui)
