@@ -37,6 +37,7 @@ height = 92.3318
 [node name="OverWorld" type="Node2D"]
 material = SubResource("ShaderMaterial_2udsx")
 position = Vector2(0, 13)
+scale = Vector2(1.00765, 1)
 script = ExtResource("1_gu437")
 
 [node name="Overworld1" type="Sprite2D" parent="."]
@@ -139,19 +140,15 @@ zoom = Vector2(1.25, 1.11)
 limit_top = -500
 limit_bottom = 0
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Player/Camera2D"]
-follow_viewport_enabled = true
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Player"]
+volume_db = -10.84
 
-[node name="PauseMenu" parent="Player/Camera2D/CanvasLayer" instance=ExtResource("4_pa4np")]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("4_pa4np")]
 visible = false
-offset_left = 14.0
-offset_top = -835.0
-offset_right = 14.0
-offset_bottom = -835.0
-scale = Vector2(0.502756, 0.545338)
 
 [connection signal="area_entered" from="Player/Player2D" to="Player" method="_on_Area2D_body_entered"]
 [connection signal="area_exited" from="Player/Player2D" to="Player" method="_on_Area2D_body_exited"]
 
 [editable path="NPC"]
-[editable path="Player/Camera2D/CanvasLayer/PauseMenu"]

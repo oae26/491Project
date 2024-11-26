@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwy7k25wudbdc"
-path="res://.godot/imported/8aa0e7b1-73ae-4d42-a43c-b4433f10080e-removebg-preview.png-076ce6de98fdda06dd1c15803200f061.ctex"
+uid="uid://dm1cl5a6wwdk1"
+path="res://.godot/imported/Lily.png-d5489340a3b19b7628a2e6780a995cd5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/8aa0e7b1-73ae-4d42-a43c-b4433f10080e-removebg-preview.png"
-dest_files=["res://.godot/imported/8aa0e7b1-73ae-4d42-a43c-b4433f10080e-removebg-preview.png-076ce6de98fdda06dd1c15803200f061.ctex"]
+source_file="res://art/Lily.png"
+dest_files=["res://.godot/imported/Lily.png-d5489340a3b19b7628a2e6780a995cd5.ctex"]
 
 [params]
 
