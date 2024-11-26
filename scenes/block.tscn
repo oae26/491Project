@@ -22,7 +22,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"break",
-"speed": 4.0
+"speed": 6.0
 }]
 
 [node name="Block" type="StaticBody2D"]
@@ -39,5 +39,6 @@ position = Vector2(32, -9)
 scale = Vector2(0.548713, 0.523785)
 sprite_frames = SubResource("SpriteFrames_fg5tm")
 animation = &"break"
+frame_progress = 0.310931
 
 [connection signal="block_broken" from="." to="." method="break_block"]

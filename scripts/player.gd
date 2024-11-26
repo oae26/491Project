@@ -11,23 +11,24 @@ var npc: Node = null  # Variable to track NPC in range
 @onready var sporeTimer = $SporeTimer
 @onready var area2d = $Player2D
 @onready var npc_area2d = $NPCInteractionArea
+@onready var footsteps = $AudioStreamPlayer
 
 @export var flowers: Array = [
 	{
 		"texture": preload("res://art/Daffodil.png"),
-		"message": "Be kinder to yourself."
+		"message": "A new mindset begins to take root..."
 	},
 	{
 		"texture": preload("res://art/Rose.png"),
-		"message": "Be kinder to yourself."
+		"message": "A new mindset begins to take root..."
 	},
 	{
 		"texture": preload("res://art/Cosmo.png"),
-		"message": "Be kinder to yourself."
+		"message": "A new mindset begins to take root..."
 	},
 	{
 		"texture": preload("res://art/LilyOfTheValley.png"),
-		"message": "Be kinder to yourself."
+		"message": "A new mindset begins to take root..."
 	}
 ]
 
@@ -36,6 +37,8 @@ var npc: Node = null  # Variable to track NPC in range
 var last_direction = 1
 
 func _ready() -> void:
+
+	print("Footsteps node:", footsteps)
 	# Check for the Player2D node before trying to use it
 	if has_node("Player2D"):
 		area2d = $Player2D
@@ -60,6 +63,7 @@ func _physics_process(delta: float) -> void:
 	# Add gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+	print(is_on_floor())
 
 	# Handle jump
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
@@ -71,6 +75,8 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction * SPEED
 		$AnimatedSprite2D.animation = "walk"
 		$AnimatedSprite2D.play()
+		if not footsteps.is_playing() and is_on_floor():
+			footsteps.play()
 		
 		last_direction = sign(direction)
 		$AnimatedSprite2D.flip_h = (last_direction == -1)
@@ -78,7 +84,8 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		$AnimatedSprite2D.stop()
 		$AnimatedSprite2D.flip_h = (last_direction == -1)
-
+		if footsteps.is_playing() and not is_on_floor():
+			footsteps.stop()
 	# Block breaking
 	if Input.is_action_just_pressed("break_block") and current_block:
 		print("Breaking Block")
@@ -166,8 +173,14 @@ func _on_block_destroyed() -> void:
 	current_block = null
 	
 func show_flower_message(position: Vector2, message: String) -> void:
-	# Instantiate the thought UI (assuming you already have this scene created)
-	var thought_ui = preload("res://scenes/thought_UI.tscn").instantiate()
-	thought_ui.global_position = position + Vector2(0, -50)  # Slightly above the flower
-	thought_ui.text = message  # Pass the flower's message to the UI
-	get_tree().get_current_scene().add_child(thought_ui)
+	var label = Label.new()
+	label.text = message
+	label.position = position + Vector2(0, -50)  # Position above the flower
+	get_tree().get_current_scene().add_child(label)
+
+	# Fade out and remove the label
+	label.modulate = Color(1, 1, 1, 1)  # Fully opaque
+	var timer = get_tree().create_timer(3.0)  # Create a timer for 3 seconds
+	timer.timeout.connect(func():
+		label.queue_free()  # Remove the label when the timer ends
+	)

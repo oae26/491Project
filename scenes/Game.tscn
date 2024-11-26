@@ -1,8 +1,9 @@
-[gd_scene load_steps=30 format=3 uid="uid://cf3twmrxqgskj"]
+[gd_scene load_steps=31 format=3 uid="uid://cf3twmrxqgskj"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_qdjrj"]
 [ext_resource type="Shader" path="res://shaders/snow.gdshader" id="2_gd2af"]
 [ext_resource type="Texture2D" uid="uid://pb1vh15ys1hg" path="res://art/snowlevel2.PNG" id="3_o54ch"]
+[ext_resource type="AudioStream" uid="uid://dkwj3whlrip31" path="res://music/soundbitersfx_footsteps-in-snow.wav" id="4_eunfy"]
 [ext_resource type="Texture2D" uid="uid://vtqnetjlg4kk" path="res://art/IMG_0598.png" id="4_wib7y"]
 [ext_resource type="Texture2D" uid="uid://b3712or6a7qx0" path="res://art/snowlevel1.png" id="5_bk3sj"]
 [ext_resource type="Shader" path="res://shaders/clouds.gdshader" id="6_4pmpv"]
@@ -105,6 +106,9 @@ shape = SubResource("CapsuleShape2D_waeqy")
 position = Vector2(-363, -846)
 anchor_mode = 0
 position_smoothing_speed = 12.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource("4_eunfy")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 process_mode = 1
@@ -397,6 +401,12 @@ attenuation = 0.000482087
 script = ExtResource("9_j42no")
 
 [node name="ThoughtUi" parent="." instance=ExtResource("21_kuylg")]
+modulate = Color(0.741784, 0.956412, 1, 1)
+offset_left = 421.0
+offset_top = 110.0
+offset_right = 421.0
+offset_bottom = 110.0
+text = "feeaefeafaefeaf"
 metadata/_edit_use_anchors_ = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
