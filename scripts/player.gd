@@ -77,45 +77,27 @@ func _physics_process(delta: float) -> void:
 			velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle movement/deceleration
-	var direction := Input.get_axis("move_left", "move_right")
-	if direction != 0:
-		velocity.x = direction * SPEED
-		$AnimatedSprite2D.animation = "walk"
-		$AnimatedSprite2D.play()
-		if not footsteps.is_playing() and is_on_floor():
-			footsteps.play()
-		
-		last_direction = sign(direction)
-		$AnimatedSprite2D.flip_h = (last_direction == -1)
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		$AnimatedSprite2D.stop()
-		$AnimatedSprite2D.flip_h = (last_direction == -1)
-		if footsteps.is_playing() and not is_on_floor():
-			footsteps.stop()
-	# Block breaking
-	if Input.is_action_just_pressed("break_block") and current_block:
-		print("Breaking Block")
-		current_block.destroy_block()
-			# Get the input direction and handle movement/deceleration
 		var direction := Input.get_axis("move_left", "move_right")
 		if direction != 0:
 			velocity.x = direction * SPEED
 			$AnimatedSprite2D.animation = "walk"
 			$AnimatedSprite2D.play()
-				
+			if not footsteps.is_playing() and is_on_floor():
+				footsteps.play()
+		
 			last_direction = sign(direction)
 			$AnimatedSprite2D.flip_h = (last_direction == -1)
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 			$AnimatedSprite2D.stop()
 			$AnimatedSprite2D.flip_h = (last_direction == -1)
-
+			if footsteps.is_playing() and not is_on_floor():
+				footsteps.stop()
 		# Block breaking
 		if Input.is_action_just_pressed("break_block") and current_block:
 			print("Breaking Block")
 			current_block.destroy_block()
-
+			
 		# Spore launching
 		if Input.is_action_just_pressed("spore_launch"):
 				launch_spore()

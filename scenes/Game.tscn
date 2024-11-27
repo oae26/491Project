@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cf3twmrxqgskj"]
+[gd_scene load_steps=30 format=3 uid="uid://cf3twmrxqgskj"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_qdjrj"]
 [ext_resource type="Shader" path="res://shaders/snow.gdshader" id="2_gd2af"]
@@ -20,7 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://barwiegfv76e0" path="res://scenes/pause_menu.tscn" id="12_fts5d"]
 [ext_resource type="Texture2D" uid="uid://bdq08uxmvcefk" path="res://art/IMG_0671-removebg-preview.png" id="13_8jx3m"]
 [ext_resource type="Texture2D" uid="uid://chin14pr8fj4e" path="res://art/IMG_0669-removebg-preview.png" id="14_2oldg"]
-[ext_resource type="PackedScene" uid="uid://et83bqgd3gn8" path="res://scenes/thought_UI.tscn" id="21_kuylg"]
+[ext_resource type="PackedScene" path="res://scenes/thought_UI.tscn" id="21_kuylg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_waeqy"]
 radius = 39.0818
@@ -87,6 +87,7 @@ process_mode = 3
 script = ExtResource("1_qdjrj")
 
 [node name="Player" parent="." instance=ExtResource("10_gs2t8")]
+process_mode = 1
 z_as_relative = false
 position = Vector2(-605, 307)
 metadata/_edit_group_ = true
@@ -408,6 +409,7 @@ text = "feeaefeafaefeaf"
 metadata/_edit_use_anchors_ = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 2
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("12_fts5d")]
 visible = false
