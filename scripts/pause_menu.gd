@@ -1,6 +1,5 @@
 extends Control
 
-
 @onready var resume_btn = $Panel/VBoxContainer/ResumeBtn as Button
 @onready var quit_btn = $Panel/VBoxContainer/QuitBtn as Button
 @onready var confirmation_prompt = $ConfirmationPrompt as ConfirmationPrompt

@@ -1,14 +1,19 @@
 extends CharacterBody2D
 
+enum ControlState { PLAYER, SPORE }
+
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 var screen_size
+var control_state: ControlState = ControlState.PLAYER
+var spore_count: int = 0
+var current_spore: Node = null
 var current_block: Node = null
 var npc: Node = null  # Variable to track NPC in range
 
-@onready var game = get_tree().root.get_node("Game")
+@onready var player_manager = get_parent()
+@onready var game = get_tree().root.get_node("IceLevel")
 @onready var SPORE = load("res://scenes/spore.tscn")
-@onready var sporeTimer = $SporeTimer
 @onready var area2d = $Player2D
 @onready var npc_area2d = $NPCInteractionArea
 @onready var footsteps = $AudioStreamPlayer
@@ -59,46 +64,50 @@ func _ready() -> void:
 			npc_area2d.body_exited.connect(_on_NPCInteractionArea_body_exited)
 	else:
 		print("NPCInteractionArea not found in this scene")
+
 func _physics_process(delta: float) -> void:
 	# Add gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	print(is_on_floor())
 
-	# Handle jump
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+	if control_state == ControlState.PLAYER:
+		# Handle jump
+		if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+			velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle movement/deceleration
-	var direction := Input.get_axis("move_left", "move_right")
-	if direction != 0:
-		velocity.x = direction * SPEED
-		$AnimatedSprite2D.animation = "walk"
-		$AnimatedSprite2D.play()
-		if not footsteps.is_playing() and is_on_floor():
-			footsteps.play()
+		var direction := Input.get_axis("move_left", "move_right")
+		if direction != 0:
+			velocity.x = direction * SPEED
+			$AnimatedSprite2D.animation = "walk"
+			$AnimatedSprite2D.play()
+			if not footsteps.is_playing() and is_on_floor():
+				footsteps.play()
 		
-		last_direction = sign(direction)
-		$AnimatedSprite2D.flip_h = (last_direction == -1)
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		$AnimatedSprite2D.stop()
-		$AnimatedSprite2D.flip_h = (last_direction == -1)
-		if footsteps.is_playing() and not is_on_floor():
-			footsteps.stop()
-	# Block breaking
-	if Input.is_action_just_pressed("break_block") and current_block:
-		print("Breaking Block")
-		current_block.destroy_block()
+			last_direction = sign(direction)
+			$AnimatedSprite2D.flip_h = (last_direction == -1)
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
+			$AnimatedSprite2D.stop()
+			$AnimatedSprite2D.flip_h = (last_direction == -1)
+			if footsteps.is_playing() and not is_on_floor():
+				footsteps.stop()
+		# Block breaking
+		if Input.is_action_just_pressed("break_block") and current_block:
+			print("Breaking Block")
+			current_block.destroy_block()
+			
+		# Spore launching
+		if Input.is_action_just_pressed("spore_launch"):
+				launch_spore()
 
-	# Spore launching
-	if Input.is_action_just_pressed("spore_launch") and sporeTimer.get_time_left() == 0:
-		launch_spore()
-
-	# NPC interaction
-	if Input.is_action_just_pressed("interact") and npc:
-		trigger_dialogue(npc)
-
+		# NPC interaction
+		if Input.is_action_just_pressed("interact") and npc:
+			trigger_dialogue(npc)
+	elif control_state == ControlState.SPORE:
+		velocity = Vector2.ZERO
+		
 	move_and_slide()
 
 # Function to trigger dialogue with the NPC
@@ -132,14 +141,31 @@ func _on_NPCInteractionArea_body_exited(body: Node) -> void:
 		print("Player exited NPC interaction area")
 
 # Function to launch a spore
-func launch_spore():
-	var spore = SPORE.instantiate()
-	spore.dir = rotation
-	spore.spawnPos = global_position
-	spore.spawnRot = rotation
-	game.add_child.call_deferred(spore)
-	sporeTimer.start()
-	
+func launch_spore() -> void:
+	# Checks to see if a spore is already present
+	if spore_count == 0:
+		var spore = SPORE.instantiate()
+		current_spore = spore
+		spore_count = 1
+		spore.dir = rotation
+		spore.spawnPos = global_position
+		spore.spawnRot = rotation
+		game.add_child(spore)
+		print("Spore is launched. Spore count: ", spore_count)
+		# Resets spore count to zero if spore has been destroyed
+		spore.connect("tree_exited", Callable(self, "destroy_spore"))
+		# Pass control to spore
+		print("Controlling spore")
+		control_state = ControlState.SPORE
+	else:
+		print("Spore already exists")
+
+func destroy_spore() -> void:
+	print("Spore has been destroyed")
+	spore_count = 0
+	current_spore = null
+	control_state = ControlState.PLAYER
+	print("Controlling player")
 	
 func _on_block_destroyed() -> void:
 	if not current_block:
