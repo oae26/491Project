@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cf3twmrxqgskj"]
+[gd_scene load_steps=19 format=3 uid="uid://cf3twmrxqgskj"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_6n0sd"]
 [ext_resource type="Texture2D" uid="uid://b3712or6a7qx0" path="res://art/IMG_0596.png" id="3_n34rj"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://scripts/text_float.gd" id="9_chctq"]
 [ext_resource type="PackedScene" uid="uid://barwiegfv76e0" path="res://scenes/pause_menu.tscn" id="10_vf2hw"]
 [ext_resource type="PackedScene" uid="uid://bh4p66j4pm065" path="res://scenes/block.tscn" id="10_x6xq4"]
+[ext_resource type="PackedScene" uid="uid://dif8bokxkrkx1" path="res://scenes/seed.tscn" id="11_23btp"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fica4"]
 
@@ -163,9 +164,9 @@ anchor_mode = 0
 limit_top = -500
 limit_bottom = 0
 
-[node name="Area2D" type="Area2D" parent="Player"]
+[node name="PlayerArea2D" type="Area2D" parent="Player"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/PlayerArea2D"]
 position = Vector2(-48.4612, -12.3234)
 shape = SubResource("CircleShape2D_1crns")
 
@@ -193,10 +194,14 @@ text_color = Color(2.21401e-06, 0, 0.666229, 1)
 position = Vector2(-188, 109)
 rotation = 3.13401
 shape = SubResource("RectangleShape2D_si1lk")
+disabled = true
 
 [node name="Block" parent="." instance=ExtResource("10_x6xq4")]
 process_mode = 1
 position = Vector2(577, 325)
+
+[node name="Seed" parent="." groups=["seeds"] instance=ExtResource("11_23btp")]
+position = Vector2(1285, 307)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -207,6 +212,6 @@ offset_top = -528.0
 offset_right = -387.0
 offset_bottom = -528.0
 
-[connection signal="body_entered" from="Player/Area2D" to="Player" method="_on_Area2D_body_entered"]
-[connection signal="body_exited" from="Player/Area2D" to="Player" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="Player/PlayerArea2D" to="Player" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Player/PlayerArea2D" to="Player" method="_on_Area2D_body_exited"]
 [connection signal="block_broken" from="Block" to="Player" method="_on_block_broken"]

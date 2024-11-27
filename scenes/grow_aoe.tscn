@@ -10,10 +10,13 @@ position = Vector2(3, -5)
 texture = ExtResource("1_42cbw")
 script = ExtResource("2_1183r")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-collision_layer = 0
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
 scale = Vector2(24.935, 24.935)
 shape = SubResource("CircleShape2D_se15c")
 debug_color = Color(0.953185, 6.73831e-07, 0.554854, 0.42)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
