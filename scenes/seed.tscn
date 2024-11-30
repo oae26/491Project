@@ -27,5 +27,6 @@ texture = ExtResource("2_fshtl")
 offset = Vector2(823.53, -189.427)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(31.46, 22.74)
 scale = Vector2(0.966184, 1.04545)
 shape = SubResource("RectangleShape2D_3q1li")

@@ -200,8 +200,11 @@ disabled = true
 process_mode = 1
 position = Vector2(577, 325)
 
-[node name="Seed" parent="." groups=["seeds"] instance=ExtResource("11_23btp")]
+[node name="Seed" parent="." instance=ExtResource("11_23btp")]
 position = Vector2(1285, 307)
+
+[node name="Seed2" parent="." instance=ExtResource("11_23btp")]
+position = Vector2(100, 307)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

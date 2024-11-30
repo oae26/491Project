@@ -50,7 +50,7 @@ func _grow():
 	var grow = aoE.instantiate();
 
 	get_parent().add_child(grow);
-	grow.position = global_position;
+	grow.position = global_position - Vector2(65, 0);
 
 func launch_spore():
 	var spore = SPORE.instantiate()
