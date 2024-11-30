@@ -1,0 +1,60 @@
+[gd_scene load_steps=10 format=3 uid="uid://diov5hm34a742"]
+
+[ext_resource type="Texture2D" uid="uid://x2hl3p13sfc" path="res://art/Cosmo.png" id="1_0ke8e"]
+[ext_resource type="Script" path="res://scripts/respawn.gd" id="1_qxqsf"]
+[ext_resource type="Texture2D" uid="uid://70ftqu31t5hv" path="res://art/Tulip.png" id="2_0f1ph"]
+[ext_resource type="Texture2D" uid="uid://dpdg6ukqu5dyw" path="res://art/Sunflower.png" id="3_grcg2"]
+[ext_resource type="Texture2D" uid="uid://bvolnf7cg1tq3" path="res://art/Rose.png" id="4_76223"]
+[ext_resource type="Texture2D" uid="uid://y6gyc5vn7nwr" path="res://art/Orchid.png" id="5_qclta"]
+[ext_resource type="Texture2D" uid="uid://gc1a7kfr7aic" path="res://art/Daisy.png" id="6_pn6w1"]
+[ext_resource type="Texture2D" uid="uid://brnxic0po5eud" path="res://art/Pansy.png" id="7_8u0b3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bn63v"]
+size = Vector2(123, 20)
+
+[node name="Respawn" type="Node2D"]
+script = ExtResource("1_qxqsf")
+metadata/_edit_group_ = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(12, 1)
+shape = SubResource("RectangleShape2D_bn63v")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2, -21.5)
+scale = Vector2(1.53125, 1.46875)
+texture = ExtResource("1_0ke8e")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(-16, -12.5)
+scale = Vector2(1.5, 1.59375)
+texture = ExtResource("2_0f1ph")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(5, -11.5)
+scale = Vector2(1.4375, 1.46875)
+texture = ExtResource("3_grcg2")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(24, -15.5)
+scale = Vector2(1.65625, 1.8125)
+texture = ExtResource("4_76223")
+
+[node name="Orchid" type="Sprite2D" parent="."]
+position = Vector2(47.5, -19.25)
+scale = Vector2(1.71875, 1.76563)
+texture = ExtResource("5_qclta")
+
+[node name="Daisy" type="Sprite2D" parent="."]
+position = Vector2(-24, -6.5)
+scale = Vector2(1.3125, 1.15625)
+texture = ExtResource("6_pn6w1")
+
+[node name="Pansy" type="Sprite2D" parent="."]
+position = Vector2(20, -6)
+scale = Vector2(1.1875, 1.34375)
+texture = ExtResource("7_8u0b3")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cim86pndbs2ij"]
+
+[ext_resource type="Texture2D" uid="uid://bun52tqniknd" path="res://art/AOE.png" id="1_42cbw"]
+[ext_resource type="Script" path="res://scripts/grow.gd" id="2_1183r"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_se15c"]
+
+[node name="GrowAoe" type="Sprite2D"]
+position = Vector2(3, -5)
+texture = ExtResource("1_42cbw")
+script = ExtResource("2_1183r")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(24.935, 24.935)
+shape = SubResource("CircleShape2D_se15c")
+debug_color = Color(0.953185, 6.73831e-07, 0.554854, 0.42)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

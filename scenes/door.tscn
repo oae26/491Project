@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxh8vaajkqnuv"]
+
+[ext_resource type="Script" path="res://scripts/door.gd" id="1_m2fng"]
+
+[sub_resource type="Gradient" id="Gradient_syhx6"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.186747, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.0269573, 0.951211, 0.803972, 1, 0, 0, 0, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ru14u"]
+gradient = SubResource("Gradient_syhx6")
+width = 252
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gr8rc"]
+size = Vector2(117, 148.5)
+
+[node name="StaticBody2D" type="StaticBody2D"]
+position = Vector2(86, 5)
+scale = Vector2(1, 0.96)
+script = ExtResource("1_m2fng")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(23, 45.375)
+scale = Vector2(0.48, 146.75)
+texture = SubResource("GradientTexture1D_ru14u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(20, 45.8333)
+shape = SubResource("RectangleShape2D_gr8rc")

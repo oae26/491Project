@@ -10,7 +10,7 @@ func _ready() -> void:
 func destroy_block():
 	if not is_broken:
 		is_broken = true  # Mark the block as broken
-
+		emit_signal("block_broken")
 		# Play the "break" animation (ensure the name matches your animation)
 		$AnimatedSprite2D.animation = "break"
 		$AnimatedSprite2D.play()
@@ -19,10 +19,12 @@ func destroy_block():
 		$AnimatedSprite2D.animation_finished.connect(_on_animation_finished)
 
 		# Emit the block_broken signal with optional memory text or data
-		emit_signal("block_broken")
+		
+		print("Block signal emitted")
 		
 
 func _on_animation_finished():
 	# Check if the current animation is "break" to ensure proper timing
 	if $AnimatedSprite2D.animation == "break":
+	
 		queue_free()  # Remove the block after the animation finishes

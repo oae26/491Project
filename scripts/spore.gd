@@ -26,6 +26,8 @@ var spawnRot : float
 ]
 
 func _ready():
+	add_to_group("spores")
+	print(is_in_group("spores"))
 	global_position = spawnPos + Vector2(-50,-85)
 	global_rotation = spawnRot
 	velocity = Vector2(0, -SPEED/2).rotated(dir)

@@ -1,10 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://bde8ibebpl0b3"]
+[gd_scene load_steps=16 format=3 uid="uid://bde8ibebpl0b3"]
 
 [ext_resource type="PackedScene" uid="uid://bkmtjqhmucw03" path="res://scenes/player.tscn" id="1_81mt6"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_gu437"]
 [ext_resource type="Shader" path="res://shaders/clouds.gdshader" id="1_urki4"]
 [ext_resource type="Texture2D" uid="uid://xlhscffwqb5w" path="res://art/overworld1.PNG" id="2_3ae4y"]
-[ext_resource type="Script" path="res://scripts/player.gd" id="2_rryov"]
 [ext_resource type="Texture2D" uid="uid://jfutkkdcukrp" path="res://art/overworld2.PNG" id="3_gfb7x"]
 [ext_resource type="PackedScene" uid="uid://barwiegfv76e0" path="res://scenes/pause_menu.tscn" id="4_pa4np"]
 [ext_resource type="PackedScene" uid="uid://ci23ocsa8yhhk" path="res://scenes/npc.tscn" id="8_f3ykd"]
@@ -120,7 +119,6 @@ color = Color(0.613231, 0.662323, 0.525181, 1)
 z_index = 1
 z_as_relative = false
 position = Vector2(-852, 124)
-script = ExtResource("2_rryov")
 metadata/_edit_group_ = true
 
 [node name="Player2D" type="Area2D" parent="Player"]

@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 enum ControlState { PLAYER, SPORE }
-
+var last_anchor: Node2D = null  # Stores the last activated anchor point
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 var screen_size
@@ -10,14 +10,16 @@ var spore_count: int = 0
 var current_spore: Node = null
 var current_block: Node = null
 var npc: Node = null  # Variable to track NPC in range
-
+const aoE = preload("res://scenes/grow_aoe.tscn")
 @onready var player_manager = get_parent()
 @onready var game = get_tree().root.get_node("IceLevel")
 @onready var SPORE = load("res://scenes/spore.tscn")
 @onready var area2d = $Player2D
 @onready var npc_area2d = $NPCInteractionArea
 @onready var footsteps = $AudioStreamPlayer
-
+var time_off_ground: float = 0.0  # Tracks how long the player has been off the ground
+@export var fall_time_threshold: float = 1.0  # Time (in seconds) to consider the player as falling
+var is_in_transition: bool = false  # Tracks if the player is in a transition zone
 @export var flowers: Array = [
 	{
 		"texture": preload("res://art/Daffodil.png"),
@@ -66,10 +68,17 @@ func _ready() -> void:
 		print("NPCInteractionArea not found in this scene")
 
 func _physics_process(delta: float) -> void:
-	# Add gravity
+	if is_on_floor():
+		time_off_ground = 0.0  # Reset timer when on the ground
+	elif not is_in_transition:
+		time_off_ground += delta  # Increment timer only if not in transition
+
+	if time_off_ground > fall_time_threshold and not is_in_transition:
+		respawn()
+		# Add gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-	print(is_on_floor())
+	
 
 	if control_state == ControlState.PLAYER:
 		# Handle jump
@@ -109,7 +118,10 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector2.ZERO
 		
 	move_and_slide()
-
+	
+	if 	Input.is_action_just_released("grow_aoe"):
+		print("growing")
+		_grow();
 # Function to trigger dialogue with the NPC
 func trigger_dialogue(npc_node: Node) -> void:
 	var dialogue_box = preload("res://scenes/dialogue.tscn").instantiate()
@@ -210,3 +222,18 @@ func show_flower_message(position: Vector2, message: String) -> void:
 	timer.timeout.connect(func():
 		label.queue_free()  # Remove the label when the timer ends
 	)
+func _grow():
+	var grow = aoE.instantiate();
+
+	get_parent().add_child(grow);
+	grow.position = global_position;
+func respawn() -> void:
+	if last_anchor:
+		global_position = last_anchor.respawn_position
+		velocity = Vector2.ZERO  # Reset velocity
+		print("Respawned at anchor:", last_anchor.name)
+	else:
+		print("No anchor set! Respawning at default start position.")
+		global_position = Vector2.ZERO  # Default spawn position
+
+	time_off_ground = 0.0  # Reset the timer after respawning

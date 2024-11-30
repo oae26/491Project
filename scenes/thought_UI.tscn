@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://et83bqgd3gn8"]
 
-[ext_resource type="Script" path="res://scenes/thought.gd" id="1_v301f"]
+[ext_resource type="Script" path="res://scripts/thought.gd" id="1_v301f"]
 
 [node name="ThoughtUi" type="Control"]
 layout_mode = 3
