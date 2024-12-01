@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://diov5hm34a742"]
+[gd_scene load_steps=11 format=3 uid="uid://diov5hm34a742"]
 
 [ext_resource type="Texture2D" uid="uid://x2hl3p13sfc" path="res://art/Cosmo.png" id="1_0ke8e"]
 [ext_resource type="Script" path="res://scripts/respawn.gd" id="1_qxqsf"]
@@ -8,11 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://y6gyc5vn7nwr" path="res://art/Orchid.png" id="5_qclta"]
 [ext_resource type="Texture2D" uid="uid://gc1a7kfr7aic" path="res://art/Daisy.png" id="6_pn6w1"]
 [ext_resource type="Texture2D" uid="uid://brnxic0po5eud" path="res://art/Pansy.png" id="7_8u0b3"]
+[ext_resource type="Texture2D" uid="uid://wqwdubq5htg8" path="res://art/bush.png" id="9_b6ee8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bn63v"]
 size = Vector2(123, 20)
 
 [node name="Respawn" type="Node2D"]
+position = Vector2(-25, -1)
 script = ExtResource("1_qxqsf")
 metadata/_edit_group_ = true
 
@@ -56,5 +58,11 @@ texture = ExtResource("6_pn6w1")
 position = Vector2(20, -6)
 scale = Vector2(1.1875, 1.34375)
 texture = ExtResource("7_8u0b3")
+
+[node name="Bush" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(15.5, -10)
+scale = Vector2(0.255887, 0.237374)
+texture = ExtResource("9_b6ee8")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3 uid="uid://cw2p0p4rhr600"]
+
+[ext_resource type="Texture2D" uid="uid://bovwjkkc4wdy4" path="res://scenes/Sample.PNG" id="1_li3bk"]
+[ext_resource type="PackedScene" uid="uid://bkmtjqhmucw03" path="res://scenes/player.tscn" id="2_ljrur"]
+[ext_resource type="AudioStream" uid="uid://dkwj3whlrip31" path="res://music/soundbitersfx_footsteps-in-snow.wav" id="3_qsr5j"]
+[ext_resource type="AudioStream" uid="uid://bmf1jaifutik4" path="res://music/henkonen_footsteps-stone-floor.wav" id="4_xy8aq"]
+[ext_resource type="PackedScene" uid="uid://ci23ocsa8yhhk" path="res://scenes/npc.tscn" id="5_poakd"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v83av"]
+radius = 39.0818
+height = 92.3318
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_c7sik"]
+
+[node name="IceLevelCured" type="Node2D"]
+
+[node name="Sample" type="Sprite2D" parent="."]
+position = Vector2(24, -33)
+texture = ExtResource("1_li3bk")
+
+[node name="Sample2" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(24, -33)
+scale = Vector2(3.26319, 3.34581)
+texture = ExtResource("1_li3bk")
+
+[node name="Player" parent="." instance=ExtResource("2_ljrur")]
+process_mode = 1
+z_index = 3
+z_as_relative = false
+position = Vector2(19, 273)
+metadata/_edit_group_ = true
+
+[node name="Player2D" type="Area2D" parent="Player"]
+position = Vector2(-141, 18)
+scale = Vector2(1.27937, 1.13605)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Player2D"]
+position = Vector2(70.347, -25.527)
+scale = Vector2(1, 1.37282)
+shape = SubResource("CapsuleShape2D_v83av")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(-363, -846)
+anchor_mode = 0
+position_smoothing_speed = 12.0
+
+[node name="SnowFootsteps" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource("3_qsr5j")
+
+[node name="CavernFootsteps" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource("4_xy8aq")
+
+[node name="NPC" parent="." instance=ExtResource("5_poakd")]
+position = Vector2(288, 197)
+scale = Vector2(0.84, 0.76)
+dialogue_lines = Array[String](["I... my head feels so clear now.", "Has it always been this cold..?", "Thank you.. I don't know what you are, or what to say, but thank you."])
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-469, 371)
+shape = SubResource("WorldBoundaryShape2D_c7sik")
+
+[connection signal="area_entered" from="Player/Player2D" to="Player" method="_on_Area2D_body_entered"]
+[connection signal="area_exited" from="Player/Player2D" to="Player" method="_on_Area2D_body_exited"]

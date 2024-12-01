@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3ai0b1u4f1s0"]
+
+[ext_resource type="Shader" path="res://shaders/clouds.gdshader" id="1_indxv"]
+[ext_resource type="Texture2D" uid="uid://chin14pr8fj4e" path="res://art/IMG_0669-removebg-preview.png" id="2_sb4gn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tganb"]
+size = Vector2(60, 154)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sv8qi"]
+shader = ExtResource("1_indxv")
+shader_parameter/BackColor = Color(0, 0, 0, 0)
+shader_parameter/CloudColor = Color(0.019028, 0.212946, 0.275133, 1)
+shader_parameter/speed = 0.0
+
+[node name="Barrier" type="StaticBody2D"]
+metadata/_edit_horizontal_guides_ = [-91.0]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(20, 67)
+shape = SubResource("RectangleShape2D_tganb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_sv8qi")
+position = Vector2(19, 66)
+scale = Vector2(0.186335, 0.419889)
+texture = ExtResource("2_sb4gn")

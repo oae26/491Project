@@ -16,7 +16,7 @@ const aoE = preload("res://scenes/grow_aoe.tscn")
 @onready var SPORE = load("res://scenes/spore.tscn")
 @onready var area2d = $Player2D
 @onready var npc_area2d = $NPCInteractionArea
-@onready var footsteps = $AudioStreamPlayer
+@onready var footsteps = $SnowFootsteps
 var time_off_ground: float = 0.0  # Tracks how long the player has been off the ground
 @export var fall_time_threshold: float = 1.0  # Time (in seconds) to consider the player as falling
 var is_in_transition: bool = false  # Tracks if the player is in a transition zone
@@ -223,10 +223,25 @@ func show_flower_message(position: Vector2, message: String) -> void:
 		label.queue_free()  # Remove the label when the timer ends
 	)
 func _grow():
-	var grow = aoE.instantiate();
+	var grow_area = aoE.instantiate()
+	get_parent().add_child(grow_area)
+	grow_area.position = global_position - Vector2(65, 0)
 
-	get_parent().add_child(grow);
-	grow.position = global_position;
+	# Connect the signal to handle interactions dynamically
+	var area2d = grow_area.get_node("Area2D")
+	if area2d:
+		area2d.body_entered.connect(_on_body_entered)
+
+func _on_body_entered(body: Node) -> void:
+	# Platform Seed Handling
+	if body.is_in_group("platform_seeds"):
+		print("Platform seed found:", body.name)
+		body.grow_seed()  # Call the grow function for platform seeds
+
+	# Jump Seed Handling
+	elif body.is_in_group("jump_seeds"):
+		print("Jump seed found:", body.name)
+		velocity.y = JUMP_VELOCITY  # Apply jump logic from the player script
 func respawn() -> void:
 	if last_anchor:
 		global_position = last_anchor.respawn_position
@@ -237,3 +252,5 @@ func respawn() -> void:
 		global_position = Vector2.ZERO  # Default spawn position
 
 	time_off_ground = 0.0  # Reset the timer after respawning
+func jump():
+	velocity.y = JUMP_VELOCITY

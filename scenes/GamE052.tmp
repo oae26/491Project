@@ -1,10 +1,9 @@
-[gd_scene load_steps=47 format=3 uid="uid://cf3twmrxqgskj"]
+[gd_scene load_steps=39 format=3 uid="uid://cf3twmrxqgskj"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_qdjrj"]
 [ext_resource type="Shader" path="res://shaders/snow.gdshader" id="2_gd2af"]
 [ext_resource type="Texture2D" uid="uid://pb1vh15ys1hg" path="res://art/snowlevel2.PNG" id="3_o54ch"]
 [ext_resource type="AudioStream" uid="uid://dkwj3whlrip31" path="res://music/soundbitersfx_footsteps-in-snow.wav" id="4_eunfy"]
-[ext_resource type="AudioStream" uid="uid://bmf1jaifutik4" path="res://music/henkonen_footsteps-stone-floor.wav" id="4_ray15"]
 [ext_resource type="Texture2D" uid="uid://vtqnetjlg4kk" path="res://art/IMG_0598.png" id="4_wib7y"]
 [ext_resource type="Texture2D" uid="uid://b3712or6a7qx0" path="res://art/snowlevel1.png" id="5_bk3sj"]
 [ext_resource type="Shader" path="res://shaders/clouds.gdshader" id="6_4pmpv"]
@@ -29,9 +28,6 @@
 [ext_resource type="Script" path="res://scripts/task_manager.gd" id="25_w72ea"]
 [ext_resource type="PackedScene" uid="uid://diov5hm34a742" path="res://scenes/respawn.tscn" id="27_esi72"]
 [ext_resource type="Script" path="res://scripts/transition_point.gd" id="28_kb3vl"]
-[ext_resource type="PackedScene" uid="uid://b3ai0b1u4f1s0" path="res://scenes/barrier.tscn" id="29_p2ww1"]
-[ext_resource type="AudioStream" uid="uid://dqon4c3kgmxf4" path="res://music/Project Growth Ice.wav" id="31_aifps"]
-[ext_resource type="AudioStream" uid="uid://cycqra72vhie6" path="res://music/Project Growth Ice 2.mp3" id="32_x0qdv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_waeqy"]
 radius = 39.0818
@@ -80,29 +76,7 @@ shader_parameter/speed = 2.3
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bll0u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mff3o"]
-size = Vector2(730.375, 212.25)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dvvd1"]
-size = Vector2(2176, 208.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_11u0w"]
-size = Vector2(62.1694, 45.1097)
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1njib"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pi7tv"]
-shader = ExtResource("2_gd2af")
-shader_parameter/rain_amount = 200.0
-shader_parameter/near_rain_length = 0.01
-shader_parameter/far_rain_length = 0.1
-shader_parameter/near_rain_width = 1.0
-shader_parameter/far_rain_width = 0.5
-shader_parameter/near_rain_transparency = 1.0
-shader_parameter/far_rain_transparency = 0.5
-shader_parameter/rain_color = Color(1, 1, 1, 1)
-shader_parameter/base_rain_speed = 0.5
-shader_parameter/additional_rain_speed = 0.5
-shader_parameter/slant = 0.2
+size = Vector2(6033, 210.5)
 
 [sub_resource type="GDScript" id="GDScript_x7i0g"]
 script/source = "extends Sprite2D
@@ -128,7 +102,7 @@ script = ExtResource("1_qdjrj")
 [node name="Player" parent="." instance=ExtResource("10_gs2t8")]
 process_mode = 1
 z_as_relative = false
-position = Vector2(10058, 3645)
+position = Vector2(-616, 306)
 metadata/_edit_group_ = true
 
 [node name="Player2D" type="Area2D" parent="Player"]
@@ -145,16 +119,13 @@ position = Vector2(-363, -846)
 anchor_mode = 0
 position_smoothing_speed = 12.0
 
-[node name="SnowFootsteps" type="AudioStreamPlayer" parent="Player"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Player"]
 stream = ExtResource("4_eunfy")
-
-[node name="CavernFootsteps" type="AudioStreamPlayer" parent="Player"]
-stream = ExtResource("4_ray15")
 
 [node name="AboveGround" type="StaticBody2D" parent="."]
 process_mode = 1
 z_index = 6
-position = Vector2(-946, 412)
+position = Vector2(-922, 440)
 physics_material_override = SubResource("PhysicsMaterial_fica4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AboveGround"]
@@ -254,22 +225,22 @@ scale = Vector2(0.864282, 1)
 texture = SubResource("CompressedTexture2D_bll0u")
 
 [node name="Img0670-removebg-preview2" type="Sprite2D" parent="Background/Underground"]
-position = Vector2(-601.538, 424)
+position = Vector2(-601.54, 197)
 scale = Vector2(0.864282, 1)
 texture = ExtResource("12_2rq1d")
 
 [node name="Img0663-removebg-preview" type="Sprite2D" parent="Background/Underground"]
-position = Vector2(13.8305, 488)
+position = Vector2(11.2377, 402)
 scale = Vector2(2.28666, 1.73649)
 texture = ExtResource("9_fojyb")
 
 [node name="Img0668-removebg-preview2" type="Sprite2D" parent="Background/Underground"]
-position = Vector2(-20.9561, 585.875)
-scale = Vector2(2.03961, 1.83427)
+position = Vector2(-12.0979, 550)
+scale = Vector2(2.05856, 2.103)
 texture = ExtResource("8_3iydb")
 
 [node name="Img0669-removebg-preview" type="Sprite2D" parent="Background/Underground"]
-position = Vector2(843.541, 645)
+position = Vector2(478.813, 370)
 scale = Vector2(0.864282, 1)
 texture = ExtResource("14_2oldg")
 
@@ -289,7 +260,7 @@ scale = Vector2(0.864282, 1)
 texture = SubResource("CompressedTexture2D_bll0u")
 
 [node name="Img0670-removebg-preview" type="Sprite2D" parent="Background/Underground"]
-position = Vector2(1004.3, 609)
+position = Vector2(1031.95, 299)
 scale = Vector2(0.864282, 1)
 texture = ExtResource("12_2rq1d")
 
@@ -306,8 +277,8 @@ texture = ExtResource("10_10v1h")
 
 [node name="Underground4" type="Sprite2D" parent="Background"]
 z_index = -3
-position = Vector2(8628.55, 4651)
-scale = Vector2(4.19672, 5.09444)
+position = Vector2(7509.74, 3264.5)
+scale = Vector2(3.03129, 2.52685)
 texture = ExtResource("7_hlggy")
 flip_h = true
 
@@ -319,12 +290,12 @@ flip_h = true
 
 [node name="Img0668-removebg-preview2" type="Sprite2D" parent="Background/Underground2"]
 z_index = 1
-position = Vector2(-771.803, 373.241)
-scale = Vector2(0.417814, 1.27067)
+position = Vector2(60.5014, 633.755)
+scale = Vector2(2.05856, 1.69243)
 texture = ExtResource("8_3iydb")
 
 [node name="Img0663-removebg-preview" type="Sprite2D" parent="Background/Underground2"]
-position = Vector2(71.7364, 415.262)
+position = Vector2(19.8778, 166.99)
 scale = Vector2(2.28666, 1.39747)
 texture = ExtResource("9_fojyb")
 
@@ -338,14 +309,18 @@ position = Vector2(-55.3106, 7.64527)
 scale = Vector2(1.01398, 1.15597)
 texture = SubResource("CompressedTexture2D_bll0u")
 
+[node name="Img0670-removebg-preview" type="Sprite2D" parent="Background/Underground2"]
+position = Vector2(924.785, 30.1787)
+scale = Vector2(0.864282, 0.804769)
+texture = ExtResource("12_2rq1d")
+
 [node name="Img0671-removebg-preview" type="Sprite2D" parent="Background/Underground2"]
-z_index = 4
-position = Vector2(-48.3986, 288.913)
-scale = Vector2(2.88766, 2.87549)
+z_index = 1
+position = Vector2(-110.626, 373.815)
+scale = Vector2(1.19365, 1.52348)
 texture = ExtResource("13_8jx3m")
 
 [node name="Img0666-removebg-preview2" type="Sprite2D" parent="Background/Underground2"]
-z_index = 3
 position = Vector2(-7.77499, -440.611)
 rotation = 3.14159
 scale = Vector2(0.79993, -0.804769)
@@ -357,59 +332,51 @@ scale = Vector2(0.864282, 0.804769)
 texture = ExtResource("12_2rq1d")
 
 [node name="Img0670-removebg-preview(1)2" type="Sprite2D" parent="Background/Underground2"]
-z_index = 3
-position = Vector2(-756.246, 169.807)
+position = Vector2(-732.907, 141.237)
 scale = Vector2(0.864282, 0.804769)
 texture = SubResource("CompressedTexture2D_bll0u")
 
 [node name="Img0669-removebg-preview" type="Sprite2D" parent="Background/Underground2"]
-z_index = 3
-position = Vector2(-925.645, 535.977)
+z_index = 1
+position = Vector2(66.5531, -13.2788)
 scale = Vector2(0.864282, 0.804769)
 texture = ExtResource("14_2oldg")
 
-[node name="Img0652" type="Sprite2D" parent="Background"]
-z_index = 2
-position = Vector2(5706.47, 2009.75)
-scale = Vector2(1.16087, 1.2912)
-texture = ExtResource("7_hlggy")
-
 [node name="Underground3" type="Sprite2D" parent="Background"]
-modulate = Color(0.00784314, 0.239216, 0.262745, 1)
 z_index = -1
 position = Vector2(9408.57, 3221)
 flip_h = true
 
-[node name="Img0664-removebg-preview2" type="Sprite2D" parent="Background/Underground3"]
-position = Vector2(-66.5479, -297)
-scale = Vector2(2.38732, 1.72435)
-texture = ExtResource("11_5iu1d")
+[node name="Img0652" type="Sprite2D" parent="Background/Underground3"]
+z_index = 2
+position = Vector2(-3702.1, -1211.25)
+scale = Vector2(1.16087, 1.2912)
+texture = ExtResource("7_hlggy")
 
 [node name="Img0666-removebg-preview" type="Sprite2D" parent="Background/Underground3"]
-z_index = 3
 position = Vector2(-600.676, -416)
 texture = ExtResource("10_10v1h")
 
+[node name="Img0663-removebg-preview" type="Sprite2D" parent="Background/Underground3"]
+position = Vector2(12.9639, 481)
+scale = Vector2(1.87425, 1)
+texture = ExtResource("9_fojyb")
+
 [node name="Img0665-removebg-preview" type="Sprite2D" parent="Background/Underground3"]
-z_index = 3
 position = Vector2(560.475, -308.5)
 scale = Vector2(1.3796, 1.49684)
 texture = ExtResource("17_lryhq")
 
 [node name="Img0670-removebg-preview" type="Sprite2D" parent="Background/Underground3"]
-z_index = 3
 position = Vector2(-857.366, 552)
 texture = ExtResource("12_2rq1d")
 
 [node name="Img0670-removebg-preview2" type="Sprite2D" parent="Background/Underground3"]
-z_index = 3
-position = Vector2(111.915, 560)
-scale = Vector2(1.03665, 1.08481)
+position = Vector2(616.233, 272)
 texture = ExtResource("12_2rq1d")
 
 [node name="Img0671-removebg-preview" type="Sprite2D" parent="Background/Underground3"]
-z_index = 4
-position = Vector2(94.2084, 505)
+position = Vector2(-45.3545, 237.875)
 scale = Vector2(1.46348, 3.44653)
 texture = ExtResource("13_8jx3m")
 
@@ -420,86 +387,41 @@ position = Vector2(577, 325)
 process_mode = 1
 position = Vector2(0, 0)
 
-[node name="Block5" parent="Blocks" groups=["blocks_top"] instance=ExtResource("7_kq8o2")]
-process_mode = 1
-position = Vector2(1231, -303)
-
-[node name="Block2" parent="Blocks" groups=["blocks_top"] instance=ExtResource("7_kq8o2")]
-process_mode = 1
-z_index = -2
-position = Vector2(1486, -9)
-
-[node name="Block3" parent="Blocks" groups=["blocks_top"] instance=ExtResource("7_kq8o2")]
-process_mode = 1
-position = Vector2(2448, -782)
-
-[node name="Block4" parent="Blocks" groups=["blocks_top"] instance=ExtResource("7_kq8o2")]
-process_mode = 1
-position = Vector2(3007, -247)
-
-[node name="Block11" parent="Blocks" groups=["blocks_top"] instance=ExtResource("7_kq8o2")]
-process_mode = 1
-position = Vector2(3595, -15)
-
-[node name="Block12" parent="Blocks" groups=["blocks_top"] instance=ExtResource("7_kq8o2")]
-process_mode = 1
-position = Vector2(3978, -238)
-
 [node name="Block6" parent="Blocks" groups=["blocks_bottom"] instance=ExtResource("7_kq8o2")]
 process_mode = 1
-position = Vector2(5776, 3362)
-
-[node name="Block13" parent="Blocks" groups=["blocks_bottom"] instance=ExtResource("7_kq8o2")]
-process_mode = 1
-position = Vector2(7589, 3225)
-
-[node name="Block14" parent="Blocks" groups=["blocks_bottom"] instance=ExtResource("7_kq8o2")]
-process_mode = 1
-position = Vector2(8133, 3227)
-
-[node name="Block15" parent="Blocks" groups=["blocks_bottom"] instance=ExtResource("7_kq8o2")]
-process_mode = 1
-position = Vector2(7911, 2651)
+position = Vector2(5554, 3466)
 
 [node name="Block7" parent="Blocks" groups=["blocks_bottom"] instance=ExtResource("7_kq8o2")]
 process_mode = 1
-position = Vector2(5774, 3428)
-
-[node name="Block16" parent="Blocks" groups=["blocks_bottom"] instance=ExtResource("7_kq8o2")]
-process_mode = 1
-position = Vector2(8880, 3194)
-
-[node name="Block17" parent="Blocks" groups=["final_blocks"] instance=ExtResource("7_kq8o2")]
-process_mode = 1
-position = Vector2(9986, 2890)
-
-[node name="Block21" parent="Blocks" groups=["final_blocks"] instance=ExtResource("7_kq8o2")]
-process_mode = 1
-position = Vector2(10662, 3002)
-
-[node name="Block20" parent="Blocks" groups=["final_blocks"] instance=ExtResource("7_kq8o2")]
-process_mode = 1
-position = Vector2(10864, 3530)
-
-[node name="Block18" parent="Blocks" groups=["final_blocks"] instance=ExtResource("7_kq8o2")]
-process_mode = 1
-position = Vector2(9894, 2569)
-
-[node name="Block19" parent="Blocks" groups=["final_blocks"] instance=ExtResource("7_kq8o2")]
-process_mode = 1
-position = Vector2(9515, 3393)
+position = Vector2(6730, 3457)
 
 [node name="Block8" parent="Blocks" groups=["blocks_bottom"] instance=ExtResource("7_kq8o2")]
 process_mode = 1
-position = Vector2(5594, 3085)
+position = Vector2(6016, 3475)
 
 [node name="Block9" parent="Blocks" groups=["blocks_bottom"] instance=ExtResource("7_kq8o2")]
 process_mode = 1
-position = Vector2(6602, 3422)
+position = Vector2(8036, 3502)
 
 [node name="Block10" parent="Blocks" groups=["blocks_bottom"] instance=ExtResource("7_kq8o2")]
 process_mode = 1
-position = Vector2(5683, 3090)
+position = Vector2(7322, 3506)
+
+[node name="Block2" parent="Blocks" groups=["blocks_top"] instance=ExtResource("7_kq8o2")]
+process_mode = 1
+position = Vector2(5, -684)
+
+[node name="Block3" parent="Blocks" groups=["blocks_top"] instance=ExtResource("7_kq8o2")]
+process_mode = 1
+position = Vector2(1238, -8)
+
+[node name="Block4" parent="Blocks" groups=["blocks_top"] instance=ExtResource("7_kq8o2")]
+process_mode = 1
+position = Vector2(1238, -89)
+
+[node name="Block5" parent="Blocks" groups=["blocks_top"] instance=ExtResource("7_kq8o2")]
+process_mode = 1
+position = Vector2(1238, -170)
 
 [node name="Node" type="Node" parent="."]
 
@@ -517,25 +439,7 @@ script = ExtResource("9_j42no")
 position = Vector2(5665, 3903)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UndergroundCollLayer"]
-position = Vector2(4122.81, -7)
-shape = SubResource("RectangleShape2D_mff3o")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="UndergroundCollLayer"]
-position = Vector2(873, 23.25)
-shape = SubResource("RectangleShape2D_dvvd1")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="UndergroundCollLayer"]
-position = Vector2(1838.58, -77.918)
-rotation = -0.301971
-scale = Vector2(6.02163, -3.92)
-shape = SubResource("RectangleShape2D_11u0w")
-
-[node name="UndergroundCollLayer3" type="StaticBody2D" parent="."]
-position = Vector2(5665, 3903)
-physics_material_override = SubResource("PhysicsMaterial_1njib")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="UndergroundCollLayer3"]
-position = Vector2(2313.63, 13.875)
+position = Vector2(2814, 16)
 shape = SubResource("RectangleShape2D_mff3o")
 
 [node name="ThoughtUi" parent="." instance=ExtResource("21_kuylg")]
@@ -556,91 +460,15 @@ visible = false
 [node name="Seeds" type="Node2D" parent="."]
 position = Vector2(1320, 328)
 
-[node name="JumpSeed" parent="Seeds" groups=["jump_seeds"] instance=ExtResource("22_p3cey")]
-position = Vector2(-70, 0)
-collision_layer = 2
+[node name="Seed" parent="Seeds" groups=["jump_seeds", "seeds_top"] instance=ExtResource("22_p3cey")]
+position = Vector2(0, 0)
 seed_type = "jump"
 
-[node name="JumpSeed2" parent="Seeds" groups=["jump_seeds"] instance=ExtResource("22_p3cey")]
-position = Vector2(1856, -45)
-collision_layer = 2
-seed_type = "jump"
+[node name="Seed2" parent="Seeds" groups=["platform_seeds", "seeds_top"] instance=ExtResource("22_p3cey")]
+position = Vector2(264, -29)
 
-[node name="JumpSeed3" parent="Seeds" groups=["jump_seeds"] instance=ExtResource("22_p3cey")]
-position = Vector2(3073, -59)
-collision_layer = 2
-seed_type = "jump"
-
-[node name="PlatformSeed" parent="Seeds" groups=["seeds_top"] instance=ExtResource("22_p3cey")]
-modulate = Color(0, 0.717647, 0, 1)
-position = Vector2(254, -77)
-collision_layer = 2
-
-[node name="PlatformSeed2" parent="Seeds" groups=["seeds_top"] instance=ExtResource("22_p3cey")]
-modulate = Color(0, 0.717647, 0, 1)
-position = Vector2(2251, -70)
-collision_layer = 2
-
-[node name="PlatformSeedBottom" parent="Seeds" groups=["seeds_bottom"] instance=ExtResource("22_p3cey")]
-modulate = Color(0, 0.717647, 0, 1)
-position = Vector2(6858, 3325)
-collision_layer = 2
-
-[node name="PlatformSeedBottom2" parent="Seeds" groups=["seeds_bottom"] instance=ExtResource("22_p3cey")]
-modulate = Color(0, 0.717647, 0, 1)
-position = Vector2(7580, 3360)
-collision_layer = 2
-
-[node name="PlatformSeedBottom3" parent="Seeds" groups=["seeds_bottom"] instance=ExtResource("22_p3cey")]
-modulate = Color(0, 0.717647, 0, 1)
-position = Vector2(8172, 3508)
-collision_layer = 2
-
-[node name="PlatformSeedBottom4" parent="Seeds" groups=["final_seeds"] instance=ExtResource("22_p3cey")]
-modulate = Color(0, 0.717647, 0, 1)
-position = Vector2(9896, 3274)
-collision_layer = 2
-
-[node name="PlatformSeedBottom5" parent="Seeds" groups=["final_seeds"] instance=ExtResource("22_p3cey")]
-modulate = Color(0, 0.717647, 0, 1)
-position = Vector2(10620, 3251)
-collision_layer = 2
-
-[node name="JumpSeedBottom" parent="Seeds" groups=["seeds_bottom"] instance=ExtResource("22_p3cey")]
-position = Vector2(6606, 3428)
-collision_layer = 2
-seed_type = "jump"
-
-[node name="JumpSeedBottom2" parent="Seeds" groups=["seeds_bottom"] instance=ExtResource("22_p3cey")]
-position = Vector2(7192, 3166)
-collision_layer = 2
-seed_type = "jump"
-
-[node name="JumpSeedBottom3" parent="Seeds" groups=["seeds_bottom"] instance=ExtResource("22_p3cey")]
-position = Vector2(7867, 3287)
-collision_layer = 2
-seed_type = "jump"
-
-[node name="FinalSeed" parent="Seeds" groups=["final"] instance=ExtResource("22_p3cey")]
-modulate = Color(1, 0, 0.0392157, 1)
-material = SubResource("ShaderMaterial_pi7tv")
-position = Vector2(10770, 3049)
-collision_layer = 2
-seed_type = "final"
-
-[node name="JumpSeedBottom4" parent="Seeds" groups=["seeds_bottom"] instance=ExtResource("22_p3cey")]
-position = Vector2(9055, 3359)
-collision_layer = 2
-seed_type = "jump"
-
-[node name="JumpSeedBottom5" parent="Seeds" groups=["seeds_bottom"] instance=ExtResource("22_p3cey")]
-position = Vector2(9423, 3236)
-collision_layer = 2
-seed_type = "jump"
-
-[node name="JumpSeedBottom6" parent="Seeds" groups=["seeds_bottom"] instance=ExtResource("22_p3cey")]
-position = Vector2(10346, 3384)
-collision_layer = 2
+[node name="Seed3" parent="Seeds" groups=["seeds_bottom"] instance=ExtResource("22_p3cey")]
+position = Vector2(5571, 3442)
 seed_type = "jump"
 
 [node name="ForegroundLeaves" type="Sprite2D" parent="."]
@@ -678,43 +506,32 @@ position = Vector2(5143, -328)
 [node name="BottomSwitch" parent="." instance=ExtResource("23_05403")]
 visible = false
 position = Vector2(9557, 2968)
-inactive_sprite = ExtResource("17_lryhq")
 
 [node name="Door" parent="." instance=ExtResource("24_oeftf")]
-position = Vector2(5270, 65)
-scale = Vector2(1.40949, 1.55326)
+position = Vector2(5302, 121)
+scale = Vector2(1.06281, 2.73961)
 
 [node name="BottomDoor" parent="." instance=ExtResource("24_oeftf")]
-modulate = Color(0.506654, 0.45118, 0.29078, 0.92549)
-position = Vector2(9681, 3565)
-scale = Vector2(1.40949, 1.55326)
+position = Vector2(9826, 2849)
+scale = Vector2(1.06434, 9.87695)
 
 [node name="TaskManagerTop" type="Node2D" parent="."]
 position = Vector2(1405, 70)
 scale = Vector2(1.06281, 2.73961)
 script = ExtResource("25_w72ea")
 block_group = "blocks_top"
-seed_group = "seeds_top"
-door_path = NodePath("../Door")
+seed_group = null
+door_path = null
 switch_path = NodePath("../TopSwitch")
 
 [node name="TaskManagerBottom" type="Node2D" parent="."]
-position = Vector2(1405, 69)
+position = Vector2(1405, 70)
 scale = Vector2(1.06281, 2.73961)
 script = ExtResource("25_w72ea")
-block_group = "blocks_bottom"
-seed_group = "seeds_bottom"
-door_path = NodePath("../BottomDoor")
+block_group = null
+seed_group = null
+door_path = null
 switch_path = NodePath("../BottomSwitch")
-
-[node name="TaskManagerFinal" type="Node2D" parent="."]
-position = Vector2(1405, 69)
-scale = Vector2(1.06281, 2.73961)
-script = ExtResource("25_w72ea")
-block_group = "final_blocks"
-seed_group = "final_seeds"
-final_seed_path = NodePath("../Seeds/FinalSeed")
-final_scene_path = "res://scenes/ice_level_cured.tscn"
 
 [node name="Respawn" parent="." instance=ExtResource("27_esi72")]
 position = Vector2(-840, 363)
@@ -733,44 +550,10 @@ position = Vector2(5628, 286)
 scale = Vector2(1, 4.03461)
 script = ExtResource("28_kb3vl")
 target_anchor_path = NodePath("../Respawn2")
-footsteps_upper_path = NodePath("../Player/SnowFootsteps")
-footsteps_lower_path = NodePath("../Player/CavernFootsteps")
-music_upper_path = NodePath("../AboveGroundMusic")
-music_lower_path = NodePath("../BelowGroundMusic")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionPoint"]
 position = Vector2(870, 344)
 shape = SubResource("RectangleShape2D_tte6f")
-
-[node name="Snowlevel2" type="Sprite2D" parent="."]
-z_index = -7
-position = Vector2(2206, -200.5)
-scale = Vector2(3.38021, 2.71574)
-texture = ExtResource("3_o54ch")
-
-[node name="Barrier" parent="." instance=ExtResource("29_p2ww1")]
-z_index = -1
-position = Vector2(1793, 118)
-scale = Vector2(2.00001, 1.88)
-
-[node name="Barrier2" parent="." instance=ExtResource("29_p2ww1")]
-z_index = -1
-position = Vector2(2795, -537)
-scale = Vector2(2.00001, 1.88)
-
-[node name="Barrier3" parent="." instance=ExtResource("29_p2ww1")]
-position = Vector2(10496, 3320)
-rotation = -1.58519
-
-[node name="Barrier4" parent="." instance=ExtResource("29_p2ww1")]
-position = Vector2(10297, 2987)
-scale = Vector2(4.97048, 2.3814)
-
-[node name="AboveGroundMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("31_aifps")
-
-[node name="BelowGroundMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("32_x0qdv")
 
 [connection signal="area_entered" from="Player/Player2D" to="Player" method="_on_Area2D_body_entered"]
 [connection signal="area_exited" from="Player/Player2D" to="Player" method="_on_Area2D_body_exited"]

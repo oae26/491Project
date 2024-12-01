@@ -1,18 +1,20 @@
 [gd_scene load_steps=5 format=3 uid="uid://cggivafc0gmt6"]
 
 [ext_resource type="Script" path="res://scripts/switch.gd" id="1_8nbsq"]
-[ext_resource type="Texture2D" uid="uid://cn3doofpw58q6" path="res://art/ice_block_half_broken.png" id="2_bejqi"]
-[ext_resource type="Texture2D" uid="uid://dlgsxymme4w02" path="res://icon.svg" id="3_dfpf5"]
+[ext_resource type="Texture2D" uid="uid://vtqnetjlg4kk" path="res://art/IMG_0598.png" id="2_ypoj7"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_gaqid"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xf46q"]
 radius = 224.397
 
 [node name="Switch" type="Area2D"]
+modulate = Color(0.851003, 0, 0.308087, 1)
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("1_8nbsq")
-active_sprite = ExtResource("2_bejqi")
-inactive_sprite = ExtResource("3_dfpf5")
+active_sprite = SubResource("CanvasTexture_gaqid")
+inactive_sprite = ExtResource("2_ypoj7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(8, 14)
