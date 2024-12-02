@@ -41,6 +41,5 @@ func switch_to_lower_layer_audio() -> void:
 	if music_upper and music_lower:
 		music_upper.stop()
 		music_lower.play()
-		music_lower.loop  # Enable looping for lower music
 
 		

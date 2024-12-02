@@ -128,7 +128,7 @@ script = ExtResource("1_qdjrj")
 [node name="Player" parent="." instance=ExtResource("10_gs2t8")]
 process_mode = 1
 z_as_relative = false
-position = Vector2(10058, 3645)
+position = Vector2(-797, 282)
 metadata/_edit_group_ = true
 
 [node name="Player2D" type="Area2D" parent="Player"]
@@ -774,9 +774,9 @@ stream = ExtResource("32_x0qdv")
 
 [connection signal="area_entered" from="Player/Player2D" to="Player" method="_on_Area2D_body_entered"]
 [connection signal="area_exited" from="Player/Player2D" to="Player" method="_on_Area2D_body_exited"]
-[connection signal="switch_activated" from="TopSwitch" to="Door" method="open"]
 [connection signal="switch_activated" from="TopSwitch" to="Door" method="_on_switch_switch_activated"]
-[connection signal="switch_activated" from="BottomSwitch" to="Door" method="open"]
+[connection signal="switch_activated" from="TopSwitch" to="Door" method="open"]
 [connection signal="switch_activated" from="BottomSwitch" to="Door" method="_on_switch_switch_activated"]
+[connection signal="switch_activated" from="BottomSwitch" to="Door" method="open"]
 [connection signal="body_entered" from="TransitionPoint" to="TransitionPoint" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="TransitionPoint" to="TransitionPoint" method="_on_Area2D_body_exited"]

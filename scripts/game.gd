@@ -3,8 +3,12 @@ extends Node2D
 
 @onready var pause_menu = $CanvasLayer/PauseMenu
 @onready var resume = $CanvasLayer/PauseMenu/Panel/VBoxContainer/ResumeBtn
+@onready var aboveMusic = $AboveGroundMusic
 var paused = false
 # Called when the node enters the scene tree for the first time.
+
+func _ready() -> void:
+	aboveMusic.play()
 
 func _on_block_broken() -> void:
 	print("broken block")
