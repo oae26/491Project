@@ -768,9 +768,11 @@ scale = Vector2(4.97048, 2.3814)
 
 [node name="AboveGroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("31_aifps")
+volume_db = -13.436
 
 [node name="BelowGroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("32_x0qdv")
+volume_db = -15.979
 
 [connection signal="area_entered" from="Player/Player2D" to="Player" method="_on_Area2D_body_entered"]
 [connection signal="area_exited" from="Player/Player2D" to="Player" method="_on_Area2D_body_exited"]

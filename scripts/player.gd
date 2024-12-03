@@ -220,7 +220,7 @@ func show_flower_message(position: Vector2, message: String) -> void:
 	label.modulate = Color(1, 1, 1, 1)  # Fully opaque
 	var timer = get_tree().create_timer(3.0)  # Create a timer for 3 seconds
 	timer.timeout.connect(func():
-		label.queue_free()  # Remove the label when the timer ends
+		label.visible = false  # Remove the label when the timer ends
 	)
 func _grow():
 	var grow_area = aoE.instantiate()
